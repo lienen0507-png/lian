@@ -1,0 +1,3360 @@
+/* =========================================================
+   Digital Art 頁（digital-art.html）專用樣式
+   風格跟首頁一樣：復古馬戲團 × 50 年代廣告
+   顏色都用 style.css 裡的色庫（--red、--copper、--gold、--cornflower、--cream、--cadet、--kiwi）
+   字體：Alfa Slab One（大標）、Yellowtail（手寫）、Jost＝black / normal（內文）
+   花紋：直條紋星星（Arts）、藍底圓點（About Me）、橘色菱格紋（Contact）
+   ========================================================= */
+
+.da-page {
+  --da-title: "Alfa Slab One", "Rockwell", Georgia, serif;
+  --da-script: "Yellowtail", "Brush Script MT", cursive;
+  --da-ink: #4A2216;              /* 深咖啡：陰影、小字 */
+  margin: 0;
+  background: var(--cream);
+  color: var(--da-ink);
+  font-family: "normal", sans-serif;
+}
+
+.da-page main {
+  overflow: hidden;               /* 歪歪的東西不要撐出橫向捲軸 */
+}
+
+
+/* ---------- 導覽列（跟首頁一樣的資料夾分頁） ---------- */
+.da-page .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  align-items: flex-end;
+  gap: 24px;
+  padding: 10px 5% 0;             /* 上面只留 10px，凸起的分頁剛好頂到最上面 */
+  border-bottom: none;            /* 不要黑線，分頁直接接著下面的內容 */
+  background-color: var(--cream);
+  background-image: radial-gradient(rgba(43, 29, 18, 0.12) 1px, transparent 1.4px);
+  background-size: 6px 6px;
+}
+
+/* ===== 左邊：網站名稱 ===== */
+.da-page .nav-logo {
+  align-self: center;
+  margin-top: -10px;              /* 抵銷上面的 10px，讓字在整條導覽列中間 */
+  color: var(--red);
+  font-family: "black", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.da-page .nav-logo:hover {
+  color: var(--copper);
+}
+
+/* ===== 右邊：分頁 ===== */
+.da-page .nav-tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  flex-wrap: nowrap;
+  margin-bottom: 0;
+}
+
+.da-page .nav-tab {
+  position: relative;
+  margin-left: -8px;              /* 分頁之間互相疊一點點，像真的資料夾 */
+  padding: 9px 28px 9px;          /* 平常比較矮 */
+  border: none;
+  border-radius: 14px 14px 0 0;
+  color: var(--cream);
+  font-family: "black", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.3;
+  text-decoration: none;
+  /* 沒有黑邊，只留一點點柔和的陰影讓字浮起來 */
+  text-shadow: 0 2px 0 rgba(60, 20, 10, 0.25);
+  /* 分頁頂端一條淡淡的亮邊 */
+  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.22);
+  transition:
+    padding-bottom 0.3s cubic-bezier(0.3, 1.6, 0.5, 1),
+    margin-top 0.3s cubic-bezier(0.3, 1.6, 0.5, 1),
+    filter 0.2s ease;
+}
+
+.da-page .nav-tab:first-child {
+  margin-left: 0;
+}
+
+/* ===== 四種顏色＋嘉年華花紋 =====
+   花紋都調成半透明（透明度寫在每個花紋裡），字才會清楚 */
+
+/* Home：紅底＋奶黃直條紋 */
+.da-page .tab-red {
+  background-color: var(--red);
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(248, 239, 213, 0.2) 0 9px,
+    transparent 9px 18px
+  );
+}
+
+/* About Me：藍底＋奶黃圓點 */
+.da-page .tab-blue {
+  background-color: #5F8FB3;      /* Cornflower 稍微加深，字才清楚 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cg fill='%23F8EFD5' fill-opacity='0.28'%3E%3Ccircle cx='6' cy='6' r='4'/%3E%3Ccircle cx='18' cy='18' r='4'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 作品收藏：黃底＋菱格紋（黃底上用紅字比較顯眼） */
+.da-page .tab-yellow {
+  background-color: #E8B24A;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='28'%3E%3Cpath d='M10 0 L20 14 L10 28 L0 14 Z' fill='%23C03A22' fill-opacity='0.16'/%3E%3Cpath d='M0 0 L10 0 L0 14 Z M20 0 L10 0 L20 14 Z M0 28 L10 28 L0 14 Z M20 28 L10 28 L20 14 Z' fill='%23F8EFD5' fill-opacity='0.22'/%3E%3C/svg%3E");
+  color: var(--red);
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* 聯絡我：銅底＋奶黃星星 */
+.da-page .tab-copper {
+  background-color: var(--copper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M14 3 L16.6 10.4 L24.5 10.6 L18.2 15.4 L20.5 23 L14 18.5 L7.5 23 L9.8 15.4 L3.5 10.6 L11.4 10.4 Z' fill='%23F8EFD5' fill-opacity='0.3'/%3E%3Cpath d='M14 3 L16.6 10.4 L24.5 10.6 L18.2 15.4 L20.5 23 L14 18.5 L7.5 23 L9.8 15.4 L3.5 10.6 L11.4 10.4 Z' transform='translate%2814 14%29 scale%280.55%29' fill='%23F8EFD5' fill-opacity='0.22'/%3E%3C/svg%3E");
+}
+
+/* 滑過：分頁往上長高一點、稍微變亮
+   加大的是「下面」的內距，所以字會跟著分頁頂端一起往上跳
+   負的 margin 讓它往上長，不會撐高整條導覽列 */
+.da-page .nav-tab:hover {
+  padding-bottom: 14px;
+  margin-top: -5px;
+  filter: brightness(1.06);
+}
+
+/* 目前所在的區塊：分頁凸起、頂到導覽列最上面，蓋在其他分頁上（home.js 會加上 is-active） */
+.da-page .nav-tab.is-active {
+  z-index: 2;
+  padding-bottom: 19px;           /* 字跟著一起升高 */
+  margin-top: -10px;              /* 往上長 10px，剛好頂到導覽列最上面 */
+}
+
+.da-page .nav-tab:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ===== 手機：名稱和分頁縮小 ===== */
+@media (max-width: 700px) {
+  .da-page .navbar {
+    gap: 8px;
+    padding: 8px 3% 0;
+  }
+
+  .da-page .nav-logo {
+    margin-top: -8px;
+    font-size: 13px;
+    letter-spacing: 0;
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  .da-page .nav-tab {
+    margin-left: -6px;
+    padding: 7px 9px 7px;
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  .da-page .nav-tab:hover {
+    padding-bottom: 10px;
+    margin-top: -3px;
+  }
+
+  .da-page .nav-tab.is-active {
+    padding-bottom: 15px;
+    margin-top: -8px;
+  }
+}
+
+
+/* ---------- 共用：區塊標題 ---------- */
+.da-head {
+  text-align: center;
+  margin: 0 auto 30px;
+}
+
+.da-eyebrow {
+  margin: 0 0 6px;
+  font-family: "black", sans-serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.da-heading {
+  margin: 0;
+  font-family: var(--da-title);
+  font-weight: 400;
+  font-size: clamp(34px, 4.6vw, 56px);
+  line-height: 1.05;
+  color: var(--red);
+  text-shadow: 0 4px 0 rgba(74, 34, 22, 0.18);
+}
+
+.da-sub {
+  margin: 8px 0 0;
+  font-family: var(--da-script);
+  font-size: 26px;
+  color: var(--copper);
+}
+
+/* 捲到才浮上來（digital-art.js 會加 .is-in） */
+.da-reveal {
+  opacity: 0;
+  translate: 0 36px;
+  transition: opacity 0.7s ease, translate 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.da-reveal.is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+
+
+/* =========================================================
+   1. 海報
+   ========================================================= */
+.da-hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  /* 紅色＋深紅直條紋＋淡淡的奶黃星星（跟首頁的門票同一個紅） */
+  background-color: var(--red);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='64'%3E%3Crect width='30' height='64' fill='%23A93220'/%3E%3Cpath d='M15 9 L17.4 16 L24.6 16.2 L18.9 20.7 L21 27.6 L15 23.5 L9 27.6 L11.1 20.7 L5.4 16.2 L12.6 16 Z' fill='%23F8EFD5' fill-opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 60px 64px;
+}
+
+/* 四周暗一點，像聚光燈打在海報上 */
+.da-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse at 50% 50%, transparent 35%, rgba(60, 12, 6, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* 海報後面慢慢轉的放射光 */
+.da-rays {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  width: 170vmax;
+  height: 170vmax;
+  translate: -50% -50%;
+  background: repeating-conic-gradient(rgba(248, 239, 213, 0.12) 0deg 7deg, transparent 7deg 15deg);
+  mask-image: radial-gradient(circle, #000 0%, transparent 55%);
+  -webkit-mask-image: radial-gradient(circle, #000 0%, transparent 55%);
+  animation: da-spin 90s linear infinite;
+}
+
+@keyframes da-spin {
+  to { rotate: 360deg; }
+}
+
+/* 海報本體：奶黃紙＋紅色雙框＋淡淡的網點 */
+.da-poster {
+  position: relative;
+  width: min(660px, 100%);
+  padding: min(38px, 4.5vh) 40px min(34px, 4vh);
+  text-align: center;
+  background-color: var(--cream);
+  background-image: radial-gradient(rgba(192, 58, 34, 0.08) 1.2px, transparent 1.6px);
+  background-size: 7px 7px;
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 0 8px var(--cream),
+    inset 0 0 0 11px var(--red),
+    inset 0 0 0 16px var(--cream),
+    inset 0 0 0 17px var(--red),
+    0 14px 0 rgba(60, 12, 6, 0.45);
+  rotate: -1.5deg;
+}
+
+.da-presents {
+  margin: 6px 0 14px;
+  font-family: "black", sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cadet);
+}
+
+/* 紅色緞帶（兩邊剪成燕尾） */
+.da-ribbon {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 0 34px;
+  background: var(--red);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 50%, 100% 100%, 0 100%, 14px 50%);
+}
+
+.da-ribbon span {
+  display: block;
+  padding: 7px 0 8px;
+  font-family: var(--da-title);
+  font-size: 17px;
+  letter-spacing: 2px;
+  color: var(--cream);
+}
+
+.da-title {
+  margin: 4px 0 0;
+  font-family: var(--da-title);
+  font-weight: 400;
+  line-height: 0.88;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+/* 字的大小同時看畫面的寬和高，DIGITAL 才不會超出海報、整張海報也放得進一個畫面 */
+.da-title span {
+  display: block;
+  white-space: nowrap;
+  font-size: max(40px, min(100px, 8.4vw, 11vh));
+  letter-spacing: 0;
+  color: #3E6A8E;                 /* DIGITAL：深藍 */
+  text-shadow: 0 6px 0 var(--gold), 0 11px 0 rgba(74, 34, 22, 0.3);
+}
+
+.da-title span + span {
+  font-size: max(60px, min(150px, 13vw, 16vh));
+  color: var(--red);              /* ART：紅 */
+}
+
+.da-tagline {
+  margin: 1.4vh 0 0;
+  font-family: var(--da-script);
+  font-size: clamp(26px, min(4vw, 4.6vh), 38px);
+  color: var(--copper);
+}
+
+.da-divider {
+  margin: 8px 0 14px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--red);
+  opacity: 0.6;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.da-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 0 min(26px, 3vh);
+  padding: 0;
+  list-style: none;
+}
+
+.da-badges li {
+  padding: 6px 16px 7px;
+  border: 2px solid var(--red);
+  border-radius: 999px;
+  font-family: "black", sans-serif;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* 票：點了往下滑 */
+.da-admit {
+  --notch: radial-gradient(circle 11px at 0 50%, transparent 97%, #000) left / 51% 100% no-repeat,
+           radial-gradient(circle 11px at 100% 50%, transparent 97%, #000) right / 51% 100% no-repeat;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 46px 12px;
+  background: var(--red);
+  color: var(--cream);
+  text-decoration: none;
+  mask: var(--notch);
+  -webkit-mask: var(--notch);
+  filter: drop-shadow(0 5px 0 rgba(74, 34, 22, 0.3));
+  outline: 2px dashed rgba(248, 239, 213, 0.7);
+  outline-offset: -7px;
+  transition: translate 0.25s cubic-bezier(0.3, 1.6, 0.5, 1), rotate 0.25s ease;
+}
+
+.da-admit:hover {
+  translate: 0 -4px;
+  rotate: -2deg;
+}
+
+.da-admit-small {
+  font-family: var(--da-script);
+  font-size: 20px;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.da-admit-big {
+  font-family: var(--da-title);
+  font-size: 20px;
+  letter-spacing: 1.5px;
+  line-height: 1.2;
+}
+
+/* 裝飾星星：一閃一閃 */
+.da-spark {
+  position: absolute;
+  color: var(--cream);
+  text-shadow: 0 3px 0 rgba(74, 34, 22, 0.3);
+  animation: da-twinkle 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.da-spark-1 { left: 12%; top: 18%; font-size: 54px; }
+.da-spark-2 { right: 13%; top: 26%; font-size: 38px; animation-delay: -0.8s; color: var(--gold); }
+.da-spark-3 { left: 16%; bottom: 18%; font-size: 40px; animation-delay: -1.4s; color: var(--gold); }
+.da-spark-4 { right: 10%; bottom: 14%; font-size: 60px; animation-delay: -2s; }
+
+@keyframes da-twinkle {
+  0%, 100% { scale: 1; rotate: 0deg; opacity: 1; }
+  50%      { scale: 0.7; rotate: 20deg; opacity: 0.7; }
+}
+
+
+/* =========================================================
+   2. 藝術家的話：藍底圓點＋奶黃信紙
+   ========================================================= */
+.da-note-wrap {
+  background-color: #5F8FB3;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cg fill='%23F8EFD5' fill-opacity='0.22'%3E%3Ccircle cx='6' cy='6' r='4'/%3E%3Ccircle cx='18' cy='18' r='4'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.da-note {
+  position: relative;
+  width: min(720px, 100%);
+  margin: 0 auto;
+  padding: 54px 48px 40px;
+  background: var(--cream);
+  border-radius: 6px;
+  box-shadow: 0 12px 0 rgba(30, 50, 70, 0.3);
+  rotate: 0.8deg;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+/* 上面一塊紅色的小標籤，像貼上去的 */
+.da-note-tab {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  translate: -50% 0;
+  rotate: -3deg;
+  margin: 0;
+  padding: 6px 24px 8px;
+  background: var(--red);
+  border-radius: 6px;
+  font-family: var(--da-script);
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--cream);
+  white-space: nowrap;
+  box-shadow: 0 5px 0 rgba(74, 34, 22, 0.3);
+}
+
+.da-note-title {
+  margin: 0 0 18px;
+  font-family: var(--da-title);
+  font-weight: 400;
+  font-size: clamp(18px, 2.6vw, 21px);   /* 縮小，電腦上一行放得下 */
+  line-height: 1.2;
+  text-align: center;
+  color: #3E6A8E;
+}
+
+.da-note-title em {
+  font-style: normal;
+  color: var(--red);
+}
+
+.da-note p {
+  margin: 0 0 14px;
+}
+
+.da-sign {
+  margin: 8px 0 0 !important;
+  text-align: right;
+  font-family: var(--da-script);
+  font-size: 32px;
+  color: var(--red);
+}
+
+
+/* =========================================================
+   共用：畫框（點了可以放大）
+   ========================================================= */
+.da-frame {
+  --mat: var(--gold);
+  position: relative;
+  margin: 0;
+  padding: 14px;
+  background: var(--mat);
+  border-radius: 4px;
+  cursor: zoom-in;
+  box-shadow:
+    inset 0 0 0 3px rgba(74, 34, 22, 0.25),
+    inset 0 0 0 7px rgba(248, 239, 213, 0.35),
+    0 10px 0 rgba(74, 34, 22, 0.28);
+}
+
+.da-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 0 0 3px var(--cream);
+}
+
+.da-frame-gold   { --mat: var(--gold); }
+.da-frame-red    { --mat: var(--red); }
+.da-frame-blue   { --mat: #5F8FB3; }
+.da-frame-kiwi   { --mat: var(--kiwi); }
+.da-frame-copper { --mat: var(--copper); }
+.da-frame-cadet  { --mat: var(--cadet); }
+
+/* 掛畫的釘子和繩子 */
+.da-nail {
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  width: 120px;
+  height: 36px;
+  translate: -50% 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 5px, var(--da-ink) 0 5px, transparent 5.5px),
+    linear-gradient(to top right, transparent calc(50% - 1px), var(--da-ink) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)) left / 50% 100% no-repeat,
+    linear-gradient(to top left, transparent calc(50% - 1px), var(--da-ink) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)) right / 50% 100% no-repeat;
+}
+
+/* 還沒有圖的時候：顯示菱格紋＋Coming soon（digital-art.js 會加 .is-empty） */
+.da-frame.is-empty {
+  cursor: default;
+}
+
+.da-frame.is-empty img {
+  display: none;
+}
+
+.da-frame.is-empty::after {
+  content: "artwork\A coming soon";
+  white-space: pre;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  text-align: center;
+  border-radius: 2px;
+  box-shadow: 0 0 0 3px var(--cream);
+  background-color: var(--cream);
+  background-image:
+    linear-gradient(rgba(248, 239, 213, 0.7), rgba(248, 239, 213, 0.7)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'%3E%3Cpath d='M-64 -96L-32 -64L-64 -32L-96 -64Z' fill='%23D58A4B'/%3E%3Cpath d='M0 -96L32 -64L0 -32L-32 -64Z' fill='%23D58A4B'/%3E%3Cpath d='M-32 -64L0 -32L-32 0L-64 -32Z' fill='%23A9C0C4'/%3E%3Cpath d='M-64 -32L-32 0L-64 32L-96 0Z' fill='%23D58A4B'/%3E%3Cpath d='M64 -96L96 -64L64 -32L32 -64Z' fill='%23D58A4B'/%3E%3Cpath d='M32 -64L64 -32L32 0L0 -32Z' fill='%23F0CF9C'/%3E%3Cpath d='M0 -32L32 0L0 32L-32 0Z' fill='%23D58A4B'/%3E%3Cpath d='M-32 0L0 32L-32 64L-64 32Z' fill='%23F0CF9C'/%3E%3Cpath d='M-64 32L-32 64L-64 96L-96 64Z' fill='%23D58A4B'/%3E%3Cpath d='M128 -96L160 -64L128 -32L96 -64Z' fill='%23D58A4B'/%3E%3Cpath d='M96 -64L128 -32L96 0L64 -32Z' fill='%23A9C0C4'/%3E%3Cpath d='M64 -32L96 0L64 32L32 0Z' fill='%23D58A4B'/%3E%3Cpath d='M32 0L64 32L32 64L0 32Z' fill='%23A9C0C4'/%3E%3Cpath d='M0 32L32 64L0 96L-32 64Z' fill='%23D58A4B'/%3E%3Cpath d='M-32 64L0 96L-32 128L-64 96Z' fill='%23A9C0C4'/%3E%3Cpath d='M-64 96L-32 128L-64 160L-96 128Z' fill='%23D58A4B'/%3E%3Cpath d='M192 -96L224 -64L192 -32L160 -64Z' fill='%23D58A4B'/%3E%3Cpath d='M160 -64L192 -32L160 0L128 -32Z' fill='%23F0CF9C'/%3E%3Cpath d='M128 -32L160 0L128 32L96 0Z' fill='%23D58A4B'/%3E%3Cpath d='M96 0L128 32L96 64L64 32Z' fill='%23F0CF9C'/%3E%3Cpath d='M64 32L96 64L64 96L32 64Z' fill='%23D58A4B'/%3E%3Cpath d='M32 64L64 96L32 128L0 96Z' fill='%23F0CF9C'/%3E%3Cpath d='M0 96L32 128L0 160L-32 128Z' fill='%23D58A4B'/%3E%3Cpath d='M-32 128L0 160L-32 192L-64 160Z' fill='%23F0CF9C'/%3E%3Cpath d='M-64 160L-32 192L-64 224L-96 192Z' fill='%23D58A4B'/%3E%3Cpath d='M192 -32L224 0L192 32L160 0Z' fill='%23D58A4B'/%3E%3Cpath d='M160 0L192 32L160 64L128 32Z' fill='%23A9C0C4'/%3E%3Cpath d='M128 32L160 64L128 96L96 64Z' fill='%23D58A4B'/%3E%3Cpath d='M96 64L128 96L96 128L64 96Z' fill='%23A9C0C4'/%3E%3Cpath d='M64 96L96 128L64 160L32 128Z' fill='%23D58A4B'/%3E%3Cpath d='M32 128L64 160L32 192L0 160Z' fill='%23A9C0C4'/%3E%3Cpath d='M0 160L32 192L0 224L-32 192Z' fill='%23D58A4B'/%3E%3Cpath d='M192 32L224 64L192 96L160 64Z' fill='%23D58A4B'/%3E%3Cpath d='M160 64L192 96L160 128L128 96Z' fill='%23F0CF9C'/%3E%3Cpath d='M128 96L160 128L128 160L96 128Z' fill='%23D58A4B'/%3E%3Cpath d='M96 128L128 160L96 192L64 160Z' fill='%23F0CF9C'/%3E%3Cpath d='M64 160L96 192L64 224L32 192Z' fill='%23D58A4B'/%3E%3Cpath d='M192 96L224 128L192 160L160 128Z' fill='%23D58A4B'/%3E%3Cpath d='M160 128L192 160L160 192L128 160Z' fill='%23A9C0C4'/%3E%3Cpath d='M128 160L160 192L128 224L96 192Z' fill='%23D58A4B'/%3E%3Cpath d='M192 160L224 192L192 224L160 192Z' fill='%23D58A4B'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 64px 64px;
+  font-family: var(--da-script);
+  font-size: 30px;
+  line-height: 1.1;
+  color: var(--red);
+}
+
+
+/* =========================================================
+   3. 今晚的主秀：白雪公主
+   夜晚森林的深藍底＋淡淡的星星直條紋＋從上面打下來的聚光燈
+   ========================================================= */
+.da-feature {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: #1F2933;
+  background-image:
+    radial-gradient(ellipse 60% 70% at 62% 0%, rgba(240, 190, 87, 0.22), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(8, 10, 14, 0.55) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='64'%3E%3Crect width='30' height='64' fill='%23FFFFFF' fill-opacity='0.025'/%3E%3Cpath d='M15 9 L17.4 16 L24.6 16.2 L18.9 20.7 L21 27.6 L15 23.5 L9 27.6 L11.1 20.7 L5.4 16.2 L12.6 16 Z' fill='%23F8EFD5' fill-opacity='0.07'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 60px 64px;
+}
+
+.da-feature .da-eyebrow {
+  color: var(--gold);
+}
+
+.da-feature-body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 520px);
+  justify-content: center;
+  align-items: center;
+  gap: clamp(36px, 5vw, 72px);
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
+
+.da-feature-frame {
+  rotate: -2deg;
+  box-shadow:
+    inset 0 0 0 3px rgba(74, 34, 22, 0.25),
+    inset 0 0 0 7px rgba(248, 239, 213, 0.35),
+    0 14px 0 rgba(0, 0, 0, 0.35),
+    0 0 60px rgba(240, 190, 87, 0.18);
+  transition: rotate 0.4s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.da-feature-frame:hover {
+  rotate: 0deg;
+}
+
+/* 釘子和繩子在深色背景上改成奶黃色 */
+.da-feature .da-nail {
+  --da-ink: var(--cream);
+}
+
+/* 畫的高度跟著畫面高度走，整張放得進一個畫面 */
+.da-feature-frame img {
+  width: auto;
+  height: calc(100svh - var(--nav-h, 64px) - 190px);
+  max-height: 700px;
+  min-height: 260px;
+  aspect-ratio: 4 / 5;
+}
+
+/* 右邊一整欄 */
+.da-feature-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.da-feature-info .da-eyebrow {
+  margin-bottom: 18px;
+  translate: 0 -14px;             /* 往上挪一點 */
+}
+
+/* 標準字：直接放在深色背景上，後面一圈淡淡的光 */
+.da-lettering {
+  width: min(100%, 400px);
+  margin: 0 0 12px;
+  cursor: zoom-in;
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, 0.45)) drop-shadow(0 0 22px rgba(240, 190, 87, 0.25));
+  transition: scale 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.da-lettering:hover {
+  scale: 1.04;
+}
+
+.da-lettering img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 說明牌 */
+.da-placard {
+  padding: 20px 28px 22px;
+  text-align: left;
+  background: var(--cream);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 6px var(--cream), inset 0 0 0 8px var(--gold), 0 10px 0 rgba(0, 0, 0, 0.35);
+  font-size: 14.5px;
+  line-height: 1.6;
+  rotate: 0.8deg;
+}
+
+.da-placard p {
+  margin: 0 0 10px;
+}
+
+.da-placard-no {
+  margin: 0 0 8px !important;
+  font-family: "black", sans-serif;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.da-mini-label {
+  margin: 14px 0 8px !important;
+  font-family: var(--da-script);
+  font-size: 24px;
+  color: var(--red);
+}
+
+/* 線稿 → 平塗 → 完成 三張小圖 */
+.da-steps-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  width: min(100%, 330px);
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.da-steps-strip li {
+  position: relative;
+  text-align: center;
+}
+
+.da-steps-strip li + li::before {
+  content: "→";
+  position: absolute;
+  left: -13px;
+  top: 38%;
+  font-family: "black", sans-serif;
+  color: var(--red);
+}
+
+.da-steps-strip img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: 50% 45%;
+  border-radius: 4px;
+  box-shadow: 0 0 0 3px var(--cream), 0 0 0 5px var(--da-ink), 0 6px 0 3px rgba(74, 34, 22, 0.2);
+}
+
+.da-steps-strip span {
+  display: block;
+  margin-top: 8px;
+  font-family: "black", sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* 按鈕 */
+.da-button {
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  padding: 11px 28px 12px;
+  border-radius: 999px;
+  background: var(--red);
+  color: var(--cream);
+  font-family: var(--da-title);
+  font-size: 17px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  box-shadow: 0 5px 0 var(--da-ink);
+  transition: translate 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+}
+
+.da-button:hover {
+  background: var(--copper);
+  translate: 0 -2px;
+  box-shadow: 0 7px 0 var(--da-ink);
+}
+
+.da-button:active {
+  translate: 0 4px;
+  box-shadow: 0 1px 0 var(--da-ink);
+}
+
+
+/* =========================================================
+   4. 作品收藏：奶黃牆＋掛起來的畫
+   ========================================================= */
+.da-collection {
+  background-color: #F5DDA2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='64'%3E%3Crect width='30' height='64' fill='%23EECB7C'/%3E%3Cpath d='M15 9 L17.4 16 L24.6 16.2 L18.9 20.7 L21 27.6 L15 23.5 L9 27.6 L11.1 20.7 L5.4 16.2 L12.6 16 Z' fill='%23FBF3DC' fill-opacity='0.9'/%3E%3C/svg%3E");
+  background-size: 60px 64px;
+}
+
+/* 每頁三幅大大的掛在牆上；畫的大小跟著畫面高度走，剛好放得進一個畫面 */
+.da-grid {
+  --frame-h: clamp(220px, calc(100svh - var(--nav-h, 64px) - 345px), 560px);
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  align-items: start;
+  gap: 40px clamp(30px, 4.5vw, 80px);
+  margin: 50px auto 0;
+}
+
+/* 中間那幅稍微低一點，看起來像隨意掛在牆上 */
+.da-grid .da-piece:nth-child(2) {
+  margin-top: 22px;
+}
+
+.da-piece {
+  margin: 0;
+  rotate: var(--tilt, 0deg);
+  transition: rotate 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.da-piece .da-frame {
+  height: var(--frame-h);
+  aspect-ratio: 4 / 5;
+  padding: 13px;
+  transform-origin: 50% -34px;
+}
+
+.da-piece .da-frame.is-empty::after {
+  min-height: 0;
+  font-size: 30px;
+}
+
+/* 滑過：畫扶正、像被碰到一樣晃一下 */
+.da-piece:hover {
+  rotate: 0deg;
+}
+
+.da-piece:hover .da-frame {
+  animation: da-swing 0.9s ease-out;
+}
+
+@keyframes da-swing {
+  0%   { rotate: 0deg; }
+  25%  { rotate: 3deg; }
+  50%  { rotate: -2deg; }
+  75%  { rotate: 1deg; }
+  100% { rotate: 0deg; }
+}
+
+/* 畫下面的小名牌 */
+.da-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  margin: 16px auto 0;
+  padding: 8px 20px 9px;
+  background: var(--cream);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 2px var(--da-ink), 0 5px 0 rgba(74, 34, 22, 0.2);
+  text-align: center;
+}
+
+.da-label-no {
+  font-family: "black", sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--copper);
+}
+
+.da-label strong {
+  font-family: var(--da-title);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--red);
+}
+
+.da-label span:last-child {
+  font-size: 12px;
+  color: var(--cadet);
+}
+
+
+/* =========================================================
+   5. 幕後：橘色菱格紋＋告示牌
+   ========================================================= */
+.da-process {
+  background-color: #D58A4B;
+  background-image:
+    linear-gradient(rgba(213, 138, 75, 0.5), rgba(213, 138, 75, 0.5)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'%3E%3Cpath d='M-64 -96L-32 -64L-64 -32L-96 -64Z' fill='%23D58A4B'/%3E%3Cpath d='M0 -96L32 -64L0 -32L-32 -64Z' fill='%23D58A4B'/%3E%3Cpath d='M-32 -64L0 -32L-32 0L-64 -32Z' fill='%23A9C0C4'/%3E%3Cpath d='M-64 -32L-32 0L-64 32L-96 0Z' fill='%23D58A4B'/%3E%3Cpath d='M64 -96L96 -64L64 -32L32 -64Z' fill='%23D58A4B'/%3E%3Cpath d='M32 -64L64 -32L32 0L0 -32Z' fill='%23F0CF9C'/%3E%3Cpath d='M0 -32L32 0L0 32L-32 0Z' fill='%23D58A4B'/%3E%3Cpath d='M-32 0L0 32L-32 64L-64 32Z' fill='%23F0CF9C'/%3E%3Cpath d='M-64 32L-32 64L-64 96L-96 64Z' fill='%23D58A4B'/%3E%3Cpath d='M128 -96L160 -64L128 -32L96 -64Z' fill='%23D58A4B'/%3E%3Cpath d='M96 -64L128 -32L96 0L64 -32Z' fill='%23A9C0C4'/%3E%3Cpath d='M64 -32L96 0L64 32L32 0Z' fill='%23D58A4B'/%3E%3Cpath d='M32 0L64 32L32 64L0 32Z' fill='%23A9C0C4'/%3E%3Cpath d='M0 32L32 64L0 96L-32 64Z' fill='%23D58A4B'/%3E%3Cpath d='M-32 64L0 96L-32 128L-64 96Z' fill='%23A9C0C4'/%3E%3Cpath d='M-64 96L-32 128L-64 160L-96 128Z' fill='%23D58A4B'/%3E%3Cpath d='M192 -96L224 -64L192 -32L160 -64Z' fill='%23D58A4B'/%3E%3Cpath d='M160 -64L192 -32L160 0L128 -32Z' fill='%23F0CF9C'/%3E%3Cpath d='M128 -32L160 0L128 32L96 0Z' fill='%23D58A4B'/%3E%3Cpath d='M96 0L128 32L96 64L64 32Z' fill='%23F0CF9C'/%3E%3Cpath d='M64 32L96 64L64 96L32 64Z' fill='%23D58A4B'/%3E%3Cpath d='M32 64L64 96L32 128L0 96Z' fill='%23F0CF9C'/%3E%3Cpath d='M0 96L32 128L0 160L-32 128Z' fill='%23D58A4B'/%3E%3Cpath d='M-32 128L0 160L-32 192L-64 160Z' fill='%23F0CF9C'/%3E%3Cpath d='M-64 160L-32 192L-64 224L-96 192Z' fill='%23D58A4B'/%3E%3Cpath d='M192 -32L224 0L192 32L160 0Z' fill='%23D58A4B'/%3E%3Cpath d='M160 0L192 32L160 64L128 32Z' fill='%23A9C0C4'/%3E%3Cpath d='M128 32L160 64L128 96L96 64Z' fill='%23D58A4B'/%3E%3Cpath d='M96 64L128 96L96 128L64 96Z' fill='%23A9C0C4'/%3E%3Cpath d='M64 96L96 128L64 160L32 128Z' fill='%23D58A4B'/%3E%3Cpath d='M32 128L64 160L32 192L0 160Z' fill='%23A9C0C4'/%3E%3Cpath d='M0 160L32 192L0 224L-32 192Z' fill='%23D58A4B'/%3E%3Cpath d='M192 32L224 64L192 96L160 64Z' fill='%23D58A4B'/%3E%3Cpath d='M160 64L192 96L160 128L128 96Z' fill='%23F0CF9C'/%3E%3Cpath d='M128 96L160 128L128 160L96 128Z' fill='%23D58A4B'/%3E%3Cpath d='M96 128L128 160L96 192L64 160Z' fill='%23F0CF9C'/%3E%3Cpath d='M64 160L96 192L64 224L32 192Z' fill='%23D58A4B'/%3E%3Cpath d='M192 96L224 128L192 160L160 128Z' fill='%23D58A4B'/%3E%3Cpath d='M160 128L192 160L160 192L128 160Z' fill='%23A9C0C4'/%3E%3Cpath d='M128 160L160 192L128 224L96 192Z' fill='%23D58A4B'/%3E%3Cpath d='M192 160L224 192L192 224L160 192Z' fill='%23D58A4B'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 128px 128px;
+}
+
+.da-process .da-eyebrow { color: var(--cream); text-shadow: 0 2px 0 rgba(74, 34, 22, 0.4); }
+.da-process .da-heading {
+  color: var(--cream);
+  -webkit-text-stroke: 2px var(--da-ink);
+  paint-order: stroke fill;
+  text-shadow: 0 5px 0 var(--da-ink);
+}
+
+.da-process-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px;
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.da-step {
+  position: relative;
+  padding: 52px 22px 26px;
+  background: var(--cream);
+  border-radius: 8px;
+  text-align: center;
+  rotate: var(--tilt, 0deg);
+  box-shadow: inset 0 0 0 5px var(--cream), inset 0 0 0 7px var(--red), 0 9px 0 rgba(74, 34, 22, 0.3);
+  transition: rotate 0.4s cubic-bezier(0.3, 1.6, 0.5, 1), translate 0.3s ease;
+}
+
+.da-step:hover {
+  rotate: 0deg;
+  translate: 0 -6px;
+}
+
+/* 上面的金色圓章，寫編號 */
+.da-step-no {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  translate: -50% 0;
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: inset 0 0 0 4px var(--gold), inset 0 0 0 6px var(--cream), 0 5px 0 rgba(74, 34, 22, 0.3);
+  font-family: var(--da-title);
+  font-size: 22px;
+  color: var(--red);
+}
+
+.da-step h3 {
+  margin: 0 0 8px;
+  font-family: var(--da-title);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--red);
+}
+
+.da-step p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   6. 其他場次：三張票
+   ========================================================= */
+.da-more {
+  text-align: center;
+  background-color: var(--cream);
+  background-image: radial-gradient(rgba(43, 29, 18, 0.1) 1px, transparent 1.4px);
+  background-size: 6px 6px;
+}
+
+.da-tickets {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.da-ticket {
+  --edge: var(--red);
+  --notch: radial-gradient(circle 14px at 0 50%, transparent 97%, #000) left / 51% 100% no-repeat,
+           radial-gradient(circle 14px at 100% 50%, transparent 97%, #000) right / 51% 100% no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 260px;
+  padding: 20px 30px 22px;
+  background: var(--edge);
+  color: var(--cream);
+  text-decoration: none;
+  mask: var(--notch);
+  -webkit-mask: var(--notch);
+  outline: 2px dashed rgba(248, 239, 213, 0.75);
+  outline-offset: -9px;
+  filter: drop-shadow(0 6px 0 rgba(74, 34, 22, 0.3));
+  transition: translate 0.3s cubic-bezier(0.3, 1.6, 0.5, 1), rotate 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.da-ticket:nth-child(1) { rotate: -3deg; }
+.da-ticket:nth-child(2) { rotate: 2deg; }
+.da-ticket:nth-child(3) { rotate: -1.5deg; }
+
+.da-ticket:hover {
+  translate: 0 -8px;
+  rotate: 0deg;
+}
+
+.da-ticket-blue   { --edge: #5F8FB3; }
+.da-ticket-copper { --edge: var(--copper); }
+.da-ticket-kiwi   { --edge: #A9A35A; }
+
+.da-ticket-no {
+  font-family: "black", sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  opacity: 0.85;
+}
+
+.da-ticket strong {
+  font-family: var(--da-title);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.15;
+  text-shadow: 0 3px 0 rgba(74, 34, 22, 0.3);
+}
+
+.da-ticket-go {
+  font-family: var(--da-script);
+  font-size: 22px;
+  color: var(--cream);
+}
+
+.da-back {
+  display: inline-block;
+  margin-top: 46px;
+  font-family: var(--da-script);
+  font-size: 30px;
+  color: var(--red);
+  text-decoration: none;
+}
+
+.da-back:hover {
+  color: var(--copper);
+}
+
+
+/* =========================================================
+   放大看作品的視窗
+   ========================================================= */
+.da-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: grid;
+  grid-template-columns: 70px 1fr 70px;
+  align-items: center;
+  padding: 30px 10px;
+  background: rgba(30, 20, 14, 0.88);
+  animation: da-fade 0.25s ease;
+}
+
+.da-lightbox[hidden] {
+  display: none;
+}
+
+@keyframes da-fade {
+  from { opacity: 0; }
+}
+
+.da-lb-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: calc(100svh - 60px);
+  margin: 0;
+}
+
+.da-lb-img {
+  max-width: 100%;
+  max-height: calc(100svh - 170px);
+  border: 10px solid var(--cream);
+  border-radius: 4px;
+  box-shadow: 0 0 0 3px var(--gold), 0 14px 0 rgba(0, 0, 0, 0.35);
+  animation: da-pop-in 0.35s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+
+@keyframes da-pop-in {
+  from { scale: 0.85; opacity: 0; }
+}
+
+.da-lightbox figcaption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 18px;
+  text-align: center;
+  color: var(--cream);
+}
+
+.da-lb-title {
+  font-family: var(--da-title);
+  font-weight: 400;
+  font-size: 26px;
+}
+
+.da-lb-desc {
+  max-width: 560px;
+  margin-top: 4px;
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+.da-lightbox button {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--red);
+  font-family: var(--da-title);
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
+  transition: background 0.2s ease, scale 0.2s ease;
+}
+
+.da-lightbox button:hover {
+  background: var(--gold);
+  scale: 1.08;
+}
+
+.da-lb-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 22px !important;
+}
+
+
+/* ---------- 頁尾（跟首頁一樣，壓扁成一排置中） ---------- */
+.da-page footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  padding: 10px 110px;
+}
+
+.da-page footer p {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.da-page footer p:first-child {
+  font-family: var(--da-title);
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.da-page footer p:nth-child(2) {
+  font-family: var(--da-script);
+  font-size: 24px;
+  color: var(--gold);
+}
+
+.da-page footer .copyright {
+  font-family: "normal", sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+
+/* =========================================================
+   平板、手機
+   ========================================================= */
+@media (max-width: 900px) {
+  .da-feature-body {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .da-feature-frame {
+    width: min(420px, 100%);
+    margin: 0 auto;
+  }
+
+  .da-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .da-piece:nth-child(3n + 2) { margin-top: 0; }
+  .da-piece:nth-child(2n) { margin-top: 40px; }
+
+  .da-process-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 54px;
+  }
+}
+
+@media (max-width: 600px) {
+  .da-poster {
+    padding: 30px 22px 28px;
+  }
+
+  .da-spark { display: none; }
+
+  .da-note {
+    padding: 48px 24px 30px;
+    font-size: 16px;
+  }
+
+  .da-placard {
+    padding: 26px 22px;
+  }
+
+  .da-grid {
+    grid-template-columns: 1fr;
+    width: min(360px, 100%);
+  }
+
+  .da-piece:nth-child(2n) { margin-top: 0; }
+
+  .da-process-list {
+    grid-template-columns: 1fr;
+    width: min(360px, 100%);
+  }
+
+  .da-lightbox {
+    grid-template-columns: 44px 1fr 44px;
+    padding: 20px 4px;
+  }
+
+  .da-lightbox button {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .da-page footer {
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .da-rays, .da-spark { animation: none; }
+  .da-reveal { opacity: 1; translate: none; transition: none; }
+}
+
+
+/* =========================================================
+   一整頁一整頁：每一格剛好是「畫面 − 導覽列」那麼高，捲動時會卡在每一頁
+   （用滑鼠的電腦由 digital-art.js 控制卡頁；手機、平板用瀏覽器內建的卡格）
+   ========================================================= */
+html:has(body.da-page) {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: var(--nav-h, 64px);
+}
+
+html.js-snap:has(body.da-page) {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+.da-page main > section {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100vh - var(--nav-h, 64px));
+  min-height: calc(100svh - var(--nav-h, 64px));
+  padding: 40px 24px;
+  scroll-snap-align: start;
+}
+
+.da-page main > .da-hero {
+  display: grid;
+  place-items: center;
+  padding: 30px 20px;
+}
+
+/* 最後一頁扣掉頁尾，滑到最底時這一頁＋頁尾剛好一起出現 */
+.da-page main > section:last-child {
+  min-height: calc(100vh - var(--nav-h, 64px) - var(--footer-h, 52px));
+  min-height: calc(100svh - var(--nav-h, 64px) - var(--footer-h, 52px));
+}
+
+.da-page footer {
+  scroll-snap-align: end;
+}
+
+/* 落地時整頁往下震一下 */
+.da-page .snap-land {
+  animation: snap-land 0.32s cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+/* 手機：內容比較長，不硬塞進一個畫面 */
+@media (max-width: 900px) {
+  .da-feature-frame img {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .da-feature-body {
+    grid-template-columns: 1fr;
+  }
+
+  .da-grid {
+    --frame-h: auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 50px 20px;
+  }
+
+  .da-piece .da-frame {
+    height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .da-grid {
+    grid-template-columns: 1fr;
+    width: min(320px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* 作品收藏這一頁東西比較多：上下留白、標題縮小一點 */
+.da-page main > .da-collection {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.da-collection .da-head {
+  margin-bottom: 0;
+}
+
+.da-collection .da-heading {
+  font-size: clamp(30px, 3.6vw, 44px);
+}
+
+/* 「Act I  click any piece…」：紅色小緞帶＋手寫字 */
+.da-act {
+  margin: 6px 0 0;
+  font-family: var(--da-script);
+  font-size: 22px;
+  color: var(--copper);
+}
+
+.da-act span {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 3px 14px 4px;
+  border-radius: 4px;
+  background: var(--red);
+  font-family: var(--da-title);
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--cream);
+  vertical-align: 3px;
+  rotate: -3deg;
+}
+
+/* 比較矮的螢幕（例如筆電 768px 高）：主秀那一頁縮緊一點，才放得進一個畫面 */
+@media (max-height: 820px) and (min-width: 901px) {
+  .da-lettering { width: min(100%, 320px); margin-bottom: 8px; }
+  .da-feature-info .da-eyebrow { margin-bottom: 0; }
+  .da-placard { padding: 18px 24px 20px; font-size: 14px; line-height: 1.55; }
+  .da-mini-label { margin: 8px 0 6px !important; font-size: 21px; }
+  .da-steps-strip { width: min(100%, 280px); margin-bottom: 12px; }
+  .da-steps-strip span { margin-top: 6px; }
+}
+
+/* 名牌下面的連結（想在名牌下面放連結時用：<a class="da-label-link" href="…">…</a>） */
+.da-label-link {
+  margin-top: 2px;
+  font-family: var(--da-script);
+  font-size: 18px;
+  color: var(--red);
+  text-decoration: none;
+}
+
+.da-label-link:hover {
+  color: var(--copper);
+}
+
+
+/* ---------- 大畫框裡疊在一起的三張圖：選到的那張淡入 ---------- */
+.da-feature-frame {
+  position: relative;
+}
+
+.da-feature-frame .da-stage-img:not(:first-of-type) {
+  position: absolute;
+  inset: 14px;
+  width: calc(100% - 28px);
+  height: calc(100% - 28px);
+  min-height: 0;
+  max-height: none;
+}
+
+.da-feature-frame .da-stage-img {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.da-feature-frame .da-stage-img.is-shown {
+  opacity: 1;
+}
+
+/* ---------- 膠囊切換（Liquid Bulge） ---------- */
+.da-bulge {
+  width: min(100%, 330px);
+  margin: 0 0 4px;
+}
+
+.da-bulge-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.da-bulge-shape {
+  fill: #FFF9EA;
+  stroke: var(--da-ink);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 3px 0 rgba(74, 34, 22, 0.18));
+}
+
+.da-bulge-small {
+  fill: var(--da-ink);
+  opacity: 1;
+  transition: opacity 0.15s ease;
+}
+
+.da-bulge-dot {
+  fill: var(--red);
+}
+
+/* 三個字對齊三個點（50、150、250 / 300） */
+.da-bulge-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 4px;
+}
+
+.da-bulge-tabs button {
+  padding: 4px 0;
+  border: none;
+  background: none;
+  font-family: "black", sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cadet);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.da-bulge-tabs button:hover {
+  color: var(--copper);
+}
+
+.da-bulge-tabs button[aria-selected="true"] {
+  color: var(--red);
+}
+
+.da-bulge-tabs button:focus-visible {
+  outline: 2px dashed var(--red);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* 人物臨摹練習這種比較瘦長的畫（大約 7:10）：畫框跟著變瘦長，才不會切到 */
+.da-piece-portrait .da-frame {
+  aspect-ratio: 7 / 10;
+}
+
+/* 設計稿（正方形的系服、去背的角色）：整張放進畫框，不裁切，後面墊奶黃紙＋淡淡的網點 */
+.da-frame-contain img {
+  object-fit: contain;
+  background-color: #FBF5E6;
+  background-image: radial-gradient(rgba(192, 58, 34, 0.07) 1.2px, transparent 1.6px);
+  background-size: 7px 7px;
+}
+
+/* ---------- 其他分類的票：被撕開 ---------- */
+.da-ticket {
+  position: relative;
+}
+
+/* 撕的時候：原本的票變透明，只留下兩半在動 */
+.da-ticket.is-tearing {
+  background: transparent;
+  outline-color: transparent;
+  mask: none;
+  -webkit-mask: none;
+  filter: none;
+  translate: 0 0;
+  pointer-events: none;
+}
+
+.da-ticket.is-tearing > :not(.da-tear-piece) {
+  visibility: hidden;
+}
+
+/* 每一半：一樣有兩邊的半圓缺口和硬陰影 */
+.da-tear-piece {
+  position: absolute;
+  inset: 0;
+  mask: var(--notch);
+  -webkit-mask: var(--notch);
+  filter: drop-shadow(0 6px 0 rgba(74, 34, 22, 0.3));
+  pointer-events: none;
+}
+
+.da-tear-fiber,
+.da-tear-face {
+  position: absolute;
+  inset: 0;
+}
+
+/* 撕口露出來的紙纖維 */
+.da-tear-fiber {
+  background: #FBF3DC;
+}
+
+/* 票面：跟原本的票長得一樣 */
+.da-tear-face {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 20px 30px 22px;
+  background: var(--edge);
+  color: var(--cream);
+  outline: 2px dashed rgba(248, 239, 213, 0.75);
+  outline-offset: -9px;
+}
+
+/* 電腦上：信紙夠寬，標題不要換行 */
+@media (min-width: 820px) {
+  .da-note-title { white-space: nowrap; }
+}
+
+
+/* =========================================================
+   其他三個作品分類頁：海報背景色 = 首頁那張門票的顏色
+   （body 加上 theme-blue / theme-copper / theme-kiwi）
+   ========================================================= */
+.theme-blue .da-hero {
+  background-color: #5F8FB3;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='64'%3E%3Crect width='30' height='64' fill='%234F7EA2'/%3E%3Cpath d='M15 9 L17.4 16 L24.6 16.2 L18.9 20.7 L21 27.6 L15 23.5 L9 27.6 L11.1 20.7 L5.4 16.2 L12.6 16 Z' fill='%23F8EFD5' fill-opacity='0.3'/%3E%3C/svg%3E");
+}
+
+.theme-copper .da-hero {
+  background-color: #D58A4B;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='64'%3E%3Crect width='30' height='64' fill='%23C2773A'/%3E%3Cpath d='M15 9 L17.4 16 L24.6 16.2 L18.9 20.7 L21 27.6 L15 23.5 L9 27.6 L11.1 20.7 L5.4 16.2 L12.6 16 Z' fill='%23F8EFD5' fill-opacity='0.3'/%3E%3C/svg%3E");
+}
+
+.theme-kiwi .da-hero {
+  background-color: #B3AB5E;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='64'%3E%3Crect width='30' height='64' fill='%23A19A50'/%3E%3Cpath d='M15 9 L17.4 16 L24.6 16.2 L18.9 20.7 L21 27.6 L15 23.5 L9 27.6 L11.1 20.7 L5.4 16.2 L12.6 16 Z' fill='%23F8EFD5' fill-opacity='0.3'/%3E%3C/svg%3E");
+}
+
+/* 海報大字的兩個顏色，跟背景搭配 */
+.theme-blue .da-title span       { color: var(--red); }
+.theme-blue .da-title span + span { color: #3E6A8E; }
+
+.theme-copper .da-title span       { color: #3E6A8E; }
+.theme-copper .da-title span + span { color: #C0652A; }
+
+.theme-kiwi .da-title span       { color: var(--red); }
+.theme-kiwi .da-title span + span { color: #7F7A3A; }
+
+/* 主秀沒有手寫標準字的頁面：用大字當標題 */
+.da-feature-title {
+  margin: 0 0 18px;
+  font-family: var(--da-title);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.05;
+  color: var(--cream);
+  text-shadow: 0 5px 0 rgba(0, 0, 0, 0.45), 0 0 24px rgba(240, 190, 87, 0.25);
+}
+
+/* 其他分類的票：Digital Art 用紅色、Kiwi 用深一點的綠 */
+.da-ticket-red  { --edge: var(--red); }
+.da-ticket-kiwi { --edge: #A9A35A; }
+
+/* 主秀還沒有圖的時候：佔位畫框維持跟有圖時一樣大 */
+.da-feature-frame.is-empty::after {
+  height: calc(100svh - var(--nav-h, 64px) - 190px);
+  max-height: 700px;
+  min-height: 260px;
+  width: auto;
+  aspect-ratio: 4 / 5;
+  font-size: 40px;
+}
+
+@media (max-width: 900px) {
+  .da-feature-frame.is-empty::after {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+}
+
+/* 海報大字：每一行的寬度剛好包住字（digital-art.js 才量得出來太寬要縮多少） */
+.da-title span {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 海報固定寬度（不要被裡面的字撐大或縮小），大字才知道最多能多寬 */
+.da-page main > .da-hero {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+
+/* =========================================================
+   Visual Design：四個活動，每一頁的背景配合活動的氣氛
+   ========================================================= */
+
+/* Act I 黑洞奇藝點：深紫色的宇宙＋漩渦光＋閃閃星星 */
+.vd-act-hole {
+  background-color: #241A36;
+  background-image:
+    radial-gradient(ellipse 50% 60% at 28% 50%, rgba(170, 120, 220, 0.35), transparent 70%),
+    repeating-conic-gradient(from 0deg at 28% 50%, rgba(201, 168, 232, 0.07) 0deg 10deg, transparent 10deg 24deg),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(8, 4, 16, 0.6) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cpath transform='translate%2830 40%29 scale%280.9%29' d='M0 -10 C1 -2 2 -1 10 0 C2 1 1 2 0 10 C-1 2 -2 1 -10 0 C-2 -1 -1 -2 0 -10Z' fill='%23F8EFD5' fill-opacity='0.55'/%3E%3Cpath transform='translate%28130 20%29 scale%280.5%29' d='M0 -10 C1 -2 2 -1 10 0 C2 1 1 2 0 10 C-1 2 -2 1 -10 0 C-2 -1 -1 -2 0 -10Z' fill='%23F0BE57' fill-opacity='0.6'/%3E%3Cpath transform='translate%28100 120%29 scale%280.7%29' d='M0 -10 C1 -2 2 -1 10 0 C2 1 1 2 0 10 C-1 2 -2 1 -10 0 C-2 -1 -1 -2 0 -10Z' fill='%23F8EFD5' fill-opacity='0.4'/%3E%3Cpath transform='translate%28160 150%29 scale%280.4%29' d='M0 -10 C1 -2 2 -1 10 0 C2 1 1 2 0 10 C-1 2 -2 1 -10 0 C-2 -1 -1 -2 0 -10Z' fill='%23C9A8E8' fill-opacity='0.7'/%3E%3Ccircle cx='70' cy='90' r='1.6' fill='%23F8EFD5' fill-opacity='0.6'/%3E%3Ccircle cx='15' cy='150' r='1.2' fill='%23F8EFD5' fill-opacity='0.5'/%3E%3Ccircle cx='150' cy='80' r='1.4' fill='%23F8EFD5' fill-opacity='0.5'/%3E%3Ccircle cx='55' cy='10' r='1' fill='%23F8EFD5' fill-opacity='0.6'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 100% 100%, 180px 180px;
+}
+
+/* Act II 賭賭賭她很壞：黑色＋橘色的撲克牌菱格紋（紅心）＋橘色聚光燈 */
+.vd-act-halloween {
+  background-color: #1C1210;
+  background-image:
+    radial-gradient(ellipse 55% 70% at 62% 0%, rgba(224, 123, 57, 0.28), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(8, 4, 2, 0.6) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cpath d='M48 0 L96 48 L48 96 L0 48Z' fill='%232A1814'/%3E%3Cpath d='M48 38 C44 30 34 33 37 41 C39 46 48 52 48 52 C48 52 57 46 59 41 C62 33 52 30 48 38Z' fill='%23E07B39' fill-opacity='0.35'/%3E%3Cpath d='M0 0 L4 4 M96 0 L92 4' stroke='none'/%3E%3Cpath d='M8 4 L12 10 L8 16 L4 10Z' fill='%23E07B39' fill-opacity='0.25'/%3E%3Cpath d='M88 80 L92 86 L88 92 L84 86Z' fill='%23E07B39' fill-opacity='0.25'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 96px 96px;
+}
+
+/* Act III 聖誕創藝所：深綠色＋金色星星直條紋（像市集的帳篷）＋暖黃燈光 */
+.vd-act-market {
+  background-color: #20402F;
+  background-image:
+    radial-gradient(ellipse 55% 70% at 62% 0%, rgba(240, 190, 87, 0.3), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(5, 15, 10, 0.55) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='64'%3E%3Crect width='30' height='64' fill='%231A3328'/%3E%3Cpath transform='translate%2815 18%29 scale%280.8%29' d='M0 -10 L2.4 -3.2 L9.5 -3.1 L3.8 1.3 L5.9 8.1 L0 4 L-5.9 8.1 L-3.8 1.3 L-9.5 -3.1 L-2.4 -3.2 Z' fill='%23F0BE57' fill-opacity='0.35'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 60px 64px;
+}
+
+/* Act IV Merry Uniformas：酒紅色＋格子呢（像制服的格紋裙） */
+.vd-act-uniform {
+  background-color: #5A1F24;
+  background-image:
+    radial-gradient(ellipse 55% 70% at 62% 0%, rgba(240, 190, 87, 0.22), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(20, 4, 6, 0.55) 100%),
+    repeating-linear-gradient(90deg, rgba(248, 239, 213, 0.06) 0 2px, transparent 2px 28px, rgba(240, 190, 87, 0.08) 28px 34px, transparent 34px 56px),
+    repeating-linear-gradient(0deg, rgba(248, 239, 213, 0.06) 0 2px, transparent 2px 28px, rgba(240, 190, 87, 0.08) 28px 34px, transparent 34px 56px);
+  background-size: 100% 100%, 100% 100%, 56px 56px, 56px 56px;
+}
+
+/* 海報畫框：跟主視覺一樣的比例（1200 × 1697） */
+.vd-poster-frame .da-stage-img:first-of-type {
+  aspect-ratio: 1200 / 1697;
+}
+
+/* 畫框裡的標準字、門票：墊深色的底，淺色的字才看得清楚 */
+.vd-poster-frame .da-stage-img {
+  background-color: #1A1414;
+  background-image: radial-gradient(rgba(248, 239, 213, 0.08) 1.2px, transparent 1.6px);
+  background-size: 7px 7px;
+}
+
+/* 標準字當標題：寬一點、矮一點 */
+.vd-lettering {
+  width: min(100%, 460px);
+  margin-bottom: 18px;
+}
+
+.vd-placard-title {
+  margin: 0 0 8px;
+  font-family: var(--da-title);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--red);
+}
+
+@media (max-height: 820px) and (min-width: 901px) {
+  .vd-lettering { width: min(100%, 380px); margin-bottom: 10px; }
+  .vd-placard-title { font-size: 22px; }
+}
+
+
+/* 萬聖節的門票：一個獨立的小物件，放在整頁的任何位置都可以，用滑鼠拖得動
+   位置：--tx（左右）、--ty（上下）是整頁的百分比，--rot 是歪幾度 */
+.vd-ticket {
+  position: absolute;
+  left: var(--tx, 64%);
+  top: var(--ty, 76%);
+  z-index: 5;
+  width: clamp(200px, 19vw, 270px);
+  margin: 0;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  rotate: var(--rot, 6deg);
+  filter: drop-shadow(0 8px 0 rgba(0, 0, 0, 0.45));
+  transition: scale 0.3s cubic-bezier(0.3, 1.6, 0.5, 1), filter 0.25s ease;
+}
+
+.vd-ticket:hover {
+  scale: 1.05;
+}
+
+.vd-ticket.is-grabbed {
+  cursor: grabbing;
+  scale: 1.1;
+  filter: drop-shadow(0 20px 6px rgba(0, 0, 0, 0.45));
+}
+
+.vd-ticket img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+/* 萬聖節那一頁的標準字縮小一點 */
+#act-2 .vd-lettering {
+  width: min(100%, 400px);
+}
+
+@media (max-height: 820px) and (min-width: 901px) {
+  #act-2 .vd-lettering { width: min(100%, 320px); }
+  .vd-ticket { width: 210px; }
+}
+
+/* 手機：門票放到這一頁的最下面，不用拖 */
+@media (max-width: 900px) {
+  .vd-ticket {
+    position: relative;
+    left: auto;
+    top: auto;
+    align-self: center;
+    width: min(300px, 90%);
+    margin: 20px auto 0;
+  }
+}
+
+/* 編輯模式（網址加 ?edit）：右下角顯示門票的位置數字 */
+.vd-edit-panel {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--cream);
+  box-shadow: 0 0 0 2px var(--red), 0 6px 0 rgba(0, 0, 0, 0.3);
+  font-family: monospace;
+  font-size: 14px;
+  color: #4A2216;
+}
+
+.vd-edit-panel button {
+  padding: 4px 12px;
+  border: none;
+  border-radius: 6px;
+  background: var(--red);
+  color: var(--cream);
+  font: inherit;
+  cursor: pointer;
+}
+
+/* 右側的區塊指示：在淺色背景（作品收藏、其他場次）用深色，其他用奶黃色 */
+.da-page .section-dots[data-tone="dark"] .section-dot,
+.da-page .section-dots[data-tone="dark"] .section-dot.is-active .section-dot-label {
+  color: var(--cream);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.da-page .section-dots[data-tone="dark"]::before,
+.da-page .section-dots[data-tone="dark"] .section-dot-mark::before {
+  background-color: var(--cream);
+}
+
+.da-page .section-dots[data-tone="dark"] .section-dot-mark::after {
+  border-color: var(--cream);
+}
+
+.da-page .section-dots[data-tone="dark"] .section-dot.is-active .section-dot-mark::before {
+  background-color: var(--red);
+  box-shadow: 0 0 0 3px var(--cream);
+}
+
+/* 電腦上：右邊留一條空間給區塊指示（點＋文字），內容才不會被蓋到 */
+@media (min-width: 901px) {
+  .da-page main > section {
+    padding-left: 60px;
+    padding-right: 200px;
+  }
+}
+
+
+/* =========================================================
+   Pixel Games 頁：《The Reader》
+   ========================================================= */
+
+/* ---------- 海報上「開發中」的紅色圓印章 ---------- */
+.pg-stamp {
+  position: absolute;
+  top: 22px;
+  right: 18px;
+  display: grid;
+  place-items: center;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 3px var(--red), inset 0 0 0 6px var(--cream), inset 0 0 0 7.5px var(--red);
+  font-family: var(--da-title);
+  font-size: 13px;
+  line-height: 1.15;
+  letter-spacing: 1px;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--red);
+  rotate: 14deg;
+  opacity: 0.88;
+  pointer-events: none;
+}
+
+/* ---------- The Pitch：小標籤＋主題 ---------- */
+.pg-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 18px 0 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.pg-tags li {
+  padding: 5px 14px 6px;
+  border-radius: 999px;
+  background: #3E6A8E;
+  font-family: "black", sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+
+.pg-themes {
+  margin: 0 !important;
+  text-align: center;
+  font-family: var(--da-script);
+  font-size: 22px;
+  color: var(--copper);
+}
+
+.pg-themes span {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 2px 10px 3px;
+  border-radius: 4px;
+  background: var(--red);
+  font-family: var(--da-title);
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--cream);
+  vertical-align: 3px;
+  rotate: -3deg;
+}
+
+/* ---------- 角色 Isolde：夜晚的小劇場 ---------- */
+.pg-char {
+  background-color: #241A16;
+  background-image:
+    radial-gradient(ellipse 50% 70% at 30% 0%, rgba(240, 190, 87, 0.25), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(5, 3, 2, 0.6) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='64'%3E%3Crect width='30' height='64' fill='%23FFFFFF' fill-opacity='0.025'/%3E%3Cpath d='M15 9 L17.4 16 L24.6 16.2 L18.9 20.7 L21 27.6 L15 23.5 L9 27.6 L11.1 20.7 L5.4 16.2 L12.6 16 Z' fill='%23F8EFD5' fill-opacity='0.06'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 60px 64px;
+}
+
+.pg-char-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(30px, 4vw, 60px);
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+/* 小舞台：紅色布幔＋深藍背景＋木頭地板 */
+.pg-stage {
+  position: relative;
+  height: clamp(280px, calc(100svh - var(--nav-h, 64px) - 220px), 470px);
+  overflow: hidden;
+  border-radius: 10px;
+  background:
+    radial-gradient(ellipse 45% 60% at 50% 60%, rgba(240, 190, 87, 0.22), transparent 70%),
+    linear-gradient(#1C2A3A, #2C3B4E);
+  box-shadow: 0 0 0 6px var(--gold), 0 0 0 9px #4A2216, 0 14px 0 9px rgba(0, 0, 0, 0.35);
+}
+
+/* 上面的布幔（紅色波浪） */
+.pg-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  height: 46px;
+  background:
+    radial-gradient(circle at 50% 0, var(--red) 0 24px, transparent 25px) 0 0 / 48px 46px repeat-x,
+    linear-gradient(var(--red), var(--red)) 0 0 / 100% 18px no-repeat;
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, 0.3));
+}
+
+.pg-floor {
+  position: absolute;
+  inset: auto 0 0;
+  height: 22%;
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.18) 0 2px, transparent 2px 64px),
+    linear-gradient(#8A5A34, #6B4226);
+  box-shadow: inset 0 4px 0 #A8743F;
+}
+
+/* 角色本身：像素圖放大也不會糊 */
+.pg-sprite {
+  position: absolute;
+  bottom: 20%;
+  left: 0;
+  z-index: 1;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.pg-stage-empty {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  margin: 0;
+  padding-bottom: 8%;
+  text-align: center;
+  font-family: var(--da-script);
+  font-size: 34px;
+  line-height: 1.1;
+  color: rgba(248, 239, 213, 0.75);
+}
+
+.pg-stage.is-empty .pg-stage-empty { display: grid; }
+.pg-stage.is-empty .pg-sprite { display: none; }
+
+.pg-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 26px;
+  color: var(--cream);
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.pg-controls kbd {
+  display: inline-block;
+  min-width: 22px;
+  padding: 1px 6px 2px;
+  border-radius: 5px;
+  background: var(--cream);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.4);
+  font-family: "black", sans-serif;
+  color: #4A2216;
+  text-align: center;
+}
+
+.pg-key {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--cream);
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #4A2216;
+  touch-action: none;
+  user-select: none;
+  transition: translate 0.1s ease, box-shadow 0.1s ease;
+}
+
+.pg-key:active,
+.pg-key.is-pressed {
+  translate: 0 3px;
+  box-shadow: 0 1px 0 #4A2216;
+}
+
+/* 角色資料卡 */
+.pg-profile {
+  padding: 26px 30px 24px;
+  background: var(--cream);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 6px var(--cream), inset 0 0 0 8px var(--gold), 0 10px 0 rgba(0, 0, 0, 0.35);
+  rotate: 0.8deg;
+}
+
+.pg-profile .da-eyebrow {
+  text-align: left;
+  color: var(--copper);
+}
+
+.pg-name {
+  margin: 2px 0 12px;
+  font-family: var(--da-title);
+  font-weight: 400;
+  font-size: clamp(36px, 4vw, 50px);
+  line-height: 1;
+  color: var(--red);
+}
+
+.pg-name span {
+  font-family: "black", sans-serif;
+  font-size: 0.42em;
+  letter-spacing: 4px;
+  color: #3E6A8E;
+  vertical-align: 0.4em;
+}
+
+.pg-stats {
+  margin: 0 0 6px;
+}
+
+.pg-stats div {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(74, 34, 22, 0.25);
+}
+
+.pg-stats dt {
+  font-family: "black", sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--copper);
+  padding-top: 2px;
+}
+
+.pg-stats dd {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+
+.pg-anim-switch {
+  width: min(100%, 260px);
+}
+
+/* 動畫每一格攤開 */
+.pg-frames {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.pg-frames canvas {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  background: #2C3B4E;
+  image-rendering: pixelated;
+  box-shadow: 0 0 0 2px #4A2216;
+  transition: box-shadow 0.1s ease;
+}
+
+.pg-frames canvas.is-current {
+  box-shadow: 0 0 0 2px #4A2216, 0 0 0 5px var(--gold);
+}
+
+/* ---------- 主線故事：書房的背景＋一本書 ---------- */
+.pg-story {
+  background-color: #2A1B14;
+  background-image:
+    radial-gradient(ellipse 60% 60% at 50% 45%, rgba(240, 190, 87, 0.2), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(5, 3, 2, 0.65) 100%),
+    repeating-linear-gradient(90deg,
+      #5A2A20 0 26px, #3B4A5C 26px 44px, #6B5A2E 44px 74px, #2E3B2E 74px 92px,
+      #7A3A26 92px 116px, #4A3A52 116px 132px, #5E4A30 132px 160px, #1E2A36 160px 176px);
+  background-size: 100% 100%, 100% 100%, 176px 100%;
+}
+
+/* 書架太花了，整片蓋一層暗色 */
+.pg-story::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 12, 8, 0.6);
+  pointer-events: none;
+}
+
+.pg-story {
+  position: relative;
+  isolation: isolate;
+}
+
+.pg-story > * {
+  position: relative;
+}
+
+.pg-story .da-head {
+  margin-bottom: 14px;
+}
+
+.pg-story .da-eyebrow { color: var(--gold); }
+.pg-story .da-heading {
+  color: var(--cream);
+  text-shadow: 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+.pg-book-wrap {
+  width: min(1000px, 100%);
+  margin: 0 auto;
+}
+
+/* 書籤（掛在書上緣的緞帶） */
+.pg-bookmarks {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding-right: 40px;
+  margin-bottom: -6px;
+  position: relative;
+  z-index: 2;
+}
+
+.pg-bookmark {
+  min-width: 52px;
+  height: 40px;
+  padding: 6px 10px 14px;
+  border: none;
+  background: var(--cadet);
+  color: var(--cream);
+  font-family: var(--da-title);
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+  transition: height 0.25s cubic-bezier(0.3, 1.6, 0.5, 1), background 0.2s ease;
+}
+
+.pg-bookmark:nth-child(2) { background: #3E6A8E; }
+.pg-bookmark:nth-child(3) { background: #A9A35A; }
+.pg-bookmark:nth-child(4) { background: var(--copper); }
+.pg-bookmark.is-spoiler   { background: #5A1F24; }
+
+.pg-bookmark:hover { height: 46px; }
+
+.pg-bookmark.is-active {
+  height: 54px;
+  background: var(--red);
+}
+
+/* 書本 */
+.pg-book {
+  position: relative;
+  height: clamp(360px, calc(100svh - var(--nav-h, 64px) - 300px), 540px);
+  padding: 14px;
+  border-radius: 10px;
+  background: #7A2A1E;
+  box-shadow: 0 0 0 3px #4A2216, 0 16px 0 rgba(0, 0, 0, 0.4), 0 0 80px rgba(240, 190, 87, 0.15);
+  perspective: 1800px;
+}
+
+.pg-spread {
+  position: absolute;
+  inset: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.pg-spread[hidden] { display: none; }
+
+.pg-page {
+  position: relative;
+  overflow: hidden;
+  padding: 30px 34px 40px;
+  background-color: #F8EFD5;
+  background-image: radial-gradient(rgba(74, 34, 22, 0.05) 1px, transparent 1.4px);
+  background-size: 6px 6px;
+}
+
+/* 書頁靠中間的地方暗一點，像真的書往內彎 */
+.pg-page-left {
+  border-radius: 6px 0 0 6px;
+  box-shadow: inset -30px 0 30px -20px rgba(74, 34, 22, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform-origin: right center;
+}
+
+.pg-page-right {
+  border-radius: 0 6px 6px 0;
+  box-shadow: inset 30px 0 30px -20px rgba(74, 34, 22, 0.35);
+  transform-origin: left center;
+}
+
+.pg-chapter-no {
+  margin: 0;
+  font-family: "black", sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.pg-chapter-title {
+  margin: 10px 0 6px;
+  font-family: var(--da-title);
+  font-weight: 400;
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.1;
+  color: var(--red);
+}
+
+/* 章節的英文副標（手寫字） */
+.pg-chapter-zh {
+  margin: 0;
+  font-family: var(--da-script);
+  font-size: 22px;
+  color: #3E6A8E;
+}
+
+.pg-chapter-icon {
+  margin-top: 18px;
+  font-size: 48px;
+  line-height: 1;
+  color: var(--gold);
+  text-shadow: 0 3px 0 rgba(74, 34, 22, 0.25);
+}
+
+.pg-folio {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  font-family: var(--da-script);
+  font-size: 18px;
+  color: rgba(74, 34, 22, 0.5);
+}
+
+/* 右頁文字（太長時可以在書裡捲動） */
+.pg-text {
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 6px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #3A2418;
+}
+
+.pg-text p { margin: 0 0 10px; }
+.pg-text strong { color: var(--red); }
+
+/* 仁慈／殘忍的小標 */
+.pg-route {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 10px 2px;
+  border-radius: 4px;
+  font-family: var(--da-title);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: var(--cream);
+  vertical-align: 1px;
+}
+
+.pg-mercy { background: #3E6A8E; }
+.pg-cruel { background: #5A1F24; }
+
+/* 一個字一個字冒出來（像在寫字） */
+.pg-w {
+  opacity: 0;
+  animation: pg-word 0.35s ease forwards;
+  animation-delay: calc(var(--i) * 16ms);
+}
+
+@keyframes pg-word {
+  from { opacity: 0; filter: blur(3px); }
+  to   { opacity: 1; filter: blur(0); }
+}
+
+/* 翻頁：往後翻 → 右頁從中間翻過來；往前翻 → 左頁翻過來 */
+.pg-spread.is-next .pg-page-right { animation: pg-flip-next 0.6s cubic-bezier(0.3, 0.7, 0.3, 1); }
+.pg-spread.is-prev .pg-page-left  { animation: pg-flip-prev 0.6s cubic-bezier(0.3, 0.7, 0.3, 1); }
+
+@keyframes pg-flip-next {
+  from { transform: rotateY(-95deg); filter: brightness(0.7); }
+  to   { transform: rotateY(0); filter: brightness(1); }
+}
+
+@keyframes pg-flip-prev {
+  from { transform: rotateY(95deg); filter: brightness(0.7); }
+  to   { transform: rotateY(0); filter: brightness(1); }
+}
+
+/* 封蠟：劇透的章節先蓋起來 */
+.pg-seal {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(248, 239, 213, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: opacity 0.5s ease;
+}
+
+.pg-spread:not(.is-sealed) .pg-seal {
+  display: none;
+}
+
+.pg-seal-wax {
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  border-radius: 46% 54% 50% 50% / 52% 48% 52% 48%;
+  background: radial-gradient(circle at 35% 30%, #D2553A, #8E2414 70%);
+  box-shadow: 0 0 0 6px rgba(142, 36, 20, 0.35), 0 6px 0 rgba(0, 0, 0, 0.3), inset 0 0 0 10px rgba(0, 0, 0, 0.12);
+  font-size: 34px;
+  color: rgba(248, 239, 213, 0.85);
+  transition: scale 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.pg-seal:hover .pg-seal-wax { scale: 1.08; }
+
+.pg-seal-text {
+  margin-top: 10px;
+  font-family: var(--da-title);
+  font-size: 22px;
+  color: var(--red);
+}
+
+.pg-seal-hint {
+  font-family: var(--da-script);
+  font-size: 20px;
+  color: #3E6A8E;
+}
+
+/* 封蠟裂開 */
+.pg-spread.is-breaking .pg-seal-wax {
+  animation: pg-crack 0.5s ease forwards;
+}
+
+.pg-spread.is-breaking .pg-seal {
+  opacity: 0;
+}
+
+@keyframes pg-crack {
+  30%  { scale: 1.15; rotate: -8deg; }
+  100% { scale: 0.2; rotate: 30deg; opacity: 0; }
+}
+
+.pg-book-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 22px;
+}
+
+.pg-turn {
+  padding: 8px 20px 9px;
+  border: none;
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--red);
+  font-family: var(--da-title);
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.45);
+  transition: background 0.2s ease, translate 0.15s ease;
+}
+
+.pg-turn:hover { background: var(--gold); }
+.pg-turn:active { translate: 0 3px; }
+.pg-turn:disabled { opacity: 0.35; cursor: default; }
+
+.pg-book-count {
+  font-family: var(--da-script);
+  font-size: 24px;
+  color: var(--cream);
+}
+
+/* ---------- 開發進度：筆記本 ---------- */
+.pg-log {
+  width: min(560px, 100%);
+  margin: 0 auto;
+  padding: 26px 34px 22px 64px;
+  border-radius: 6px;
+  background-color: #FBF5E6;
+  background-image:
+    linear-gradient(90deg, transparent 46px, rgba(192, 58, 34, 0.45) 46px 48px, transparent 48px),
+    repeating-linear-gradient(transparent 0 33px, rgba(62, 106, 142, 0.18) 33px 34px);
+  box-shadow: 0 10px 0 rgba(74, 34, 22, 0.3);
+  rotate: -1deg;
+}
+
+.pg-log-title {
+  margin: 0 0 6px;
+  font-family: var(--da-script);
+  font-size: 28px;
+  color: var(--red);
+}
+
+.pg-checklist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pg-checklist li {
+  position: relative;
+  min-height: 34px;
+  padding: 6px 0 0 34px;
+  font-size: 14px;
+  line-height: 1.3;
+  color: rgba(58, 36, 24, 0.75);
+}
+
+.pg-checklist li strong {
+  margin-right: 8px;
+  font-family: "black", sans-serif;
+  color: #3A2418;
+}
+
+/* 方框（還沒做） */
+.pg-checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #4A2216;
+  border-radius: 3px;
+}
+
+/* 打勾（做好了） */
+.pg-checklist li.is-done::after {
+  content: "✓";
+  position: absolute;
+  left: 1px;
+  top: -4px;
+  font-family: "black", sans-serif;
+  font-size: 26px;
+  color: var(--red);
+}
+
+.pg-checklist li.is-done strong {
+  text-decoration: line-through;
+  text-decoration-color: rgba(192, 58, 34, 0.6);
+}
+
+.pg-meter {
+  height: 12px;
+  margin: 14px 0 6px;
+  border-radius: 999px;
+  background: rgba(74, 34, 22, 0.12);
+  overflow: hidden;
+}
+
+.pg-meter span {
+  display: block;
+  width: var(--done);
+  height: 100%;
+  border-radius: inherit;
+  background: repeating-linear-gradient(45deg, var(--red) 0 8px, #D2553A 8px 16px);
+}
+
+.pg-log-foot {
+  margin: 0;
+  font-family: var(--da-script);
+  font-size: 20px;
+  color: var(--copper);
+}
+
+/* ---------- 比較矮的螢幕 ---------- */
+@media (max-height: 820px) and (min-width: 901px) {
+  .pg-stats dd { font-size: 13.5px; }
+  .pg-stats div { padding: 4px 0; }
+  .pg-name { font-size: 38px; margin-bottom: 6px; }
+  .pg-profile { padding: 20px 26px; }
+  .pg-checklist li { min-height: 30px; padding-top: 4px; }
+  .pg-log { padding-top: 18px; padding-bottom: 16px; background-image:
+    linear-gradient(90deg, transparent 46px, rgba(192, 58, 34, 0.45) 46px 48px, transparent 48px),
+    repeating-linear-gradient(transparent 0 29px, rgba(62, 106, 142, 0.18) 29px 30px); }
+}
+
+/* ---------- 手機 ---------- */
+@media (max-width: 900px) {
+  .pg-char-body { grid-template-columns: 1fr; }
+  .pg-stage { height: 300px; }
+  .pg-bookmarks { padding-right: 10px; flex-wrap: wrap; }
+  .pg-book { height: auto; }
+  .pg-spread { position: relative; inset: auto; grid-template-columns: 1fr; }
+  .pg-page-left { padding: 26px 20px 30px; border-radius: 6px 6px 0 0; }
+  .pg-page-right { border-radius: 0 0 6px 6px; padding: 24px 20px 40px; }
+  .pg-text { height: auto; }
+  .pg-stamp { width: 74px; height: 74px; font-size: 10px; top: 12px; right: 10px; }
+}
+
+
+/* ---------- Isolde：十字鍵、方向切換 ---------- */
+.pg-controls {
+  gap: 22px;
+  margin-top: 22px;
+}
+
+.pg-controls-hint {
+  line-height: 1.6;
+}
+
+.pg-dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 40px);
+  grid-template-rows: repeat(2, 40px);
+  gap: 4px;
+}
+
+.pg-dpad .pg-key {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.pg-up    { grid-column: 2; grid-row: 1; }
+.pg-left  { grid-column: 1; grid-row: 2; }
+.pg-down  { grid-column: 2; grid-row: 2; }
+.pg-right { grid-column: 3; grid-row: 2; }
+
+/* 地板在角色後面 */
+.pg-floor { z-index: 0; }
+.pg-sprite { z-index: 1; }
+
+.pg-anim-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pg-anim-row .pg-anim-switch {
+  width: 200px;
+  margin: 0;
+}
+
+.pg-views {
+  display: flex;
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px #4A2216;
+  overflow: hidden;
+}
+
+.pg-views button {
+  padding: 6px 12px 7px;
+  border: none;
+  background: #FFF9EA;
+  font-family: "black", sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--cadet);
+  cursor: pointer;
+}
+
+.pg-views button + button {
+  box-shadow: -2px 0 0 #4A2216;
+}
+
+.pg-views button.is-active {
+  background: var(--red);
+  color: var(--cream);
+}
+
+.pg-frames {
+  margin-top: 10px;
+}
+
+.pg-frames canvas {
+  width: 40px;
+  height: 40px;
+}
+
+.pg-frames-info {
+  margin: 8px 0 0;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--cadet);
+}
+
+
+/* Isolde 的舞台：地板加深，整個地板都可以走；點舞台她會走過去 */
+.pg-floor {
+  height: 47%;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.22), transparent 40%),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.16) 0 2px, transparent 2px 72px),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.08) 0 2px, transparent 2px 38px),
+    linear-gradient(#7E5230, #9A6A3E);
+}
+
+.pg-stage {
+  cursor: pointer;
+}
+
+/* 點下去冒出的小星星 */
+.pg-mark {
+  position: absolute;
+  z-index: 3;
+  translate: -50% -50%;
+  font-size: 22px;
+  color: var(--gold);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  animation: pg-mark 0.7s ease-out forwards;
+}
+
+@keyframes pg-mark {
+  from { scale: 0.4; opacity: 1; }
+  to   { scale: 1.6; opacity: 0; rotate: 60deg; }
+}
+
+
+/* ---------- Isolde：六張會動的小卡片 ---------- */
+.pg-anims {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.pg-anim-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 6px 7px;
+  border: none;
+  border-radius: 8px;
+  background: #2C3B4E;
+  box-shadow: 0 0 0 2px #4A2216, 0 4px 0 rgba(74, 34, 22, 0.3);
+  cursor: zoom-in;
+  transition: translate 0.2s cubic-bezier(0.3, 1.6, 0.5, 1), box-shadow 0.2s ease;
+}
+
+.pg-anim-card:hover {
+  translate: 0 -4px;
+  box-shadow: 0 0 0 2px #4A2216, 0 0 0 5px var(--gold), 0 6px 0 rgba(74, 34, 22, 0.3);
+}
+
+.pg-anim-card canvas {
+  width: 56px;
+  height: 56px;
+  image-rendering: pixelated;
+}
+
+.pg-anim-card span {
+  font-family: "black", sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+
+.pg-anims-hint {
+  margin: 8px 0 0;
+  font-family: var(--da-script);
+  font-size: 19px;
+  color: var(--copper);
+}
+
+@media (max-height: 820px) and (min-width: 901px) {
+  .pg-anim-card canvas { width: 44px; height: 44px; }
+  .pg-anim-card { padding: 5px 4px; }
+}
+
+/* ---------- 動畫檢視器 ---------- */
+.pg-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 600;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(20, 12, 8, 0.85);
+  animation: da-fade 0.25s ease;
+}
+
+.pg-viewer[hidden] { display: none; }
+
+.pg-viewer-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 340px);
+  gap: 30px;
+  align-items: center;
+  max-width: 100%;
+  padding: 28px;
+  border-radius: 10px;
+  background: var(--cream);
+  box-shadow: inset 0 0 0 6px var(--cream), inset 0 0 0 8px var(--gold), 0 14px 0 rgba(0, 0, 0, 0.4);
+  animation: da-pop-in 0.35s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+
+.pg-viewer-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--cream);
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* 放大的動畫：深藍底＋淡淡的像素格線 */
+.pg-viewer-stage {
+  display: grid;
+  place-items: center;
+  width: min(384px, 70vh, 60vw);
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background-color: #2C3B4E;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: calc(100% / 48) calc(100% / 48);
+  box-shadow: 0 0 0 3px #4A2216;
+}
+
+.pg-viewer-canvas {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.pg-viewer-side .da-eyebrow {
+  text-align: left;
+  color: var(--copper);
+}
+
+.pg-viewer-title {
+  margin: 2px 0 2px;
+  font-family: var(--da-title);
+  font-weight: 400;
+  font-size: 32px;
+  color: var(--red);
+}
+
+.pg-viewer-meta {
+  margin: 0 0 16px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--cadet);
+}
+
+.pg-viewer-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.pg-viewer-controls button {
+  width: 44px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: #3E6A8E;
+  color: var(--cream);
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #4A2216;
+}
+
+.pg-viewer-controls .pg-play {
+  width: 54px;
+  background: var(--red);
+}
+
+.pg-viewer-controls button:active {
+  translate: 0 2px;
+  box-shadow: 0 1px 0 #4A2216;
+}
+
+.pg-viewer-count {
+  margin-left: 6px;
+  font-family: var(--da-title);
+  font-size: 18px;
+  color: #4A2216;
+}
+
+.pg-viewer-speed {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "black", sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.pg-viewer-speed input {
+  flex: 1;
+  accent-color: var(--red);
+}
+
+.pg-viewer-speed output {
+  min-width: 48px;
+  font-size: 12px;
+  color: #4A2216;
+}
+
+.pg-viewer-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pg-viewer-strip button {
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: #2C3B4E;
+  box-shadow: 0 0 0 2px #4A2216;
+  cursor: pointer;
+}
+
+.pg-viewer-strip button.is-current {
+  box-shadow: 0 0 0 2px #4A2216, 0 0 0 5px var(--gold);
+}
+
+.pg-viewer-strip canvas {
+  display: block;
+  width: 40px;
+  height: 40px;
+  image-rendering: pixelated;
+}
+
+.pg-viewer-keys {
+  margin: 14px 0 0;
+  font-size: 12px;
+  color: var(--cadet);
+}
+
+.pg-viewer-keys kbd {
+  display: inline-block;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: #FFF9EA;
+  box-shadow: 0 2px 0 rgba(74, 34, 22, 0.3);
+  font-family: "black", sans-serif;
+  font-size: 11px;
+  color: #4A2216;
+}
+
+@media (max-width: 760px) {
+  .pg-viewer-panel { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
+  .pg-viewer-stage { width: min(300px, 80vw); margin: 0 auto; }
+}
+
+
+/* =========================================================
+   3D Art：四個作品，每個一整頁
+   左：大螢幕（16:9）＋下面一排底片小圖；右：作品名稱＋說明牌
+   ========================================================= */
+.td-project {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.td-body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 400px);
+  justify-content: center;
+  align-items: center;
+  gap: clamp(30px, 4vw, 56px);
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 大螢幕：寬度跟著畫面高度走，整頁放得下 */
+.td-screen {
+  position: relative;
+  width: min(56vw, calc((100svh - var(--nav-h, 64px) - 210px) * 16 / 9));
+  min-width: 320px;
+  padding: 12px;
+  rotate: -1deg;
+  box-shadow:
+    inset 0 0 0 3px rgba(74, 34, 22, 0.25),
+    inset 0 0 0 7px rgba(248, 239, 213, 0.35),
+    0 14px 0 rgba(0, 0, 0, 0.35),
+    0 0 60px rgba(240, 190, 87, 0.15);
+}
+
+.td-screen img {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: opacity 0.25s ease;
+}
+
+.td-screen img.is-fading {
+  opacity: 0;
+}
+
+/* 左右箭頭 */
+.td-arrow {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(248, 239, 213, 0.92);
+  color: var(--red);
+  font-family: var(--da-title);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease, scale 0.2s ease;
+}
+
+.td-prev { left: 22px; }
+.td-next { right: 22px; }
+
+.td-screen:hover .td-arrow,
+.td-arrow:focus-visible {
+  opacity: 1;
+}
+
+.td-arrow:hover {
+  background: var(--gold);
+  scale: 1.08;
+}
+
+/* 右下角的張數 */
+.td-count {
+  position: absolute;
+  right: 22px;
+  bottom: 20px;
+  padding: 3px 12px 4px;
+  border-radius: 999px;
+  background: rgba(20, 14, 10, 0.7);
+  font-family: "black", sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--cream);
+  pointer-events: none;
+}
+
+/* 底片小圖：太多張時可以左右捲 */
+.td-strip {
+  display: flex;
+  gap: 10px;
+  max-width: min(56vw, calc((100svh - var(--nav-h, 64px) - 210px) * 16 / 9));
+  margin: 22px auto 0;
+  padding: 8px 10px;
+  overflow-x: auto;
+  border-radius: 6px;
+  background:
+    radial-gradient(circle, #1A1410 2.5px, transparent 3px) 0 1px / 14px 7px repeat-x,
+    radial-gradient(circle, #1A1410 2.5px, transparent 3px) 0 calc(100% - 1px) / 14px 7px repeat-x,
+    #2A211B;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.4);
+  scrollbar-width: thin;
+}
+
+.td-thumb {
+  flex: 0 0 auto;
+  width: 96px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background: none;
+  cursor: pointer;
+  opacity: 0.55;
+  box-shadow: 0 0 0 2px rgba(248, 239, 213, 0.25);
+  transition: opacity 0.2s ease, box-shadow 0.2s ease, translate 0.2s ease;
+}
+
+.td-thumb img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.td-thumb:hover {
+  opacity: 0.9;
+  translate: 0 -2px;
+}
+
+.td-thumb.is-active {
+  opacity: 1;
+  box-shadow: 0 0 0 3px var(--gold);
+}
+
+/* 右邊：標題＋說明牌 */
+.td-info .da-eyebrow {
+  margin-bottom: 6px;
+  color: var(--gold);
+}
+
+.td-title {
+  margin: 0 0 18px;
+  font-family: var(--da-title);
+  font-weight: 400;
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.02;
+  color: var(--cream);
+  text-shadow: 0 5px 0 rgba(0, 0, 0, 0.45), 0 0 24px rgba(240, 190, 87, 0.25);
+}
+
+.td-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.td-tags li {
+  padding: 4px 12px 5px;
+  border-radius: 999px;
+  background: #3E6A8E;
+  font-family: "black", sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+
+/* ---------- 每個作品的背景 ---------- */
+
+/* ME!：跟作品一樣的深灰底＋白色和紅色的閃光 */
+.td-me {
+  background-color: #23201F;
+  background-image:
+    radial-gradient(ellipse 55% 70% at 30% 10%, rgba(192, 58, 34, 0.28), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(5, 3, 3, 0.6) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cpath transform='translate%2830 30%29 scale%280.9%29' d='M0 -10 C1 -2 2 -1 10 0 C2 1 1 2 0 10 C-1 2 -2 1 -10 0 C-2 -1 -1 -2 0 -10Z' fill='%23F8EFD5' fill-opacity='0.35'/%3E%3Cpath transform='translate%28110 60%29 scale%280.5%29' d='M0 -10 C1 -2 2 -1 10 0 C2 1 1 2 0 10 C-1 2 -2 1 -10 0 C-2 -1 -1 -2 0 -10Z' fill='%23F8EFD5' fill-opacity='0.3'/%3E%3Cpath transform='translate%2870 125%29 scale%280.7%29' d='M0 -10 C1 -2 2 -1 10 0 C2 1 1 2 0 10 C-1 2 -2 1 -10 0 C-2 -1 -1 -2 0 -10Z' fill='%23E8604A' fill-opacity='0.35'/%3E%3Cpath transform='translate%28140 140%29 scale%280.35%29' d='M0 -10 C1 -2 2 -1 10 0 C2 1 1 2 0 10 C-1 2 -2 1 -10 0 C-2 -1 -1 -2 0 -10Z' fill='%23F8EFD5' fill-opacity='0.4'/%3E%3Ccircle cx='60' cy='70' r='1.4' fill='%23F8EFD5' fill-opacity='0.4'/%3E%3Ccircle cx='15' cy='110' r='1' fill='%23F8EFD5' fill-opacity='0.4'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 160px 160px;
+}
+
+/* Cyran 的鍛造屋：深藍石板＋暖黃的爐火光＋小寶石 */
+.td-forge {
+  background-color: #1C2630;
+  background-image:
+    radial-gradient(ellipse 55% 70% at 30% 85%, rgba(224, 123, 57, 0.3), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(5, 8, 12, 0.6) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M20 12 L28 20 L20 28 L12 20Z' fill='%23F0BE57' fill-opacity='0.12'/%3E%3Cpath d='M60 52 L66 58 L60 64 L54 58Z' fill='%23C9A8E8' fill-opacity='0.12'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 40px);
+  background-size: 100% 100%, 100% 100%, 80px 80px, 100% 40px;
+}
+
+/* 漢堡餐廳：黑白棋盤格地板＋霓虹粉紅、綠色的光 */
+.td-diner {
+  background-color: #151012;
+  background-image:
+    radial-gradient(ellipse 50% 60% at 25% 0%, rgba(255, 60, 200, 0.28), transparent 70%),
+    radial-gradient(ellipse 50% 60% at 85% 100%, rgba(60, 220, 140, 0.18), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.6) 100%),
+    conic-gradient(rgba(255,255,255,0.07) 25%, transparent 0 50%, rgba(255,255,255,0.07) 0 75%, transparent 0);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 56px 56px;
+}
+
+/* 甜點咖啡廳：深橄欖綠＋紅色格子桌布 */
+.td-cafe {
+  background-color: #33331F;
+  background-image:
+    radial-gradient(ellipse 55% 70% at 30% 0%, rgba(240, 190, 87, 0.3), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(8, 8, 3, 0.6) 100%),
+    repeating-linear-gradient(90deg, rgba(192, 58, 34, 0.16) 0 14px, transparent 14px 28px), repeating-linear-gradient(0deg, rgba(192, 58, 34, 0.16) 0 14px, transparent 14px 28px);
+}
+
+@media (max-height: 820px) and (min-width: 901px) {
+  .td-title { font-size: 40px; margin-bottom: 12px; }
+  .td-strip { margin-top: 16px; }
+  .td-thumb { width: 80px; }
+}
+
+@media (max-width: 900px) {
+  .td-body { grid-template-columns: 1fr; }
+  .td-screen, .td-strip { width: 100%; max-width: 100%; min-width: 0; }
+  .td-arrow { opacity: 1; width: 38px; height: 38px; font-size: 22px; }
+}
+
+/* 3D 頁：左邊多留一點空間，底片小圖才不會被左下角的音量控制擋到 */
+@media (min-width: 901px) {
+  .da-page main > .td-project {
+    padding-left: 110px;
+  }
+}
+
+
+/* 3D：Liquid Wipe 換照片（蓋在上面的下一張＋發光的波浪邊） */
+/* 寫成 .td-screen 開頭，才不會被上面「.td-screen img 寬度 100%」蓋掉（那就是右邊會凸出去的原因） */
+.td-screen .td-wipe-img,
+.td-screen .td-wipe-edge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  display: none;
+  pointer-events: none;
+}
+
+.td-screen .td-wipe-img {
+  aspect-ratio: auto;
+  box-shadow: none;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.td-wipe-edge {
+  overflow: hidden;          /* 波浪和光暈只畫在照片裡面，不會凸到畫框上 */
+  border-radius: 2px;
+}
+
+.td-wipe-edge path {
+  fill: none;
+  stroke: #FFF4D6;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter:
+    drop-shadow(0 0 4px rgba(240, 190, 87, 0.95))
+    drop-shadow(0 0 12px rgba(240, 190, 87, 0.8))
+    drop-shadow(0 0 22px rgba(255, 140, 80, 0.55));
+}
+
+
+/* 3D：Cyran 的角色設計圖（兩張用紙膠帶貼著的紙，點了可以放大） */
+.td-sketches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.td-sketch {
+  position: relative;
+  margin: 0;
+  padding: 6px;
+  background: #FFFDF6;
+  cursor: zoom-in;
+  rotate: var(--tilt, 0deg);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
+  transition: rotate 0.35s cubic-bezier(0.3, 1.6, 0.5, 1), scale 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.td-sketch:hover {
+  rotate: 0deg;
+  scale: 1.06;
+  z-index: 2;
+}
+
+/* 上面的紙膠帶 */
+.td-sketch::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 64px;
+  height: 20px;
+  translate: -50% 0;
+  rotate: -3deg;
+  background: rgba(240, 190, 87, 0.75);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.td-sketch img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2360 / 1640;
+  object-fit: cover;
+}
+
+/* 有設計圖的那一頁：說明牌縮緊一點，整頁才放得下 */
+.td-has-sketches .td-title { margin-bottom: 12px; }
+.td-has-sketches .da-placard { padding: 18px 24px 20px; font-size: 14px; line-height: 1.55; }
+.td-has-sketches .da-placard p { margin-bottom: 8px; }
+
+@media (max-height: 820px) and (min-width: 901px) {
+  .td-has-sketches .td-title { font-size: 34px; margin-bottom: 8px; }
+  .td-has-sketches .da-placard { padding: 14px 20px 16px; font-size: 13px; }
+  .td-has-sketches .td-tags { margin-top: 8px; }
+  .td-sketches { margin-top: 16px; gap: 12px; }
+}
+
+
+/* ME! 的設計圖：一張橫的、一張直的，用原本的比例，不裁切 */
+.td-sketches:has(.td-sketch-tall) {
+  grid-template-columns: 1.6fr 0.9fr;
+  align-items: center;
+}
+
+.td-sketch-wide img { aspect-ratio: 4 / 3; }
+.td-sketch-tall img { aspect-ratio: 3 / 4; }
+
+@media (max-height: 820px) and (min-width: 901px) {
+  .td-sketches:has(.td-sketch-tall) { width: 86%; }
+}
+
+/* 標籤：使用的軟體（紅色，跟其他藍色的標籤分開） */
+.td-tags .td-tag-tool {
+  background: var(--red);
+}
+
+/* 聖誕小偷：遊戲廳的黑橘棋盤格地板＋夕陽橘的光 */
+.td-arcade {
+  background-color: #1A1210;
+  background-image:
+    radial-gradient(ellipse 55% 70% at 75% 0%, rgba(240, 150, 80, 0.32), transparent 70%),
+    radial-gradient(ellipse 45% 55% at 15% 100%, rgba(192, 58, 34, 0.25), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(5, 3, 2, 0.65) 100%),
+    conic-gradient(rgba(240, 160, 60, 0.11) 25%, transparent 0 50%, rgba(240, 160, 60, 0.11) 0 75%, transparent 0);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 64px 64px;
+}
+
+/* 時間軸：讓人知道這是第幾個作品（由早到晚） */
+.td-journey {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+  white-space: nowrap;
+  font-family: "black", sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(248, 239, 213, 0.75);
+}
+
+.td-journey-dots {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.td-journey-dots::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 50%;
+  height: 2px;
+  translate: 0 -50%;
+  background: rgba(248, 239, 213, 0.3);
+}
+
+.td-journey-dots i {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 2px solid rgba(248, 239, 213, 0.6);
+  background: #1A1410;
+}
+
+.td-journey-dots i.is-past {
+  border-color: var(--gold);
+  background: var(--gold);
+}
+
+.td-journey-dots i.is-now {
+  width: 14px;
+  height: 14px;
+  border-color: var(--cream);
+  background: var(--red);
+  box-shadow: 0 0 0 3px rgba(192, 58, 34, 0.35);
+}
+
+.td-journey-num {
+  color: var(--gold);
+}
+
+/* 比較矮的螢幕（例如 1280×720）：再縮一點，整頁才放得下 */
+@media (max-height: 740px) and (min-width: 901px) {
+  .td-project .td-title { font-size: 32px; margin-bottom: 8px; }
+  .td-project .da-placard { padding: 14px 20px 16px; font-size: 13px; line-height: 1.5; }
+  .td-project .da-placard p { margin-bottom: 6px; }
+  .td-project .td-tags { margin-top: 6px; }
+  .td-project .td-tags li { padding-top: 3px; padding-bottom: 3px; }
+  .td-project .da-eyebrow { margin-bottom: 4px; }
+  .td-journey { margin-bottom: 4px; }
+  .td-sketches { margin-top: 12px; width: 80%; }
+}
+
+/* 比較窄的螢幕（例如 1280 寬）：大螢幕小一點，右邊說明才有空間 */
+@media (max-width: 1680px) and (min-width: 901px) {
+  .td-screen { width: min(49vw, calc((100svh - var(--nav-h, 64px) - 210px) * 16 / 9)); }
+  .td-strip { max-width: min(49vw, calc((100svh - var(--nav-h, 64px) - 210px) * 16 / 9)); }
+}
+
+/* 3D 作品頁：「★ Act I · … ★」小標維持一行，不換行 */
+.td-info .da-eyebrow {
+  white-space: nowrap;
+  letter-spacing: 3px;
+}
+@media (max-width: 1340px) {
+  .td-info .da-eyebrow { letter-spacing: 2px; }
+}

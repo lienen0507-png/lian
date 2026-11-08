@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<!-- 作品分類頁 02：Visual Design
+     版型跟 Digital Art 頁一樣（復古馬戲團 × 50 年代廣告），每一頁剛好一個畫面，捲動會卡頁
+     海報背景色 = 首頁那張門票的顏色（body 的 theme-blue）
+       1. 海報（標題）
+       2. 藝術家的話
+       3. 四個活動的主視覺（每個一整頁，膠囊切換：主視覺／貼文／標準字）
+       5. 幕後：創作過程
+       6. 其他場次（其他作品分類，點了會撕票）
+     ★ 文字是先放的，之後換成你自己的內容
+     ★ 圖片放進 images/visual-design/，檔名跟 <img> 的 src 一樣就會自動出現 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F8EFD5">
+  <title>Visual Design | Lian</title>
+
+  <!-- 字體：本機字體＋Google Fonts（Alfa Slab One 標題、Yellowtail 手寫） -->
+  <link rel="stylesheet" href="./css/fonts.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Yellowtail&display=swap">
+
+  <!-- 共用樣式＋作品分類頁的樣式（四個分類頁共用 digital-art.css） -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/digital-art.css">
+  <link rel="stylesheet" href="./css/curtain.css">
+  <link rel="stylesheet" href="./css/i18n.css">
+  <!-- 1. 從作品頁拉著布幕過來時，先用紅色蓋住，等布幕拉起來
+       2. 中文版：先藏起畫面等翻譯好，並提早開始載入中文字型 -->
+  <script>
+    (function () {
+      var r = document.documentElement, l;
+      try { if (sessionStorage.getItem("lian-curtain-arrive") === "1") r.classList.add("curtain-arrive"); } catch (e) {}
+      try { l = localStorage.getItem("lian-lang"); } catch (e) {}
+      if (l !== "zh" && l !== "en") l = /^zh/i.test(navigator.language || "") ? "zh" : "en";
+      if (l !== "zh") return;
+      r.lang = "zh-Hant";
+      r.classList.add("lang-zh", "i18n-pending");
+      ["Dela+Gothic+One", "Noto+Sans+TC:wght@900", "Huninn", "Chiron+Hei+HK:wght@400;700"].forEach(function (f) {
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://fonts.googleapis.com/css2?family=" + f + "&display=swap";
+        document.head.appendChild(link);
+      });
+      setTimeout(function () { r.classList.remove("i18n-pending"); }, 3000);
+    })();
+  </script>
+</head>
+
+<body class="da-page theme-blue">
+
+  <!-- 導覽列：跟首頁一樣的資料夾分頁，現在在 Arts -->
+  <header class="navbar">
+    <a class="nav-logo" href="./index.html#home">LIAN's Portfolio</a>
+    <nav class="nav-tabs" aria-label="Main navigation">
+      <a class="nav-tab tab-red"    href="./index.html#home">Home</a>
+      <a class="nav-tab tab-blue"   href="./index.html#about">About Me</a>
+      <a class="nav-tab tab-yellow is-active" href="./index.html#works">Arts</a>
+      <a class="nav-tab tab-copper" href="./index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- 1. 海報 -->
+    <section class="da-hero" id="top" data-dot="Poster">
+      <div class="da-rays" aria-hidden="true"></div>
+
+      <div class="da-poster da-reveal">
+        <p class="da-presents">★ Lian's Circus of Color presents ★</p>
+        <p class="da-ribbon"><span>Collection No. 02</span></p>
+        <h1 class="da-title">
+          <span>Visual</span>
+          <span>Design</span>
+        </h1>
+        <p class="da-tagline">giving ideas a visual voice</p>
+        <p class="da-divider" aria-hidden="true">✦ ─────── ✦ ─────── ✦</p>
+        <ul class="da-badges">
+          <li>Key Visuals</li>
+          <li>Lettering</li>
+          <li>Event Design</li>
+        </ul>
+        <a class="da-admit" href="#act-1">
+          <span class="da-admit-small">admit one</span>
+          <span class="da-admit-big">Step right in ↓</span>
+        </a>
+      </div>
+
+      <span class="da-spark da-spark-1" aria-hidden="true">✦</span>
+      <span class="da-spark da-spark-2" aria-hidden="true">✦</span>
+      <span class="da-spark da-spark-3" aria-hidden="true">✧</span>
+      <span class="da-spark da-spark-4" aria-hidden="true">✦</span>
+    </section>
+
+
+    <!-- 2. 藝術家的話 -->
+    <section class="da-note-wrap" data-dot="Note">
+      <article class="da-note da-reveal">
+        <p class="da-note-tab">A note from the artist</p>
+        <h2 class="da-note-title">Every event deserves <em>a first impression</em></h2>
+        <p>
+          To me, a key visual is more than an image—it is the first impression of an event.
+        </p>
+        <p>
+          I enjoy taking a simple concept and turning it into a visual world through
+          color, composition, typography, and imagery. Every project gives me an
+          opportunity to experiment with different styles and discover new ways to
+          communicate an idea.
+        </p>
+        <p>
+          I hope my designs can do more than catch the eye, but also create a feeling
+          that stays with the viewer.
+        </p>
+        <p class="da-sign">— Lian</p>
+      </article>
+    </section>
+
+
+    <!-- =========================================
+         3. 四個活動的主視覺：每個活動一整頁（Act I～IV）
+         左：大畫框（膠囊切換：主視覺 → 貼文 → 標準字）；萬聖節另外有一張門票放在海報旁邊
+         右：標準字當標題＋說明牌
+         ★ 背景：每個活動有自己的顏色和花紋（vd-act-hole / halloween / market / uniform）
+         ========================================= -->
+    <!-- Act I：黑洞奇藝點（Freshman Welcome Event） -->
+    <section class="da-feature vd-act vd-act-hole" id="act-1" data-dot="Welcome Party">
+      <div class="da-feature-body">
+        <figure class="da-frame da-frame-gold da-feature-frame da-frame-contain vd-poster-frame da-reveal"
+                data-title="Black Hole Wonderland"
+                data-desc="Freshman Welcome Event">
+          <span class="da-nail" aria-hidden="true"></span>
+          <img class="da-stage-img is-shown" data-stage="kv"
+               src="./images/visual-design/black-hole-kv.jpg"
+               alt="Black Hole Wonderland — Key visual">
+          <img class="da-stage-img" data-stage="post"
+               src="./images/visual-design/black-hole-post.jpg"
+               alt="Black Hole Wonderland — Social media post">
+          <img class="da-stage-img" data-stage="type"
+               src="./images/visual-design/black-hole-type.png"
+               alt="Black Hole Wonderland — Lettering">
+        </figure>
+
+        <div class="da-feature-info">
+          <p class="da-eyebrow da-reveal">★ Act I · Freshman Welcome Event ★</p>
+
+          <!-- 標準字當標題 -->
+          <figure class="da-lettering vd-lettering da-reveal"
+                  data-title="Black Hole Wonderland — Lettering"
+                  data-desc="Custom lettering for freshman welcome event.">
+            <img src="./images/visual-design/black-hole-type.png" alt="Black Hole Wonderland lettering">
+          </figure>
+
+          <div class="da-placard da-reveal">
+            <p class="da-placard-no">Act I · Key visual · Welcome Party</p>
+            <h3 class="vd-placard-title">Black Hole Wonderland</h3>
+            <p>
+              The key visual for our department’s freshman welcome event. A girl in a space suit tumbles into a swirling black hole — a playful way of saying “welcome to a whole new universe.”
+            </p>
+            <p>
+              The lettering glows like starlight, with little sparkles tucked into the strokes.
+            </p>
+
+            <p class="da-mini-label">Take a closer look</p>
+            <div class="da-bulge" data-target="#act-1 .da-feature-frame">
+              <svg class="da-bulge-svg" viewBox="0 0 300 64" aria-hidden="true">
+                <path class="da-bulge-shape" d=""/>
+                <circle class="da-bulge-dot" cx="0" cy="0" r="5"/>
+              </svg>
+              <div class="da-bulge-tabs" role="tablist" aria-label="Black Hole Wonderland">
+                <button type="button" role="tab" data-stage="kv" aria-selected="true">Key visual</button>
+                <button type="button" role="tab" data-stage="post">Post</button>
+                <button type="button" role="tab" data-stage="type">Lettering</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Act II：賭賭賭她很壞（Halloween Night Party） -->
+    <section class="da-feature vd-act vd-act-halloween" id="act-2" data-dot="Halloween">
+      <div class="da-feature-body">
+        <!-- 海報＋旁邊斜斜塞著的門票（門票點了也可以放大看） -->
+        <div class="vd-frame-wrap">
+          <figure class="da-frame da-frame-gold da-feature-frame da-frame-contain vd-poster-frame da-reveal"
+                  data-title="Bet On Her, She’s Trouble"
+                  data-desc="Halloween Night Party">
+            <span class="da-nail" aria-hidden="true"></span>
+            <img class="da-stage-img is-shown" data-stage="kv"
+                 src="./images/visual-design/halloween-kv.jpg"
+                 alt="Bet On Her, She’s Trouble — Key visual">
+            <img class="da-stage-img" data-stage="post"
+                 src="./images/visual-design/halloween-post.jpg"
+                 alt="Bet On Her, She’s Trouble — Social media post">
+            <img class="da-stage-img" data-stage="type"
+                 src="./images/visual-design/halloween-type.png"
+                 alt="Bet On Her, She’s Trouble — Lettering">
+          </figure>
+
+        </div>
+
+        <div class="da-feature-info">
+          <p class="da-eyebrow da-reveal">★ Act II · Halloween Night Party ★</p>
+
+          <!-- 標準字當標題 -->
+          <figure class="da-lettering vd-lettering da-reveal"
+                  data-title="Bet On Her, She’s Trouble — Lettering"
+                  data-desc="Custom lettering for halloween night party.">
+            <img src="./images/visual-design/halloween-type.png" alt="Bet On Her, She’s Trouble lettering">
+          </figure>
+
+          <div class="da-placard da-reveal">
+            <p class="da-placard-no">Act II · Key visual · Halloween</p>
+            <h3 class="vd-placard-title">Bet On Her, She’s Trouble</h3>
+            <p>
+              The key visual for our Halloween party, themed as a spooky casino night: witches, card players, and pumpkins gather around the table under a heart-shaped spotlight.
+            </p>
+            <p>
+              Besides the poster and post, I designed the custom lettering and the event ticket — tucked right next to the poster.
+            </p>
+
+            <p class="da-mini-label">Take a closer look</p>
+            <div class="da-bulge" data-target="#act-2 .da-feature-frame">
+              <svg class="da-bulge-svg" viewBox="0 0 300 64" aria-hidden="true">
+                <path class="da-bulge-shape" d=""/>
+                <circle class="da-bulge-dot" cx="0" cy="0" r="5"/>
+              </svg>
+              <div class="da-bulge-tabs" role="tablist" aria-label="Bet On Her, She’s Trouble">
+                <button type="button" role="tab" data-stage="kv" aria-selected="true">Key visual</button>
+                <button type="button" role="tab" data-stage="post">Post</button>
+                <button type="button" role="tab" data-stage="type">Lettering</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 萬聖節的門票：一個獨立的小物件，可以用滑鼠拖來拖去
+           ★ 固定位置：改 style 裡的 --tx（左右，%）、--ty（上下，%）、--rot（歪幾度）
+           ★ 最簡單的方法：網址後面加 ?edit（例如 visual-design.html?edit），拖到喜歡的位置，
+             右下角會顯示這一行數字，按「Copy」再貼回這裡的 style="…" -->
+      <figure class="vd-ticket" style="--tx: 70.9%; --ty: 76.5%; --rot: 6deg;"
+              data-title="Bet On Her, She’s Trouble — Event Ticket"
+              data-desc="The ticket I designed for the Halloween party.">
+        <img src="./images/visual-design/halloween-ticket.jpg" alt="Halloween party ticket" draggable="false">
+      </figure>
+    </section>
+
+
+    <!-- Act III：聖誕創藝所（Christmas Market） -->
+    <section class="da-feature vd-act vd-act-market" id="act-3" data-dot="Xmas Market">
+      <div class="da-feature-body">
+        <figure class="da-frame da-frame-gold da-feature-frame da-frame-contain vd-poster-frame da-reveal"
+                data-title="The Christmas Craft Fair"
+                data-desc="Christmas Market">
+          <span class="da-nail" aria-hidden="true"></span>
+          <img class="da-stage-img is-shown" data-stage="kv"
+               src="./images/visual-design/xmas-market-kv.jpg"
+               alt="The Christmas Craft Fair — Key visual">
+          <img class="da-stage-img" data-stage="post"
+               src="./images/visual-design/xmas-market-post.jpg"
+               alt="The Christmas Craft Fair — Social media post">
+          <img class="da-stage-img" data-stage="type"
+               src="./images/visual-design/xmas-market-type.png"
+               alt="The Christmas Craft Fair — Lettering">
+        </figure>
+
+        <div class="da-feature-info">
+          <p class="da-eyebrow da-reveal">★ Act III · Christmas Market ★</p>
+
+          <!-- 標準字當標題 -->
+          <figure class="da-lettering vd-lettering da-reveal"
+                  data-title="The Christmas Craft Fair — Lettering"
+                  data-desc="Custom lettering for christmas market.">
+            <img src="./images/visual-design/xmas-market-type.png" alt="The Christmas Craft Fair lettering">
+          </figure>
+
+          <div class="da-placard da-reveal">
+            <p class="da-placard-no">Act III · Key visual · Christmas Market</p>
+            <h3 class="vd-placard-title">The Christmas Craft Fair</h3>
+            <p>
+              The key visual for our Christmas market — friends wander through a glowing fair of striped tents, gingerbread, and a giant Christmas tree.
+            </p>
+            <p>
+              The warm, rounded lettering was drawn to feel like the festival lights.
+            </p>
+
+            <p class="da-mini-label">Take a closer look</p>
+            <div class="da-bulge" data-target="#act-3 .da-feature-frame">
+              <svg class="da-bulge-svg" viewBox="0 0 300 64" aria-hidden="true">
+                <path class="da-bulge-shape" d=""/>
+                <circle class="da-bulge-dot" cx="0" cy="0" r="5"/>
+              </svg>
+              <div class="da-bulge-tabs" role="tablist" aria-label="The Christmas Craft Fair">
+                <button type="button" role="tab" data-stage="kv" aria-selected="true">Key visual</button>
+                <button type="button" role="tab" data-stage="post">Post</button>
+                <button type="button" role="tab" data-stage="type">Lettering</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Act IV：Merry Uniformas（Christmas Uniform Party） -->
+    <section class="da-feature vd-act vd-act-uniform" id="act-4" data-dot="Uniform Party">
+      <div class="da-feature-body">
+        <figure class="da-frame da-frame-gold da-feature-frame da-frame-contain vd-poster-frame da-reveal"
+                data-title="Merry Uniformas · Christmas Uniform Party"
+                data-desc="Christmas Uniform Party">
+          <span class="da-nail" aria-hidden="true"></span>
+          <img class="da-stage-img is-shown" data-stage="kv"
+               src="./images/visual-design/merry-uniforms-kv.jpg"
+               alt="Christmas Uniform Party — Key visual">
+          <img class="da-stage-img" data-stage="post"
+               src="./images/visual-design/merry-uniforms-post.jpg"
+               alt="Christmas Uniform Party — Social media post">
+          <img class="da-stage-img" data-stage="type"
+               src="./images/visual-design/merry-uniforms-type.png"
+               alt="Christmas Uniform Party — Lettering">
+        </figure>
+
+        <div class="da-feature-info">
+          <p class="da-eyebrow da-reveal">★ Act IV · Christmas Uniform Party ★</p>
+
+          <!-- 標準字當標題 -->
+          <figure class="da-lettering vd-lettering da-reveal"
+                  data-title="Merry Uniformas — Lettering"
+                  data-desc="Custom lettering for christmas uniform party.">
+            <img src="./images/visual-design/merry-uniforms-type.png" alt="Merry Uniformas lettering">
+          </figure>
+
+          <div class="da-placard da-reveal">
+            <p class="da-placard-no">Act IV · Key visual · Merry Uniformas</p>
+            <h3 class="vd-placard-title">Christmas Uniform Party</h3>
+            <p>
+              The key visual for our Christmas uniform party: two students in school uniforms stroll through a cozy, gingerbread-colored town at night.
+            </p>
+            <p>
+              The title mixes “Uniform” and “Christmas” into one word — Merry Uniformas.
+            </p>
+
+            <p class="da-mini-label">Take a closer look</p>
+            <div class="da-bulge" data-target="#act-4 .da-feature-frame">
+              <svg class="da-bulge-svg" viewBox="0 0 300 64" aria-hidden="true">
+                <path class="da-bulge-shape" d=""/>
+                <circle class="da-bulge-dot" cx="0" cy="0" r="5"/>
+              </svg>
+              <div class="da-bulge-tabs" role="tablist" aria-label="Christmas Uniform Party">
+                <button type="button" role="tab" data-stage="kv" aria-selected="true">Key visual</button>
+                <button type="button" role="tab" data-stage="post">Post</button>
+                <button type="button" role="tab" data-stage="type">Lettering</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 5. 幕後：創作過程 -->
+    <section class="da-process" data-dot="Process">
+      <header class="da-head da-reveal">
+        <p class="da-eyebrow">★ Behind the Curtain ★</p>
+        <h2 class="da-heading">How a Piece Comes to Life</h2>
+      </header>
+
+      <ol class="da-process-list">
+        <li class="da-step da-reveal" style="--tilt: -2deg;">
+          <span class="da-step-no">01</span>
+          <h3>Brief</h3>
+          <p>Understand who it’s for and what it needs to say.</p>
+        </li>
+        <li class="da-step da-reveal" style="--tilt: 1.5deg;">
+          <span class="da-step-no">02</span>
+          <h3>Concept</h3>
+          <p>Sketch ideas, moods, and visual directions.</p>
+        </li>
+        <li class="da-step da-reveal" style="--tilt: -1deg;">
+          <span class="da-step-no">03</span>
+          <h3>Layout</h3>
+          <p>Arrange type, images, and space into a clear hierarchy.</p>
+        </li>
+        <li class="da-step da-reveal" style="--tilt: 2deg;">
+          <span class="da-step-no">04</span>
+          <h3>Polish</h3>
+          <p>Refine colors and details until everything clicks.</p>
+        </li>
+      </ol>
+    </section>
+
+
+    <!-- 6. 其他場次（點了會從中間撕開，再跳過去） -->
+    <section class="da-more" data-dot="More Shows">
+      <header class="da-head da-reveal">
+        <p class="da-eyebrow">★ More Shows This Way ★</p>
+        <h2 class="da-heading">Explore Other Collections</h2>
+      </header>
+
+      <div class="da-tickets">
+        <a class="da-ticket da-ticket-red da-reveal" href="./digital-art.html">
+          <span class="da-ticket-no">No. 01</span>
+          <strong>Digital Art</strong>
+          <span class="da-ticket-go">see the show →</span>
+        </a>
+        <a class="da-ticket da-ticket-copper da-reveal" href="./pixel-games.html">
+          <span class="da-ticket-no">No. 03</span>
+          <strong>Pixel Games</strong>
+          <span class="da-ticket-go">see the show →</span>
+        </a>
+        <a class="da-ticket da-ticket-kiwi da-reveal" href="./3d-art.html">
+          <span class="da-ticket-no">No. 04</span>
+          <strong>3D Art</strong>
+          <span class="da-ticket-go">see the show →</span>
+        </a>
+      </div>
+
+      <a class="da-back" href="#top">↑ Back to the top</a>
+    </section>
+  </main>
+
+  <!-- 放大看作品的視窗 -->
+  <div class="da-lightbox" hidden>
+    <button class="da-lb-close" type="button" aria-label="Close">✕</button>
+    <button class="da-lb-prev" type="button" aria-label="Previous">‹</button>
+    <figure class="da-lb-figure">
+      <img class="da-lb-img" src="" alt="">
+      <figcaption>
+        <strong class="da-lb-title"></strong>
+        <span class="da-lb-desc"></span>
+      </figcaption>
+    </figure>
+    <button class="da-lb-next" type="button" aria-label="Next">›</button>
+  </div>
+
+  <footer>
+    <p>✦ Lian</p>
+    <p>A little nook between worlds.</p>
+    <p class="copyright">© 2026 Lian · Made with imagination.</p>
+  </footer>
+
+  <script src="./lang-zh.js"></script>
+  <script src="./i18n.js"></script>
+  <script src="./script.js"></script>
+  <script src="./curtain.js"></script>
+  <script src="./sound.js"></script>
+  <script src="./digital-art.js"></script>
+</body>
+</html>

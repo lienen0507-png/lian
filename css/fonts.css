@@ -1,0 +1,37 @@
+/* =========================
+Lian｜字體設定
+========================= */
+
+/* 品牌 Logo 字體 */
+@font-face {
+font-family: "logo";
+src: url("../fonts/logofonts.ttf") format("truetype");
+font-weight: 400;
+font-style: normal;
+font-display: swap;
+}
+
+/* 一般英文字體：black（粗體標題用）、normal（內文用） */
+@font-face {
+font-family: "black";
+src: url("../fonts/black.ttf") format("truetype");
+font-weight: 400;
+font-style: normal;
+font-display: swap;
+}
+@font-face {
+font-family: "normal";
+src: url("../fonts/normal.ttf") format("truetype");
+font-weight: 400;
+font-style: normal;
+font-display: swap;
+}
+
+/* 復古童話標題字體 */
+@font-face {
+font-family: "fell";
+src: url("../fonts/fell.ttf") format("truetype");
+font-weight: 400;
+font-style: normal;
+font-display: swap;
+}

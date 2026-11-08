@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<!-- 作品分類頁 01：數位插畫（Digital Art）
+     風格跟首頁一樣：復古馬戲團 × 50 年代廣告
+     整頁像一場「馬戲團畫展」：
+       1. 海報（標題）
+       2. 藝術家的話
+       3. 今晚的主秀：白雪公主
+       4. 作品收藏（三頁，每頁三幅；點了可以放大看）
+       5. 幕後：創作過程
+       6. 其他場次（其他作品分類）
+     ★ 要換圖片：把圖放進 images/digital-art/，再改每張 <img> 的 src
+     ★ 文字都可以直接改 -->
+<html lang="en">
+<head>
+  <!-- 網頁基本設定 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F8EFD5">
+
+  <!-- 瀏覽器分頁標題 -->
+  <title>Digital Art | Lian</title>
+
+  <!-- 字體：本機字體＋Google Fonts（Alfa Slab One 標題、Yellowtail 手寫） -->
+  <link rel="stylesheet" href="./css/fonts.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Yellowtail&display=swap">
+
+  <!-- 共用樣式＋這一頁專用的樣式 -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/digital-art.css">
+  <link rel="stylesheet" href="./css/curtain.css">
+  <link rel="stylesheet" href="./css/i18n.css">
+  <!-- 1. 從作品頁拉著布幕過來時，先用紅色蓋住，等布幕拉起來
+       2. 中文版：先藏起畫面等翻譯好，並提早開始載入中文字型 -->
+  <script>
+    (function () {
+      var r = document.documentElement, l;
+      try { if (sessionStorage.getItem("lian-curtain-arrive") === "1") r.classList.add("curtain-arrive"); } catch (e) {}
+      try { l = localStorage.getItem("lian-lang"); } catch (e) {}
+      if (l !== "zh" && l !== "en") l = /^zh/i.test(navigator.language || "") ? "zh" : "en";
+      if (l !== "zh") return;
+      r.lang = "zh-Hant";
+      r.classList.add("lang-zh", "i18n-pending");
+      ["Dela+Gothic+One", "Noto+Sans+TC:wght@900", "Huninn", "Chiron+Hei+HK:wght@400;700"].forEach(function (f) {
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://fonts.googleapis.com/css2?family=" + f + "&display=swap";
+        document.head.appendChild(link);
+      });
+      setTimeout(function () { r.classList.remove("i18n-pending"); }, 3000);
+    })();
+  </script>
+</head>
+
+<body class="da-page">
+
+  <!-- 導覽列：跟首頁一樣的資料夾分頁，現在在 Arts，所以 Arts 是凸起來的 -->
+  <header class="navbar">
+    <a class="nav-logo" href="./index.html#home">LIAN's Portfolio</a>
+    <nav class="nav-tabs" aria-label="Main navigation">
+      <a class="nav-tab tab-red"    href="./index.html#home">Home</a>
+      <a class="nav-tab tab-blue"   href="./index.html#about">About Me</a>
+      <a class="nav-tab tab-yellow is-active" href="./index.html#works">Arts</a>
+      <a class="nav-tab tab-copper" href="./index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- =========================================
+         1. 海報：整頁的標題
+         ========================================= -->
+    <section class="da-hero" id="top" data-dot="Poster">
+      <!-- 後面一圈一圈轉的放射光 -->
+      <div class="da-rays" aria-hidden="true"></div>
+
+      <div class="da-poster da-reveal">
+        <p class="da-presents">★ Lian's Circus of Color presents ★</p>
+
+        <!-- 紅色緞帶 -->
+        <p class="da-ribbon"><span>Collection No. 01</span></p>
+
+        <h1 class="da-title">
+          <span>Digital</span>
+          <span>Art</span>
+        </h1>
+
+        <p class="da-tagline">a little gallery of imagination</p>
+
+        <p class="da-divider" aria-hidden="true">✦ ─────── ✦ ─────── ✦</p>
+
+        <!-- 三個小標籤 -->
+        <ul class="da-badges">
+          <li>Illustration</li>
+          <li>Characters</li>
+          <li>Little Worlds</li>
+        </ul>
+
+        <!-- 票：點了往下滑到作品 -->
+        <a class="da-admit" href="#collection">
+          <span class="da-admit-small">admit one</span>
+          <span class="da-admit-big">Step right in ↓</span>
+        </a>
+      </div>
+
+      <!-- 海報旁邊的裝飾星星 -->
+      <span class="da-spark da-spark-1" aria-hidden="true">✦</span>
+      <span class="da-spark da-spark-2" aria-hidden="true">✦</span>
+      <span class="da-spark da-spark-3" aria-hidden="true">✧</span>
+      <span class="da-spark da-spark-4" aria-hidden="true">✦</span>
+    </section>
+
+
+    <!-- =========================================
+         2. 藝術家的話
+         ========================================= -->
+    <section class="da-note-wrap" data-dot="Note">
+      <article class="da-note da-reveal">
+        <p class="da-note-tab">A note from the artist</p>
+        <h2 class="da-note-title">To the little girl who <em>never stopped drawing</em></h2>
+        <p>
+          I have loved drawing since I was little, and I have always tried my
+          best to improve. I’m grateful to my younger self for never giving up
+          on practicing and for bringing me to where I am today.
+        </p>
+        <p>
+          Sometimes, I still wonder if I’m good enough or if anyone notices how
+          hard I try. But I think my younger self would be happy to see who I am today.
+        </p>
+        <p>
+          The girl who once could only draw little stick-figure girls can now
+          create an entire artwork on her own. I think she would be the person
+          who is most proud of me.
+        </p>
+        <p>
+          And I’ll keep creating, learning, and moving forward with her.
+        </p>
+        <p class="da-sign">— Lian</p>
+      </article>
+    </section>
+
+
+    <!-- =========================================
+         3. 今晚的主秀：白雪公主（夜晚森林的暗色背景＋聚光燈）
+         左：金框掛起來的完成圖（點了可以放大）
+         右：手寫標準字當大標題 → 說明牌（介紹、線稿 → 平塗 → 完成）
+         ========================================= -->
+    <section class="da-feature" id="main-act" data-dot="Main Act">
+      <div class="da-feature-body">
+        <!-- 左邊：完成圖 -->
+        <figure class="da-frame da-frame-gold da-feature-frame da-reveal"
+                data-title="Snow White"
+                data-desc="A quiet moment in the woods, just before the story turns.">
+          <span class="da-nail" aria-hidden="true"></span>
+          <!-- 三個階段的圖疊在一起，下面的膠囊切換會換成要看的那一張 -->
+          <img class="da-stage-img is-shown" data-stage="final"
+               src="./images/digital-art/snow-white/final.jpg"
+               alt="Snow White sits in a dark forest with a deer, rabbits and a squirrel, while a glowing poisoned apple floats toward her hand">
+          <img class="da-stage-img" data-stage="flat"
+               src="./images/digital-art/snow-white/flat-color.jpg"
+               alt="Snow White — flat color stage">
+          <img class="da-stage-img" data-stage="line"
+               src="./images/digital-art/snow-white/line-art.jpg"
+               alt="Snow White — line art stage">
+        </figure>
+
+        <!-- 右邊 -->
+        <div class="da-feature-info">
+          <p class="da-eyebrow da-reveal">★ Tonight's Main Act ★</p>
+
+          <!-- 我設計的標準字（點了可以放大） -->
+          <figure class="da-lettering da-reveal"
+                  data-title="Snow White — Custom Lettering"
+                  data-desc="Hand-drawn lettering for Snow White.">
+            <img src="./images/digital-art/snow-white/lettering.png"
+                 alt="Hand-drawn lettering: Snow White">
+          </figure>
+
+          <!-- 說明牌 -->
+          <div class="da-placard da-reveal">
+            <p class="da-placard-no">Main Act · No. 01 · Fairytale Reimagined</p>
+            <p>
+              After starting university, I began challenging myself to create
+              more polished artwork. As someone who loves cartoons and animation,
+              I chose Snow White as a starting point, reimagining the character
+              in my own style while exploring custom typography and visual design.
+            </p>
+            <p>
+              This project became an important starting point for me. Later, when
+              I joined my department’s student association and began creating key
+              visuals, I realized that this early experience gave me the confidence
+              to take on new challenges.
+            </p>
+
+            <!-- 創作過程：膠囊切換（Liquid Bulge）
+                 點一個點，膠囊上緣會鼓起來、像液體一樣滑過去，左邊大畫框的圖跟著換 -->
+            <p class="da-mini-label">From line art to final</p>
+            <div class="da-bulge" data-target="#main-act .da-feature-frame">
+              <svg class="da-bulge-svg" viewBox="0 0 300 64" aria-hidden="true">
+                <path class="da-bulge-shape" d=""/>
+                <circle class="da-bulge-dot" cx="0" cy="0" r="5"/>
+              </svg>
+              <div class="da-bulge-tabs" role="tablist" aria-label="Creative process">
+                <button type="button" role="tab" data-stage="line">Line art</button>
+                <button type="button" role="tab" data-stage="flat">Flat color</button>
+                <button type="button" role="tab" data-stage="final" aria-selected="true">Final</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================
+         4. 作品收藏：分成三頁（Act I、II、III），每頁三幅
+         ★ 換圖：改 <img> 的 src；還沒有圖的話會先顯示「Coming soon」的佔位
+         ★ data-title、data-desc 是放大看時下面顯示的文字
+         ★ 想加一頁：複製一整個 <section class="da-collection">，改 Act 和作品
+         ========================================= -->
+    <section class="da-collection" id="collection" data-dot="Act I">
+      <header class="da-head da-reveal">
+        <p class="da-eyebrow">★ Step Right Up ★</p>
+        <h2 class="da-heading">The Collection</h2>
+        <p class="da-act"><span>Act I</span> click any piece to take a closer look</p>
+      </header>
+
+      <div class="da-grid">
+        <!-- 作品 No. 02：Fish' World -->
+        <figure class="da-piece da-reveal" style="--tilt: -2deg;">
+          <div class="da-frame da-frame-red" data-title="Fish' World"
+               data-desc="A little illustration of a corner shop where the fish have taken over.">
+            <span class="da-nail" aria-hidden="true"></span>
+            <img src="./images/digital-art/closed-fishing/final.jpg" alt="Fish' World: goldfish swim around a corner shop under a full moon">
+          </div>
+          <figcaption class="da-label">
+            <span class="da-label-no">No. 02</span>
+            <strong>Fish' World</strong>
+            <span>Spot illustration</span>
+          </figcaption>
+        </figure>
+
+        <!-- 作品 No. 03：Department Tee（整張圖放進畫框裡，不裁切） -->
+        <figure class="da-piece da-reveal" style="--tilt: 1.5deg;">
+          <div class="da-frame da-frame-blue da-frame-contain" data-title="Department Tee"
+               data-desc="A T-shirt illustration for my department — two characters charging forward with a giant pencil, brush, and floating shapes.">
+            <span class="da-nail" aria-hidden="true"></span>
+            <img src="./images/digital-art/department-tee.png" alt="Department Tee">
+          </div>
+          <figcaption class="da-label">
+            <span class="da-label-no">No. 03</span>
+            <strong>Department Tee</strong>
+            <span>Apparel design</span>
+          </figcaption>
+        </figure>
+
+        <!-- 作品 No. 04：Little Clown（整張圖放進畫框裡，不裁切） -->
+        <figure class="da-piece da-reveal" style="--tilt: -1deg;">
+          <div class="da-frame da-frame-kiwi da-frame-contain" data-title="Little Clown"
+               data-desc="A playful clown character designed for merchandise, dressed in stars, stripes, and circus colors.">
+            <span class="da-nail" aria-hidden="true"></span>
+            <img src="./images/digital-art/clown-merch.png" alt="Little Clown">
+          </div>
+          <figcaption class="da-label">
+            <span class="da-label-no">No. 04</span>
+            <strong>Little Clown</strong>
+            <span>Merchandise design</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="da-collection" id="collection-2" data-dot="Act II">
+      <header class="da-head da-reveal">
+        <p class="da-eyebrow">★ Step Right Up ★</p>
+        <h2 class="da-heading">The Collection</h2>
+        <p class="da-act"><span>Act II</span> keep scrolling — the show goes on</p>
+      </header>
+
+      <div class="da-grid">
+        <!-- 作品 No. 05：Where the Sunlight Stays -->
+        <figure class="da-piece da-piece-portrait da-reveal" style="--tilt: 2deg;">
+          <div class="da-frame da-frame-copper" data-title="Where the Sunlight Stays"
+               data-desc="Friends and cats gathering on an old staircase as the sun sets.">
+            <span class="da-nail" aria-hidden="true"></span>
+            <img src="./images/digital-art/sunlight.jpg" alt="Where the Sunlight Stays">
+          </div>
+          <figcaption class="da-label">
+            <span class="da-label-no">No. 05</span>
+            <strong>Where the Sunlight Stays</strong>
+            <span>Scene illustration</span>
+          </figcaption>
+        </figure>
+
+        <!-- 作品 No. 06：Halloween Night -->
+        <figure class="da-piece da-piece-portrait da-reveal" style="--tilt: -1.5deg;">
+          <div class="da-frame da-frame-gold" data-title="Halloween Night"
+               data-desc="Two dancers twirl through a glowing street on Halloween night.">
+            <span class="da-nail" aria-hidden="true"></span>
+            <img src="./images/digital-art/halloween.jpg" alt="Halloween Night">
+          </div>
+          <figcaption class="da-label">
+            <span class="da-label-no">No. 06</span>
+            <strong>Halloween Night</strong>
+            <span>Holiday illustration</span>
+          </figcaption>
+        </figure>
+
+        <!-- 作品 No. 07 -->
+        <figure class="da-piece da-reveal" style="--tilt: 1deg;">
+          <div class="da-frame da-frame-cadet" data-title="Sketchbook"
+               data-desc="Doodles, warm-ups, and ideas that might become something bigger one day.">
+            <span class="da-nail" aria-hidden="true"></span>
+            <img src="./images/digital-art/sketchbook.jpg" alt="Sketchbook">
+          </div>
+          <figcaption class="da-label">
+            <span class="da-label-no">No. 07</span>
+            <strong>Sketchbook</strong>
+            <span>Doodles &amp; ideas</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="da-collection" id="collection-3" data-dot="Act III">
+      <header class="da-head da-reveal">
+        <p class="da-eyebrow">★ Step Right Up ★</p>
+        <h2 class="da-heading">The Collection</h2>
+        <p class="da-act"><span>Act III</span> figure studies &amp; character practice</p>
+      </header>
+
+      <div class="da-grid">
+        <!-- 作品 No. 08：人物臨摹練習 -->
+        <figure class="da-piece da-piece-portrait da-reveal" style="--tilt: -1.5deg;">
+          <div class="da-frame da-frame-blue" data-title="Soda Break"
+               data-desc="A figure study of a girl sipping a drink on red stools — practicing poses, fabric folds, and halftone textures.">
+            <span class="da-nail" aria-hidden="true"></span>
+            <img src="./images/digital-art/figure-study-1.jpg" alt="Soda Break — figure study">
+          </div>
+          <figcaption class="da-label">
+            <span class="da-label-no">No. 08</span>
+            <strong>Soda Break</strong>
+            <span>Figure study</span>
+          </figcaption>
+        </figure>
+
+        <!-- 作品 No. 09：人物臨摹練習 -->
+        <figure class="da-piece da-piece-portrait da-reveal" style="--tilt: 1.5deg;">
+          <div class="da-frame da-frame-red" data-title="Midnight Memories"
+               data-desc="A figure study set at night — practicing hands, accessories, and glowing color under city lights.">
+            <span class="da-nail" aria-hidden="true"></span>
+            <img src="./images/digital-art/figure-study-2.jpg" alt="Midnight Memories — figure study">
+          </div>
+          <figcaption class="da-label">
+            <span class="da-label-no">No. 09</span>
+            <strong>Midnight Memories</strong>
+            <span>Figure study</span>
+          </figcaption>
+        </figure>
+
+        <!-- 作品 No. 10：人物臨摹練習 -->
+        <figure class="da-piece da-piece-portrait da-reveal" style="--tilt: -1deg;">
+          <div class="da-frame da-frame-kiwi" data-title="MSBF"
+               data-desc="A figure study with a guitar and headphones — practicing outfits, lighting, and a cozy room full of details.">
+            <span class="da-nail" aria-hidden="true"></span>
+            <img src="./images/digital-art/figure-study-3.jpg" alt="MSBF — figure study">
+          </div>
+          <figcaption class="da-label">
+            <span class="da-label-no">No. 10</span>
+            <strong>MSBF</strong>
+            <span>Figure study</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+
+    <!-- =========================================
+         5. 幕後：創作過程（四張歪歪的告示牌）
+         ========================================= -->
+    <section class="da-process" data-dot="Process">
+      <header class="da-head da-reveal">
+        <p class="da-eyebrow">★ Behind the Curtain ★</p>
+        <h2 class="da-heading">How a Piece Comes to Life</h2>
+      </header>
+
+      <ol class="da-process-list">
+        <li class="da-step da-reveal" style="--tilt: -2deg;">
+          <span class="da-step-no">01</span>
+          <h3>Spark</h3>
+          <p>Collect little “what ifs” from daily life, dreams, and stories.</p>
+        </li>
+        <li class="da-step da-reveal" style="--tilt: 1.5deg;">
+          <span class="da-step-no">02</span>
+          <h3>Sketch</h3>
+          <p>Rough out shapes, poses, and the story the picture should tell.</p>
+        </li>
+        <li class="da-step da-reveal" style="--tilt: -1deg;">
+          <span class="da-step-no">03</span>
+          <h3>Color</h3>
+          <p>Block in flat colors and set the mood of the whole world.</p>
+        </li>
+        <li class="da-step da-reveal" style="--tilt: 2deg;">
+          <span class="da-step-no">04</span>
+          <h3>Light &amp; Details</h3>
+          <p>Add light, texture, and tiny easter eggs to find.</p>
+        </li>
+      </ol>
+    </section>
+
+
+    <!-- =========================================
+         6. 其他場次：其他作品分類的票
+         ========================================= -->
+    <section class="da-more" data-dot="More Shows">
+      <header class="da-head da-reveal">
+        <p class="da-eyebrow">★ More Shows This Way ★</p>
+        <h2 class="da-heading">Explore Other Collections</h2>
+      </header>
+
+      <div class="da-tickets">
+        <a class="da-ticket da-ticket-blue da-reveal" href="./visual-design.html">
+          <span class="da-ticket-no">No. 02</span>
+          <strong>Visual Design</strong>
+          <span class="da-ticket-go">see the show →</span>
+        </a>
+        <a class="da-ticket da-ticket-copper da-reveal" href="./pixel-games.html">
+          <span class="da-ticket-no">No. 03</span>
+          <strong>Pixel Games</strong>
+          <span class="da-ticket-go">see the show →</span>
+        </a>
+        <a class="da-ticket da-ticket-kiwi da-reveal" href="./3d-art.html">
+          <span class="da-ticket-no">No. 04</span>
+          <strong>3D Art</strong>
+          <span class="da-ticket-go">see the show →</span>
+        </a>
+      </div>
+
+      <a class="da-back" href="#top">↑ Back to the top</a>
+    </section>
+  </main>
+
+  <!-- 放大看作品的視窗（digital-art.js 會打開它） -->
+  <div class="da-lightbox" hidden>
+    <button class="da-lb-close" type="button" aria-label="Close">✕</button>
+    <button class="da-lb-prev" type="button" aria-label="Previous">‹</button>
+    <figure class="da-lb-figure">
+      <img class="da-lb-img" src="" alt="">
+      <figcaption>
+        <strong class="da-lb-title"></strong>
+        <span class="da-lb-desc"></span>
+      </figcaption>
+    </figure>
+    <button class="da-lb-next" type="button" aria-label="Next">›</button>
+  </div>
+
+  <!-- 頁尾：跟首頁一樣 -->
+  <footer>
+    <p>✦ Lian</p>
+    <p>A little nook between worlds.</p>
+    <p class="copyright">© 2026 Lian · Made with imagination.</p>
+  </footer>
+
+  <!-- 星星游標、移動粉塵、點擊星星 -->
+  <script src="./lang-zh.js"></script>
+  <script src="./i18n.js"></script>
+  <script src="./script.js"></script>
+  <!-- 互動音效（左下角可以開關、調音量） -->
+  <script src="./curtain.js"></script>
+  <script src="./sound.js"></script>
+  <!-- 這一頁的互動：浮上來的動畫、放大看作品 -->
+  <script src="./digital-art.js"></script>
+</body>
+</html>

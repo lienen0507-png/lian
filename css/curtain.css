@@ -1,0 +1,131 @@
+/* =========================================================
+   謝幕布幕（curtain.js 會用到）
+   - 在作品頁點上面的 Home / About Me / Arts / Contact：
+     紅色絲絨布幕從兩邊拉上 → 掌聲＋「Thank you!」→ 換頁
+   - 到了首頁：布幕往上拉起來，露出舞台
+   ========================================================= */
+
+/* 剛換頁過來、布幕還沒建好的那一瞬間：先用紅色蓋住，不會閃一下 */
+html.curtain-arrive::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  background: #A82E1A;
+}
+
+.curtain-stage {
+  --velvet-1: #5E120C;   /* 布的暗摺 */
+  --velvet-2: #9C2416;   /* 布的中間色 */
+  --velvet-3: #C03A22;   /* 布的亮摺（Retro Red） */
+  --fringe: #F0BE57;     /* 金色流蘇 */
+
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.curtain-stage.is-active {
+  pointer-events: auto;   /* 布幕在動的時候，不能再點到後面的東西 */
+}
+
+/* ---------- 左右兩片布（樣子跟首頁 Arts 舞台的布幕一樣，SVG 在 curtain.js 裡） ---------- */
+.curtain-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 51vw;
+  will-change: transform;
+}
+
+.curtain-panel svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.curtain-left  { left: 0;  transform-origin: 0 0;    filter: drop-shadow(6px 0 0 rgba(60, 15, 8, 0.3)); }
+.curtain-right { right: 0; transform-origin: 100% 0; filter: drop-shadow(-6px 0 0 rgba(60, 15, 8, 0.3)); }
+
+/* ---------- 上面的三個大垂簾（跟首頁 Arts 舞台一樣） ---------- */
+.curtain-valance {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(90px, 18vh, 150px);
+  z-index: 2;
+  filter: drop-shadow(0 6px 0 rgba(50, 12, 6, 0.3));
+  will-change: transform;
+}
+
+.curtain-valance svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- 中間的「Thank you!」 ---------- */
+.curtain-bow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  translate: -50% -50%;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  scale: 0.85;
+  transition: opacity 0.35s ease, scale 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.curtain-stage.is-bowing .curtain-bow {
+  opacity: 1;
+  scale: 1;
+}
+
+/* 打在中間的聚光燈 */
+.curtain-bow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  width: 620px;
+  height: 420px;
+  translate: -50% -50%;
+  background: radial-gradient(ellipse at center, rgba(255, 226, 150, 0.32), transparent 65%);
+}
+
+.curtain-bow-small {
+  margin: 0 0 6px;
+  font-family: "black", "Jost", sans-serif;
+  font-size: 13px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--fringe);
+}
+
+.curtain-bow-big {
+  margin: 0;
+  font-family: "Yellowtail", cursive;
+  font-size: clamp(54px, 8vw, 96px);
+  line-height: 1.05;
+  color: #F8EFD5;
+  text-shadow: 0 4px 0 #7A1E10, 0 0 24px rgba(240, 190, 87, 0.45);
+}
+
+.curtain-bow-to {
+  margin: 10px 0 0;
+  font-family: "black", "Jost", sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(248, 239, 213, 0.75);
+}
+
+/* 字距會在最後一個字後面多留一段空白，左邊補一樣多，整行才會真的置中 */
+.curtain-bow-small { padding-left: 5px; }
+.curtain-bow-to { padding-left: 3px; }

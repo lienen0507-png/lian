@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<!-- 首頁：作品集的入口，包含主視覺、自我介紹、作品分類、聯絡方式 -->
+<html lang="zh-Hant">
+<head>
+  <!-- 網頁基本設定：文字編碼、手機版縮放、瀏覽器頂部顏色、搜尋引擎描述 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F8EFD5">
+  <meta name="description" content="Lian — 收藏插畫、角色動畫、遊戲與視覺設計作品的個人作品集。">
+
+  <!-- 瀏覽器分頁上顯示的標題 -->
+  <title>LIAN's Portfolio</title>
+
+  <!-- 載入樣式檔：整體樣式、星星裝飾、字體 -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/stars.css">
+  <link rel="stylesheet" href="./css/fonts.css">
+
+  <!-- 從 Google Fonts 載入的字體：
+       Anton（首頁大標題，又高又窄的粗體字）
+       Alfa Slab One（About Me 的標題，50 年代廣告感的粗襯線字）
+       Yellowtail（About Me 的手寫字，50 年代招牌草寫） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Alfa+Slab+One&family=Yellowtail&display=swap">
+
+  <!-- 只用在這一頁的小樣式：讓「關於我」的標題使用 IM Fell English 字體 -->
+  <style>
+    .about h2 {
+      font-family: "IM Fell English", serif;
+    }
+  </style>
+  <link rel="stylesheet" href="./css/curtain.css">
+  <link rel="stylesheet" href="./css/i18n.css">
+  <!-- 1. 從作品頁拉著布幕過來時，先用紅色蓋住，等布幕拉起來
+       2. 中文版：先藏起畫面等翻譯好，並提早開始載入中文字型 -->
+  <script>
+    (function () {
+      var r = document.documentElement, l;
+      try { if (sessionStorage.getItem("lian-curtain-arrive") === "1") r.classList.add("curtain-arrive"); } catch (e) {}
+      try { l = localStorage.getItem("lian-lang"); } catch (e) {}
+      if (l !== "zh" && l !== "en") l = /^zh/i.test(navigator.language || "") ? "zh" : "en";
+      if (l !== "zh") return;
+      r.lang = "zh-Hant";
+      r.classList.add("lang-zh", "i18n-pending");
+      ["Dela+Gothic+One", "Noto+Sans+TC:wght@900", "Huninn", "Chiron+Hei+HK:wght@400;700"].forEach(function (f) {
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://fonts.googleapis.com/css2?family=" + f + "&display=swap";
+        document.head.appendChild(link);
+      });
+      setTimeout(function () { r.classList.remove("i18n-pending"); }, 3000);
+    })();
+  </script>
+</head>
+
+<!-- class="home"：只有首頁才會套用「滑動卡格」和「內容浮上來」的效果 -->
+<body class="home">
+  <!-- 導覽列：最上方的網站名稱與選單，點選後會跳到頁面中對應的區塊 -->
+  <!-- 導覽列：復古「資料夾分頁」風格
+       左邊是網站名稱，右邊是四個不同顏色的分頁，分頁底部直接接著下面的內容 -->
+  <header class="navbar">
+    <a class="nav-logo" href="#home">LIAN's Portfolio</a>
+
+    <nav class="nav-tabs" aria-label="主要導覽">
+      <a class="nav-tab tab-red"    href="#home">Home</a>       <!-- 跳到「首頁主視覺」 -->
+      <a class="nav-tab tab-blue"   href="#about">About Me</a>  <!-- 跳到「關於我」 -->
+      <a class="nav-tab tab-yellow" href="#works">Arts</a>       <!-- 跳到「作品分類」 -->
+      <a class="nav-tab tab-copper" href="#contact">Contact</a>  <!-- 跳到「聯絡區」 -->
+    </nav>
+  </header>
+
+  <main>
+    <!-- 首頁主視覺：紅色雜訊背景＋手剪感的大標題「LIAN's Portfolio」＋四周的彩色星星 -->
+    <section class="hero" id="home">
+
+      <!-- 共用的圖形與濾鏡（看不到，只是給下面引用）
+           sparkle-shape：四角星的形狀
+           grain-text：讓字和星星有顆粒、邊緣粗糙的雜訊感 -->
+      <svg class="hero-defs" aria-hidden="true" focusable="false">
+        <defs>
+          <symbol id="sparkle-shape" viewBox="0 0 40 60">
+            <path d="M20 0 Q23 27 40 30 Q23 33 20 60 Q17 33 0 30 Q17 27 20 0 Z"/>
+          </symbol>
+          <filter id="grain-text" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+            <!-- 產生雜訊 -->
+            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="noise"/>
+            <!-- 把雜訊變成很多細小的「洞」，讓字看起來像印在粗紙上 -->
+            <feColorMatrix in="noise" type="matrix"
+              values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -9 6.4" result="speckle"/>
+            <feComposite in="SourceGraphic" in2="speckle" operator="in" result="speckled"/>
+            <!-- 邊緣輕輕抖動，像手剪的紙 -->
+            <feDisplacementMap in="speckled" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
+      </svg>
+
+      <!-- 散落在標題四周的彩色星星和小圓點 -->
+      <div class="hero-sparkles" aria-hidden="true">
+        <svg class="hero-sparkle spark-yellow" style="left:14%; top:16%; --size:54px; --rot:-10deg; --delay:0.0s"><use href="#sparkle-shape"/></svg>
+        <svg class="hero-sparkle spark-blue" style="left:24%; top:30%; --size:26px; --rot:12deg; --delay:0.6s"><use href="#sparkle-shape"/></svg>
+        <svg class="hero-sparkle spark-cream" style="left:10%; top:52%; --size:34px; --rot:0deg; --delay:1.2s"><use href="#sparkle-shape"/></svg>
+        <svg class="hero-sparkle spark-yellow" style="left:19%; top:76%; --size:44px; --rot:8deg; --delay:0.4s"><use href="#sparkle-shape"/></svg>
+        <svg class="hero-sparkle spark-blue" style="left:31%; top:86%; --size:22px; --rot:-6deg; --delay:1.6s"><use href="#sparkle-shape"/></svg>
+        <svg class="hero-sparkle spark-blue" style="left:80%; top:14%; --size:40px; --rot:10deg; --delay:0.9s"><use href="#sparkle-shape"/></svg>
+        <svg class="hero-sparkle spark-yellow" style="left:88%; top:34%; --size:26px; --rot:-14deg; --delay:0.2s"><use href="#sparkle-shape"/></svg>
+        <svg class="hero-sparkle spark-cream" style="left:84%; top:60%; --size:50px; --rot:6deg; --delay:1.4s"><use href="#sparkle-shape"/></svg>
+        <svg class="hero-sparkle spark-yellow" style="left:74%; top:82%; --size:30px; --rot:-8deg; --delay:0.7s"><use href="#sparkle-shape"/></svg>
+        <svg class="hero-sparkle spark-cream" style="left:64%; top:10%; --size:20px; --rot:0deg; --delay:1.9s"><use href="#sparkle-shape"/></svg>
+        <svg class="hero-sparkle spark-yellow" style="left:40%; top:12%; --size:18px; --rot:14deg; --delay:1.1s"><use href="#sparkle-shape"/></svg>
+        <svg class="hero-sparkle spark-blue" style="left:91%; top:82%; --size:18px; --rot:0deg; --delay:0.3s"><use href="#sparkle-shape"/></svg>
+        <span class="hero-dot spark-blue" style="left:17%; top:40%; --size:9px"></span>
+        <span class="hero-dot spark-cream" style="left:27%; top:20%; --size:7px"></span>
+        <span class="hero-dot spark-yellow" style="left:12%; top:68%; --size:8px"></span>
+        <span class="hero-dot spark-cream" style="left:86%; top:24%; --size:8px"></span>
+        <span class="hero-dot spark-yellow" style="left:78%; top:44%; --size:10px"></span>
+        <span class="hero-dot spark-blue" style="left:70%; top:70%; --size:7px"></span>
+        <span class="hero-dot spark-cream" style="left:36%; top:78%; --size:8px"></span>
+        <span class="hero-dot spark-yellow" style="left:57%; top:88%; --size:9px"></span>
+      </div>
+
+      <div class="hero-content">
+        <!-- 標題上方的小字 -->
+        <p class="eyebrow">WELCOME TO MY CREATIVE SPACE</p>
+
+        <!-- 大標題：每個字母各自歪一點、高低不一，做出手剪的感覺 -->
+        <h1 class="hero-title" aria-label="LIAN's Portfolio">
+          <span class="title-line title-line-1" aria-hidden="true">
+            <span class="title-letter" style="--r:-4deg; --y:0.02em; --s:1.04; --n:0">L</span>
+            <span class="title-letter" style="--r:3deg; --y:-0.04em; --s:1.08; --n:1">I</span>
+            <span class="title-letter" style="--r:-2deg; --y:0.03em; --s:0.97; --n:2">A</span>
+            <span class="title-letter" style="--r:5deg; --y:-0.02em; --s:1.05; --n:3">N</span>
+            <span class="title-letter" style="--r:-8deg; --y:-0.05em; --s:1.0; --n:4">'</span>
+            <span class="title-letter" style="--r:4deg; --y:0.04em; --s:1.02; --n:5">s</span>
+          </span>
+          <span class="title-line title-line-2" aria-hidden="true">
+            <span class="title-letter" style="--r:-5deg; --y:-0.02em; --s:1.06; --n:6">P</span>
+            <!-- 這個 o 是實心的，中間挖空一顆星星 -->
+            <span class="title-letter title-star-o" style="--r:0deg; --y:0em; --s:1; --n:7">
+              <svg viewBox="0 0 72 100" aria-hidden="true">
+                <path fill-rule="evenodd" d="M36 2 C58 2 70 22 70 50 C70 78 58 98 36 98 C14 98 2 78 2 50 C2 22 14 2 36 2 Z M36 24 Q39.5 46.5 54 50 Q39.5 53.5 36 76 Q32.5 53.5 18 50 Q32.5 46.5 36 24 Z"/>
+              </svg>
+            </span>
+            <span class="title-letter" style="--r:4deg; --y:0.03em; --s:0.98; --n:8">r</span>
+            <span class="title-letter" style="--r:-3deg; --y:0.06em; --s:1.0; --n:9">t</span>
+            <span class="title-letter" style="--r:6deg; --y:0.02em; --s:1.03; --n:10">f</span>
+            <span class="title-letter" style="--r:-4deg; --y:0.04em; --s:0.97; --n:11">o</span>
+            <span class="title-letter" style="--r:3deg; --y:-0.03em; --s:1.09; --n:12">l</span>
+            <span class="title-letter" style="--r:-6deg; --y:0.02em; --s:1.0; --n:13">i</span>
+            <span class="title-letter" style="--r:5deg; --y:-0.02em; --s:1.04; --n:14">o</span>
+          </span>
+        </h1>
+
+        <!-- 副標題 -->
+        <p class="hero-subtitle">
+          A little nook between worlds.
+        </p>
+
+        <!-- 簡短的引言 -->
+        <p class="intro">
+          Where reality fades, stories come alive.
+        </p>
+
+        <!-- 主要按鈕：馬戲團票根
+             滑過會跳出來、撕線的點點會爬動；按下去票根會沿著撕線被撕掉，再捲到作品區（動畫在 home.js） -->
+        <a class="ticket" href="#works" aria-label="Discover My Creations：前往作品區">
+          <span class="ticket-body">
+
+            <!-- 左邊：主票 -->
+            <span class="ticket-main">
+              <span class="ticket-face">
+                <span class="ticket-kicker">✦ LIAN's Portfolio · The Stage 01</span>
+                <span class="ticket-title">Discover My Creations</span>
+                <span class="ticket-meta">Arts · Animation · Games</span>
+              </span>
+            </span>
+
+            <!-- 右邊：票根（左邊那條是撕線） -->
+            <span class="ticket-stub" aria-hidden="true">
+              <span class="ticket-admit">ADMIT ONE!</span>
+              <span class="ticket-no">No. 2026 ✦</span>
+            </span>
+
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 關於我：50 年代復古廣告風（只講我自己）
+         上方斜斜的大看板（名牌＋斜緞帶＋標語＋照片）→ 中間橫幅 → 下方兩欄（小卡＋我的故事＋經歷） -->
+    <section class="section about" id="about">
+      <div class="about-inner">
+
+        <!-- ===== 上方斜斜的大看板 ===== -->
+        <div class="about-top">
+
+          <!-- 左上角的奶黃名牌（壓在看板上） -->
+          <div class="about-plaque">
+            <span class="about-plaque-script">About</span>
+            <span class="about-plaque-big">LIAN</span>
+            <span class="about-plaque-small">Illustrator &amp; Game Maker</span>
+          </div>
+
+          <!-- 斜斜的黃色緞帶：寫著「Nice to meet you!」 -->
+          <div class="about-ribbon-nav about-ribbon-text">
+            <p>Nice to meet you!</p>
+          </div>
+
+          <!-- 藍色看板（後面墊著錯開的銅色底板） -->
+          <div class="about-board">
+
+            <!-- 左邊：黃色細條紋區，放標語 -->
+            <div class="about-banner">
+              <h2 class="about-ribbon-title">
+                <span>I'm</span>
+                <span class="about-ribbon-big">Lian</span>
+              </h2>
+              <p class="about-banner-sub">a creator of little worlds &amp; big stories</p>
+            </div>
+
+            <!-- 右邊：藍底圓點相框，放我的照片
+                 把照片存成 images/about/me.jpg 就會顯示；還沒放照片時會顯示提示 -->
+            <!-- 右邊：我的照片
+                 --pos 是照片的位置（左右% 上下%），--zoom 是放大倍數
+                 想自己調：打開 index.html?edit 用滑鼠拖照片、滾輪放大縮小，再把數字貼到這裡 -->
+            <div class="about-portrait">
+              <img class="about-photo is-active" src="./images/about/me-1.jpg"
+                   alt="Lian 坐在玩具收藏櫃前" style="--pos: 49% 35%; --zoom: 1">
+
+
+              <!-- 歪貼的小牌子 -->
+              <div class="about-sign" aria-hidden="true">
+                <span class="about-sign-script">dreaming up</span>
+                <span class="about-sign-big">WORLDS</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== 奶黃色內容紙：上緣塞在看板底下，裡面放橫幅和兩欄內容 ===== -->
+        <div class="about-sheet">
+
+        <!-- ===== 中間橫幅：黃色鋸齒徽章＋銅色標籤＋專長 ===== -->
+        <div class="about-strip" id="about-skills">
+          <!-- 轉盤：帶動右邊那排專長一起轉（可以用滑鼠按住拖動），動畫在 home.js -->
+          <span class="about-rosette" aria-hidden="true"><span>✦</span></span>
+          <p class="about-tag">My Skills</p>
+          <div class="about-strip-text">
+            <!-- 專長滾筒：一直慢慢往上捲，捲完會無縫接回開頭；按住可以上下拖動 -->
+            <div class="about-skills-reel" aria-label="Illustration, Animation, Storytelling, Game Design, 3D, English Proficiency">
+              <div class="about-skills-track" aria-hidden="true">
+                <span class="about-skills-set"><span class="about-skill"><span class="about-skill-dot">✦</span>Illustration</span><span class="about-skill"><span class="about-skill-dot">✦</span>Animation</span><span class="about-skill"><span class="about-skill-dot">✦</span>Storytelling</span><span class="about-skill"><span class="about-skill-dot">✦</span>Game Design</span><span class="about-skill"><span class="about-skill-dot">✦</span>3D</span><span class="about-skill"><span class="about-skill-dot">✦</span>English Proficiency</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 提示：第一次碰到這條黃色區域時出現一次，提醒可以轉轉看（home.js 控制）
+               紅色對話框＋轉盤外圍的黃色光圈 -->
+          <span class="about-spin-ring" aria-hidden="true"></span>
+          <span class="about-spin-hint" aria-hidden="true">
+            <span class="about-spin-bubble">
+              <strong>✦ Spin me!</strong>
+              <small>drag ↕</small>
+            </span>
+          </span>
+        </div>
+
+        <!-- ===== 下方兩欄 ===== -->
+        <div class="about-columns">
+
+          <!-- 左邊：兩張小卡 -->
+          <aside class="about-cards">
+            <!-- 小卡 1：關於我的小事（想換成你自己的小事，直接改下面的文字） -->
+            <div class="about-card about-card-copper" id="about-facts">
+              <p class="about-card-head">Fun Facts</p>
+              <p class="about-card-script">About Me:</p>
+              <ul class="about-card-list">
+                <li>I started learning digital illustration on my own.</li>
+                <li>I came from a science and mathematics background before pursuing art.</li>
+                <li>I love Disney musicals and Western pop music.</li>
+              </ul>
+            </div>
+
+            <!-- 小卡 2：最近在做什麼（連到聯絡區） -->
+            <a class="about-card about-card-blue" href="#contact">
+              <span class="about-card-small">Currently exploring</span>
+              <span class="about-card-big">Godot · 3D · Motion</span>
+              <span class="about-card-pill">Let's Create!</span>
+            </a>
+          </aside>
+
+          <!-- 中間：我的故事 -->
+          <div class="about-text-block">
+            <h3 id="about-story">My Story</h3>
+
+            <p>
+              Hi, I’m Lian, a <strong>Digital Media Design student at National Pingtung University</strong>.
+            </p>
+
+            <p>
+              As a member of the <strong>Visual Design team</strong> in my department’s student association,
+              I create event visuals, social media content, and promotional graphics.
+            </p>
+
+            <p>
+              I’m passionate about <strong>illustration, character design, and storytelling</strong>,
+              and I’m always exploring new ways to bring ideas to life through animation, 3D, games,
+              and visual design.
+            </p>
+          </div>
+
+          <!-- 右邊：經歷（想加上年份或換成你自己的經歷，直接改下面的文字） -->
+          <div class="about-text-block about-journey-block">
+            <h4 id="about-journey">My Journey</h4>
+            <ol class="about-timeline">
+              <li>
+                <span class="about-timeline-when">Self-taught Art</span>
+                <span>Started my journey through self-learning and drawing.</span>
+              </li>
+              <li class="is-now">  <!-- 紅色圓點：目前正在進行的階段 -->
+                <span class="about-timeline-when">University</span>
+                <span>Studying Digital Media Design at NPTU.</span>
+              </li>
+              <li class="is-now">  <!-- 紅色圓點：目前正在進行的階段 -->
+                <span class="about-timeline-when">Visual Design</span>
+                <span>Creating visuals for the department's student association.</span>
+              </li>
+              <li class="is-now">  <!-- 紅色圓點：目前正在進行的階段 -->
+                <span class="about-timeline-when">Creative Exploration</span>
+                <span>Exploring 3D, animation, and game design.</span>
+              </li>
+              <li>
+                <span class="about-timeline-when">Future Goals</span>
+                <span>Creating indie games and becoming an animation director.</span>
+              </li>
+            </ol>
+
+            <p>
+              Want to make something together?
+              <a href="#contact">Say hello</a> anytime!
+            </p>
+          </div>
+        </div>
+
+        </div><!-- /about-sheet -->
+
+      </div>
+    </section>
+
+    <!-- 作品分類：四張卡片，各自連到不同的作品分類頁 -->
+    <!-- 作品分類（Arts）：黃色背景，四張馬戲團票，點了會撕開票根再進到該分類頁 -->
+    <section class="section works" id="works">
+      <!-- 舞台棚子：上方垂簾、左右綁起來的布幕、下方奶黃波浪邊（純裝飾，不擋點擊） -->
+      <div class="stage" aria-hidden="true">
+        <svg width="0" height="0" style="position:absolute">
+          <defs>
+            <linearGradient id="curtain-folds" x1="0" y1="0" x2="40" y2="0" gradientUnits="userSpaceOnUse" spreadMethod="repeat">
+              <stop offset="0" stop-color="#8E2414"/>
+              <stop offset="0.35" stop-color="#C03A22"/>
+              <stop offset="0.6" stop-color="#D24A2B"/>
+              <stop offset="1" stop-color="#8E2414"/>
+            </linearGradient>
+            <linearGradient id="swag-a" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#7A1E10"/>
+              <stop offset="1" stop-color="#B23420"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <!-- 左右布幕：從最頂端開始，跟上方垂簾接在一起 -->
+        <svg class="stage-curtain stage-curtain-left" viewBox="0 0 200 1000" preserveAspectRatio="none">
+          <g>
+            <!-- 布幕本體：從頂端斜斜往外收到繩結，繩結下面再散開到底 -->
+            <path d="M0 0 H200 C185 180 120 400 30 560 C60 700 90 860 110 1000 H0 Z" fill="url(#curtain-folds)"/>
+            <!-- 布褶的亮面：往繩結收攏的幾條弧線 -->
+            <path d="M150 0 C140 200 90 420 24 560" fill="none" stroke="#E25A36" stroke-width="10" opacity="0.55"/>
+            <path d="M95 0 C90 200 60 420 16 560" fill="none" stroke="#E25A36" stroke-width="8" opacity="0.45"/>
+            <path d="M45 0 C45 220 30 420 8 560" fill="none" stroke="#E25A36" stroke-width="6" opacity="0.35"/>
+            <path d="M24 570 C50 700 70 860 86 1000" fill="none" stroke="#E25A36" stroke-width="8" opacity="0.5"/>
+            <path d="M12 570 C26 720 40 860 48 1000" fill="none" stroke="#7A1E10" stroke-width="7" opacity="0.6"/>
+            <!-- 內緣一條深色陰影，讓布幕跟背景分得開 -->
+            <path d="M200 0 C185 180 120 400 30 560 C60 700 90 860 110 1000" fill="none" stroke="#6E1A0E" stroke-width="5"/>
+            <!-- 金色綁繩 -->
+            <path d="M0 548 Q22 562 44 552" fill="none" stroke="#F0BE57" stroke-width="12" stroke-linecap="round"/>
+            <path d="M0 560 Q22 574 44 564" fill="none" stroke="#C9953F" stroke-width="5" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <svg class="stage-curtain stage-curtain-right" viewBox="0 0 200 1000" preserveAspectRatio="none">
+          <g transform="translate(200 0) scale(-1 1)">
+            <!-- 布幕本體：從頂端斜斜往外收到繩結，繩結下面再散開到底 -->
+            <path d="M0 0 H200 C185 180 120 400 30 560 C60 700 90 860 110 1000 H0 Z" fill="url(#curtain-folds)"/>
+            <!-- 布褶的亮面：往繩結收攏的幾條弧線 -->
+            <path d="M150 0 C140 200 90 420 24 560" fill="none" stroke="#E25A36" stroke-width="10" opacity="0.55"/>
+            <path d="M95 0 C90 200 60 420 16 560" fill="none" stroke="#E25A36" stroke-width="8" opacity="0.45"/>
+            <path d="M45 0 C45 220 30 420 8 560" fill="none" stroke="#E25A36" stroke-width="6" opacity="0.35"/>
+            <path d="M24 570 C50 700 70 860 86 1000" fill="none" stroke="#E25A36" stroke-width="8" opacity="0.5"/>
+            <path d="M12 570 C26 720 40 860 48 1000" fill="none" stroke="#7A1E10" stroke-width="7" opacity="0.6"/>
+            <!-- 內緣一條深色陰影，讓布幕跟背景分得開 -->
+            <path d="M200 0 C185 180 120 400 30 560 C60 700 90 860 110 1000" fill="none" stroke="#6E1A0E" stroke-width="5"/>
+            <!-- 金色綁繩 -->
+            <path d="M0 548 Q22 562 44 552" fill="none" stroke="#F0BE57" stroke-width="12" stroke-linecap="round"/>
+            <path d="M0 560 Q22 574 44 564" fill="none" stroke="#C9953F" stroke-width="5" stroke-linecap="round"/>
+          </g>
+        </svg>
+
+        <!-- 上方三個大垂簾（蓋在布幕上面，銜接處被垂簾遮住） -->
+        <svg class="stage-valance" viewBox="0 0 1200 170" preserveAspectRatio="none">
+          <rect width="1200" height="22" fill="#7A1E10"/>
+          <g>
+            <!-- 每個垂簾由三層弧形疊起來：外層最深、裡層越來越亮 -->
+            <path d="M0 10 Q200 175 400 10 Z" fill="url(#swag-a)"/>
+            <path d="M400 10 Q600 175 800 10 Z" fill="url(#swag-a)"/>
+            <path d="M800 10 Q1000 175 1200 10 Z" fill="url(#swag-a)"/>
+            <path d="M14 10 Q200 140 386 10" fill="none" stroke="#C03A22" stroke-width="16"/>
+            <path d="M414 10 Q600 140 786 10" fill="none" stroke="#C03A22" stroke-width="16"/>
+            <path d="M814 10 Q1000 140 1186 10" fill="none" stroke="#C03A22" stroke-width="16"/>
+            <path d="M30 10 Q200 108 370 10" fill="none" stroke="#D9532F" stroke-width="12"/>
+            <path d="M430 10 Q600 108 770 10" fill="none" stroke="#D9532F" stroke-width="12"/>
+            <path d="M830 10 Q1000 108 1170 10" fill="none" stroke="#D9532F" stroke-width="12"/>
+            <path d="M50 10 Q200 76 350 10" fill="none" stroke="#E86A42" stroke-width="7" opacity="0.8"/>
+            <path d="M450 10 Q600 76 750 10" fill="none" stroke="#E86A42" stroke-width="7" opacity="0.8"/>
+            <path d="M850 10 Q1000 76 1150 10" fill="none" stroke="#E86A42" stroke-width="7" opacity="0.8"/>
+            <!-- 垂簾下緣的金色流蘇 -->
+            <path d="M0 10 Q200 175 400 10 Q600 175 800 10 Q1000 175 1200 10" fill="none" stroke="#F0BE57" stroke-width="5" stroke-dasharray="2 9" stroke-linecap="round"/>
+          </g>
+          <!-- 垂簾之間的金色繩結 -->
+          <g fill="#F0BE57">
+            <ellipse cx="400" cy="18" rx="10" ry="16"/>
+            <ellipse cx="800" cy="18" rx="10" ry="16"/>
+            <ellipse cx="6" cy="18" rx="8" ry="16"/>
+            <ellipse cx="1194" cy="18" rx="8" ry="16"/>
+          </g>
+        </svg>
+
+        
+      </div>
+
+      <!-- 手電筒：整個舞台暗下來，只有滑鼠的位置亮（home.js 控制位置） -->
+      <div class="stage-dark" aria-hidden="true"></div>
+
+      <p class="eyebrow">EXPLORE THE COLLECTION</p>
+      <h2 class="arts-title">My Creative Collection</h2>
+      <p class="section-intro arts-intro">Every creation opens a door to a world beyond imagination</p>
+
+      <div class="work-grid arts-grid">
+        <!-- 票 01：Digital Art → ./digital-art.html -->
+        <a class="ticket arts-ticket edge-red" href="./digital-art.html" aria-label="Digital Art：Collection 01">
+          <span class="ticket-body">
+            <span class="ticket-main">
+              <span class="ticket-face">
+                <span class="ticket-kicker">✦ Collection 01</span>
+                <span class="ticket-title">Digital Art</span>
+              </span>
+            </span>
+            <span class="ticket-stub" aria-hidden="true">
+              <span class="ticket-admit">ADMIT ONE!</span>
+              <span class="ticket-no">No. 01 ✦</span>
+            </span>
+          </span>
+        </a>
+        <!-- 票 02：Visual Design → ./visual-design.html -->
+        <a class="ticket arts-ticket edge-blue" href="./visual-design.html" aria-label="Visual Design：Collection 02">
+          <span class="ticket-body">
+            <span class="ticket-main">
+              <span class="ticket-face">
+                <span class="ticket-kicker">✦ Collection 02</span>
+                <span class="ticket-title">Visual Design</span>
+              </span>
+            </span>
+            <span class="ticket-stub" aria-hidden="true">
+              <span class="ticket-admit">ADMIT ONE!</span>
+              <span class="ticket-no">No. 02 ✦</span>
+            </span>
+          </span>
+        </a>
+        <!-- 票 03：Pixel Games → ./pixel-games.html -->
+        <a class="ticket arts-ticket edge-copper" href="./pixel-games.html" aria-label="Pixel Games：Collection 03">
+          <span class="ticket-body">
+            <span class="ticket-main">
+              <span class="ticket-face">
+                <span class="ticket-kicker">✦ Collection 03</span>
+                <span class="ticket-title">Pixel Games</span>
+              </span>
+            </span>
+            <span class="ticket-stub" aria-hidden="true">
+              <span class="ticket-admit">ADMIT ONE!</span>
+              <span class="ticket-no">No. 03 ✦</span>
+            </span>
+          </span>
+        </a>
+        <!-- 票 04：3D Art → ./3d-art.html -->
+        <a class="ticket arts-ticket edge-kiwi" href="./3d-art.html" aria-label="3D Art：Collection 04">
+          <span class="ticket-body">
+            <span class="ticket-main">
+              <span class="ticket-face">
+                <span class="ticket-kicker">✦ Collection 04</span>
+                <span class="ticket-title">3D Art</span>
+              </span>
+            </span>
+            <span class="ticket-stub" aria-hidden="true">
+              <span class="ticket-admit">ADMIT ONE!</span>
+              <span class="ticket-no">No. 04 ✦</span>
+            </span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 聯絡區（Contact）：銅橘色底（跟 Contact 分頁同色），聯絡方式是一個個可以拖拉的馬戲團小物
+         ★ 連結：票 = LinkedIn、帳篷 = Instagram、獎章 = Email（點了會複製）；其他是裝飾，一樣可以拖
+         ★ 位置：style 裡的 --x、--y 是一開始擺在哪（%），--rot 是歪幾度；--mx、--my 是手機版的位置 -->
+    <section class="contact contact-circus" id="contact">
+
+      <!-- 最上面一直跑的大字 -->
+      <div class="contact-marquee" aria-hidden="true">
+        <div class="contact-marquee-track">
+          <span>CONTACT ✦ CONTACT ✦ CONTACT ✦ CONTACT ✦&nbsp;</span>
+          <span>CONTACT ✦ CONTACT ✦ CONTACT ✦ CONTACT ✦&nbsp;</span>
+        </div>
+      </div>
+      <h2 class="visually-hidden">Contact</h2>
+
+      <!-- 細線下面的三段小字 -->
+      <div class="contact-info">
+        <p>Let's turn your ideas<br>into something magical.</p>
+        <p class="contact-info-script">Just drop me a line!</p>
+        <p>© 2026 Lian<br>All rights reserved</p>
+      </div>
+
+      <!-- 馬戲團小物的舞台：裡面每個東西都可以用滑鼠抓起來拖 -->
+      <div class="contact-board">
+
+        <!-- 1. 票：LinkedIn -->
+        <a class="cx-item cx-ticket" href="https://www.linkedin.com/in/%E6%81%A9-%E9%80%A3-720303425/" target="_blank" rel="noopener" title="Find me on LinkedIn" style="--x: 3%; --y: 50%; --rot: -8deg; --mx: 0%; --my: 56%;" draggable="false">
+          <span class="cx-body">
+            <svg class="cx-art" viewBox="0 0 240 110" aria-hidden="true">
+              <path d="M10 0 H230 Q240 0 240 10 V40 A15 15 0 0 0 240 70 V100 Q240 110 230 110 H10 Q0 110 0 100 V70 A15 15 0 0 0 0 40 V10 Q0 0 10 0 Z" fill="#C03A22"/>
+              <rect x="22" y="10" width="196" height="90" rx="6" fill="none" stroke="#F8EFD5" stroke-width="2.5" stroke-dasharray="7 5"/>
+            </svg>
+            <span class="cx-text cx-ticket-text">
+              <small>find me on</small>
+              <strong class="is-long">LinkedIn</strong>
+            </span>
+          </span>
+        </a>
+
+        <!-- 2. 馬戲團帳篷：Instagram -->
+        <a class="cx-item cx-tent" href="https://www.instagram.com/pfxct_bun/" target="_blank" rel="noopener" style="--x: 19%; --y: 2%; --rot: 4deg; --mx: 28%; --my: 0%;" draggable="false">
+          <span class="cx-body">
+            <svg class="cx-art" viewBox="0 0 210 200" aria-hidden="true">
+              <line x1="105" y1="24" x2="105" y2="2" stroke="#3E2A20" stroke-width="3"/>
+              <path d="M106 3 L132 10 L106 17 Z" fill="#F0BE57"/>
+              <!-- 帳篷身體：紅白直條紋 -->
+              <g>
+                <rect x="20" y="92" width="170" height="104" fill="#F8EFD5"/>
+                <rect x="20" y="92" width="21" height="104" fill="#C03A22"/>
+                <rect x="62" y="92" width="21" height="104" fill="#C03A22"/>
+                <rect x="104" y="92" width="21" height="104" fill="#C03A22"/>
+                <rect x="146" y="92" width="21" height="104" fill="#C03A22"/>
+              </g>
+              <!-- 門 -->
+              <path d="M80 196 Q105 120 130 196 Z" fill="#4A2216"/>
+              <path d="M80 196 Q92 150 105 132 L100 196 Z" fill="#7A3A22"/>
+              <!-- 屋頂：從頂點放射的紅白條紋 -->
+              <polygon points="105,22 4,96 37.7,96" fill="#C03A22"/>
+              <polygon points="105,22 37.7,96 71.3,96" fill="#F8EFD5"/>
+              <polygon points="105,22 71.3,96 105,96" fill="#C03A22"/>
+              <polygon points="105,22 105,96 138.7,96" fill="#F8EFD5"/>
+              <polygon points="105,22 138.7,96 172.3,96" fill="#C03A22"/>
+              <polygon points="105,22 172.3,96 206,96" fill="#F8EFD5"/>
+              <!-- 屋簷的波浪邊 -->
+              <path d="M4 94 q16.8 24 33.7 0 q16.8 24 33.6 0 q16.8 24 33.7 0 q16.8 24 33.7 0 q16.8 24 33.6 0 q16.8 24 33.7 0 Z" fill="#F0BE57"/>
+            </svg>
+            <span class="cx-text cx-sign">INSTAGRAM</span>
+          </span>
+        </a>
+
+        <!-- 裝飾：藍色氣球（點一下會爆炸，過幾秒再長回來；一樣可以拖） -->
+        <span class="cx-item cx-balloon" style="--x: 41%; --y: -4%; --rot: -6deg; --mx: 64%; --my: -2%;" draggable="false">
+          <span class="cx-body">
+            <svg class="cx-art" viewBox="0 0 150 240" aria-hidden="true">
+              <path d="M75 160 C68 185 86 200 74 220 C66 232 78 236 76 240" fill="none" stroke="#3E2A20" stroke-width="2"/>
+              <ellipse cx="75" cy="80" rx="68" ry="78" fill="#5F8FB3"/>
+              <path d="M75 4 C112 4 141 34 143 74" fill="none" stroke="#F8EFD5" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round" opacity="0.6"/>
+              <ellipse cx="48" cy="44" rx="14" ry="24" fill="#F8EFD5" opacity="0.35" transform="rotate(25 48 44)"/>
+              <path d="M66 166 L75 156 L84 166 Z" fill="#3E6A8E"/>
+            </svg>
+            <span class="cx-text cx-balloon-text">Hi!</span>
+          </span>
+        </span>
+
+        <!-- 3. 獎章緞帶：Email（點一下會複製信箱，跳出 Copied!；外圈的小字一直轉） -->
+        <a class="cx-item cx-rosette" href="mailto:lienen0507@gmail.com" data-copy="lienen0507@gmail.com" title="Click to copy my email" style="--x: 60%; --y: 26%; --rot: 10deg; --mx: 54%; --my: 28%;" draggable="false">
+          <span class="cx-body">
+            <svg class="cx-art" viewBox="0 0 180 230" aria-hidden="true">
+              <path d="M60 140 L40 225 L58 212 L70 228 L88 150 Z" fill="#C03A22"/>
+              <path d="M120 140 L140 225 L122 212 L110 228 L92 150 Z" fill="#5F8FB3"/>
+              <polygon points="172.0,90.0 171.3,93.6 169.4,96.9 166.4,100.1 162.9,102.8 165.2,106.7 166.9,110.6 167.6,114.5 167.1,118.0 165.2,121.1 162.2,123.7 158.4,125.6 154.1,127.0 155.0,131.4 155.3,135.7 154.6,139.5 152.8,142.7 150.0,145.0 146.3,146.3 142.1,146.8 137.6,146.7 136.9,151.1 135.7,155.3 133.7,158.6 131.0,161.0 127.6,162.2 123.7,162.2 119.5,161.2 115.3,159.5 113.2,163.5 110.6,166.9 107.6,169.5 104.2,170.8 100.6,170.7 96.9,169.4 93.4,167.0 90.0,164.0 86.6,167.0 83.1,169.4 79.4,170.7 75.8,170.8 72.4,169.5 69.4,166.9 66.8,163.5 64.7,159.5 60.5,161.2 56.3,162.2 52.4,162.2 49.0,161.0 46.3,158.6 44.3,155.3 43.1,151.1 42.4,146.7 37.9,146.8 33.7,146.3 30.0,145.0 27.2,142.7 25.4,139.5 24.7,135.7 25.0,131.4 25.9,127.0 21.6,125.6 17.8,123.7 14.8,121.1 12.9,118.0 12.4,114.5 13.1,110.6 14.8,106.7 17.1,102.8 13.6,100.1 10.6,96.9 8.7,93.6 8.0,90.0 8.7,86.4 10.6,83.1 13.6,79.9 17.1,77.2 14.8,73.3 13.1,69.4 12.4,65.5 12.9,62.0 14.8,58.9 17.8,56.3 21.6,54.4 25.9,53.0 25.0,48.6 24.7,44.3 25.4,40.5 27.2,37.3 30.0,35.0 33.7,33.7 37.9,33.2 42.4,33.3 43.1,28.9 44.3,24.7 46.3,21.4 49.0,19.0 52.4,17.8 56.3,17.8 60.5,18.8 64.7,20.5 66.8,16.5 69.4,13.1 72.4,10.5 75.8,9.2 79.4,9.3 83.1,10.6 86.6,13.0 90.0,16.0 93.4,13.0 96.9,10.6 100.6,9.3 104.2,9.2 107.6,10.5 110.6,13.1 113.2,16.5 115.3,20.5 119.5,18.8 123.7,17.8 127.6,17.8 131.0,19.0 133.7,21.4 135.7,24.7 136.9,28.9 137.6,33.3 142.1,33.2 146.3,33.7 150.0,35.0 152.8,37.3 154.6,40.5 155.3,44.3 155.0,48.6 154.1,53.0 158.4,54.4 162.2,56.3 165.2,58.9 167.1,62.0 167.6,65.5 166.9,69.4 165.2,73.3 162.9,77.2 166.4,79.9 169.4,83.1 171.3,86.4" fill="#F0BE57"/>
+              <circle cx="90" cy="90" r="64" fill="#F8EFD5"/>
+              <circle cx="90" cy="90" r="40" fill="none" stroke="#C03A22" stroke-width="1.5" stroke-dasharray="3 4"/>
+              <g class="cx-spin">
+                <defs><path id="cx-ring" d="M90 90 m-52 0 a52 52 0 1 1 104 0 a52 52 0 1 1 -104 0"/></defs>
+                <text class="cx-ring-text"><textPath href="#cx-ring" textLength="318" lengthAdjust="spacing">COPY MY EMAIL ✦ COPY MY EMAIL ✦ COPY MY EMAIL ✦</textPath></text>
+              </g>
+            </svg>
+            <span class="cx-text cx-rosette-text">EMAIL</span>
+          </span>
+        </a>
+
+        <!-- 裝飾：爆米花（點一下會跳出爆米花；一樣可以拖） -->
+        <span class="cx-item cx-popcorn" style="--x: 76%; --y: 4%; --rot: -5deg; --mx: 4%; --my: 27%;" draggable="false">
+          <span class="cx-body">
+            <svg class="cx-art" viewBox="0 0 160 210" aria-hidden="true">
+              <g fill="#F8EFD5" stroke="#E2C88E" stroke-width="2">
+                <circle cx="36" cy="66" r="17"/><circle cx="62" cy="50" r="19"/><circle cx="92" cy="46" r="19"/>
+                <circle cx="122" cy="62" r="17"/><circle cx="78" cy="30" r="16"/><circle cx="108" cy="28" r="13"/>
+                <circle cx="48" cy="36" r="13"/><circle cx="132" cy="80" r="12"/><circle cx="26" cy="82" r="12"/>
+              </g>
+              <g fill="#F0BE57"><circle cx="70" cy="44" r="5"/><circle cx="104" cy="56" r="4"/><circle cx="44" cy="60" r="4"/></g>
+              <clipPath id="cx-box"><path d="M12 76 H148 L130 206 H30 Z"/></clipPath>
+              <g clip-path="url(#cx-box)">
+                <rect x="0" y="70" width="160" height="140" fill="#F8EFD5"/>
+                <path d="M14 70 L36 70 L46 210 L30 210 Z M58 70 L80 70 L82 210 L64 210 Z M102 70 L124 70 L116 210 L98 210 Z M146 70 L160 70 L150 210 L132 210 Z" fill="#C03A22"/>
+              </g>
+              <rect x="8" y="72" width="144" height="10" rx="3" fill="#C03A22"/>
+            </svg>
+            <span class="cx-text cx-popcorn-text">Pop!</span>
+          </span>
+        </span>
+
+        <!-- 裝飾：馬戲團團長的高帽（不是連結，一樣可以拖） -->
+        <span class="cx-item cx-hat" style="--x: 34%; --y: 58%; --rot: 6deg; --mx: 48%; --my: 60%;" draggable="false">
+          <span class="cx-body">
+            <svg class="cx-art" viewBox="0 0 200 150" aria-hidden="true">
+              <ellipse cx="100" cy="124" rx="94" ry="22" fill="#2F3B42"/>
+              <path d="M44 120 L52 14 Q100 2 148 14 L156 120 Q100 136 44 120 Z" fill="#3F4E56"/>
+              <ellipse cx="100" cy="14" rx="48" ry="9" fill="#56656C"/>
+              <path d="M48 76 Q100 88 152 76 L154 104 Q100 118 46 104 Z" fill="#C03A22"/>
+              <path d="M60 30 L64 66" stroke="#F8EFD5" stroke-width="4" stroke-linecap="round" opacity="0.18"/>
+            </svg>
+            <span class="cx-text cx-hat-text">✦ ✦ ✦</span>
+          </span>
+        </span>
+
+        <!-- 裝飾 1：綠色爆炸星星貼紙（不是連結，一樣可以拖） -->
+        <span class="cx-item cx-burst" style="--x: 7%; --y: 4%; --rot: -12deg; --mx: 0%; --my: 0%;">
+          <span class="cx-body">
+            <svg class="cx-art" viewBox="0 0 130 130" aria-hidden="true">
+              <polygon points="65.0,1.0 73.7,15.8 86.9,4.9 90.0,21.7 106.1,16.0 103.3,32.9 120.4,33.0 112.0,47.9 128.0,53.9 115.0,65.0 128.0,76.1 112.0,82.1 120.4,97.0 103.3,97.1 106.1,114.0 90.0,108.3 86.9,125.1 73.7,114.2 65.0,129.0 56.3,114.2 43.1,125.1 40.0,108.3 23.9,114.0 26.7,97.1 9.6,97.0 18.0,82.1 2.0,76.1 15.0,65.0 2.0,53.9 18.0,47.9 9.6,33.0 26.7,32.9 23.9,16.0 40.0,21.7 43.1,4.9 56.3,15.8" fill="#C8C078"/>
+              <circle cx="65" cy="65" r="42" fill="none" stroke="#F8EFD5" stroke-width="2" stroke-dasharray="4 4"/>
+            </svg>
+            <span class="cx-text cx-burst-text">Drag<br>me!</span>
+          </span>
+        </span>
+
+        <!-- 裝飾 2：奶黃色的 Hello 圓貼紙 -->
+        <span class="cx-item cx-hello" style="--x: 75%; --y: 62%; --rot: 8deg; --mx: 70%; --my: 82%;">
+          <span class="cx-body">
+            <span class="cx-text cx-hello-text">Hello!</span>
+          </span>
+        </span>
+
+        <!-- 裝飾 3：兩顆小星星 -->
+        <span class="cx-item cx-mini-star" style="--x: 54%; --y: 72%; --rot: 14deg; --mx: 40%; --my: 47%;">
+          <span class="cx-body"><svg class="cx-art" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 1 L25 15 L39 15 L28 24 L32 39 L20 30 L8 39 L12 24 L1 15 L15 15 Z" fill="#F0BE57"/></svg></span>
+        </span>
+        <span class="cx-item cx-mini-star" style="--x: 90%; --y: 46%; --rot: -10deg; --mx: 88%; --my: 52%;">
+          <span class="cx-body"><svg class="cx-art" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 1 L25 15 L39 15 L28 24 L32 39 L20 30 L8 39 L12 24 L1 15 L15 15 Z" fill="#F8EFD5"/></svg></span>
+        </span>
+      </div>
+
+      <!-- 最下面的手寫字 -->
+      <p class="contact-bottom">Let's create something together!</p>
+    </section>
+  </main>
+
+  <!-- 頁尾：網站名稱與版權 -->
+  <footer>
+    <p>✦ Lian</p>
+    <p>A little nook between worlds.</p>
+    <p class="copyright">© 2026 Lian · Made with imagination.</p>
+  </footer>
+
+  <!-- 載入互動特效：星星游標、移動粉塵、點擊星星 -->
+  <script src="./lang-zh.js"></script>
+  <script src="./i18n.js"></script>
+  <script src="./script.js"></script>
+
+  <!-- 互動音效：碰到東西、點擊、撕票都會有聲音（左下角可以開關、調音量） -->
+  <script src="./curtain.js"></script>
+  <script src="./sound.js"></script>
+
+  <!-- 首頁專用：滑動時內容浮上來、右側的區塊指示星星 -->
+  <script src="./home.js"></script>
+</body>
+</html>

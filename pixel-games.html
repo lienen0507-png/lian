@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<!-- 作品分類頁 03：Pixel Games — 遊戲《The Reader》（開發中）
+     1. 海報　2. The Pitch（遊戲概念）　3. 角色 Isolde（可以用 ← → 走路的小舞台）
+     4. 主線故事（一本可以翻頁的書；最後兩章用封蠟封住，點了才看得到）
+     5. 開發進度（打勾清單）　6. 其他場次
+     ─────── 下面是原本範本的說明 ───────
+     作品分類頁 03：Pixel Games
+     版型跟 Digital Art 頁一樣（復古馬戲團 × 50 年代廣告），每一頁剛好一個畫面，捲動會卡頁
+     海報背景色 = 首頁那張門票的顏色（body 的 theme-copper）
+       1. 海報（標題）
+       2. 藝術家的話
+       3. 今晚的主秀（膠囊切換：三個階段）
+       4. 作品收藏（點了可以放大看）
+       5. 幕後：創作過程
+       6. 其他場次（其他作品分類，點了會撕票）
+     ★ 文字是先放的，之後換成你自己的內容
+     ★ 圖片放進 images/pixel-games/，檔名跟 <img> 的 src 一樣就會自動出現 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F8EFD5">
+  <title>Pixel Games | Lian</title>
+
+  <!-- 字體：本機字體＋Google Fonts（Alfa Slab One 標題、Yellowtail 手寫） -->
+  <link rel="stylesheet" href="./css/fonts.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Yellowtail&display=swap">
+
+  <!-- 共用樣式＋作品分類頁的樣式（四個分類頁共用 digital-art.css） -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/digital-art.css">
+  <link rel="stylesheet" href="./css/curtain.css">
+  <link rel="stylesheet" href="./css/i18n.css">
+  <!-- 1. 從作品頁拉著布幕過來時，先用紅色蓋住，等布幕拉起來
+       2. 中文版：先藏起畫面等翻譯好，並提早開始載入中文字型 -->
+  <script>
+    (function () {
+      var r = document.documentElement, l;
+      try { if (sessionStorage.getItem("lian-curtain-arrive") === "1") r.classList.add("curtain-arrive"); } catch (e) {}
+      try { l = localStorage.getItem("lian-lang"); } catch (e) {}
+      if (l !== "zh" && l !== "en") l = /^zh/i.test(navigator.language || "") ? "zh" : "en";
+      if (l !== "zh") return;
+      r.lang = "zh-Hant";
+      r.classList.add("lang-zh", "i18n-pending");
+      ["Dela+Gothic+One", "Noto+Sans+TC:wght@900", "Huninn", "Chiron+Hei+HK:wght@400;700"].forEach(function (f) {
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://fonts.googleapis.com/css2?family=" + f + "&display=swap";
+        document.head.appendChild(link);
+      });
+      setTimeout(function () { r.classList.remove("i18n-pending"); }, 3000);
+    })();
+  </script>
+</head>
+
+<body class="da-page theme-copper">
+
+  <!-- 導覽列：跟首頁一樣的資料夾分頁，現在在 Arts -->
+  <header class="navbar">
+    <a class="nav-logo" href="./index.html#home">LIAN's Portfolio</a>
+    <nav class="nav-tabs" aria-label="Main navigation">
+      <a class="nav-tab tab-red"    href="./index.html#home">Home</a>
+      <a class="nav-tab tab-blue"   href="./index.html#about">About Me</a>
+      <a class="nav-tab tab-yellow is-active" href="./index.html#works">Arts</a>
+      <a class="nav-tab tab-copper" href="./index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- 1. 海報 -->
+    <section class="da-hero" id="top" data-dot="Poster">
+      <div class="da-rays" aria-hidden="true"></div>
+
+      <div class="da-poster da-reveal">
+        <p class="da-presents">★ Lian's Circus of Color presents ★</p>
+        <p class="da-ribbon"><span>Collection No. 03</span></p>
+        <h1 class="da-title">
+          <span>The</span>
+          <span>Reader</span>
+        </h1>
+        <p class="da-tagline">a story that rewrites reality</p>
+        <p class="da-divider" aria-hidden="true">✦ ─────── ✦ ─────── ✦</p>
+        <ul class="da-badges">
+          <li>Story RPG</li>
+          <li>Multiple Endings</li>
+          <li>Godot</li>
+        </ul>
+        <a class="da-admit" href="#pitch">
+          <span class="da-admit-small">admit one</span>
+          <span class="da-admit-big">Step right in ↓</span>
+        </a>
+
+        <!-- 「開發中」的紅色印章 -->
+        <span class="pg-stamp" aria-label="Work in progress">Work in<br>Progress</span>
+      </div>
+
+      <span class="da-spark da-spark-1" aria-hidden="true">✦</span>
+      <span class="da-spark da-spark-2" aria-hidden="true">✦</span>
+      <span class="da-spark da-spark-3" aria-hidden="true">✧</span>
+      <span class="da-spark da-spark-4" aria-hidden="true">✦</span>
+    </section>
+
+
+    <!-- 2. The Pitch：遊戲概念 -->
+    <section class="da-note-wrap" id="pitch" data-dot="The Pitch">
+      <article class="da-note da-reveal">
+        <p class="da-note-tab">The Pitch</p>
+        <h2 class="da-note-title">What if a story could <em>change reality?</em></h2>
+        <p>
+          <em>The Reader</em> is a story-driven pixel RPG where books don’t just
+          record stories — they can change, or even destroy, reality.
+        </p>
+        <p>
+          The stories inside books are bound to the real world. When a story is
+          altered, reality shifts along with it. Talk to the people you meet, fight
+          when you must, and shape how the story ends — different ways of playing
+          lead to different endings.
+        </p>
+        <ul class="pg-tags">
+          <li>Interaction</li>
+          <li>Combat</li>
+          <li>Multiple Endings</li>
+          <li>Made in Godot</li>
+        </ul>
+        <p class="pg-themes"><span>Themes</span> Reading · Wishes · Fate · The line between story and reality</p>
+      </article>
+    </section>
+
+
+    <!-- 3. 角色：Isolde
+         ★ 角色動畫：images/pixel-games/isolde-{動作}-{方向}.png（橫的一整條，每格 48 × 48）
+           動作：idle、walk；方向：side（側面，原本面向右）、front（正面）、back（背面）
+           data-frames 是每一條有幾格，data-fps 是每秒播幾格 -->
+    <section class="pg-char" id="isolde" data-dot="Isolde">
+      <div class="pg-char-body">
+        <!-- 左：小舞台（點舞台任何地方她會走過去；方向鍵也可以走；放著不管她會自己閒晃） -->
+        <div class="pg-stage-wrap da-reveal">
+          <div class="pg-stage"
+               data-src="./images/pixel-games/isolde-{anim}-{view}.png"
+               data-frames='{"idle-side":3,"idle-front":3,"idle-back":3,"walk-side":10,"walk-front":9,"walk-back":9}'
+               data-fps='{"idle":4,"walk":10}'
+               data-facing="right">
+            <div class="pg-floor" aria-hidden="true"></div>
+            <canvas class="pg-sprite" width="48" height="48" aria-label="Isolde pixel sprite"></canvas>
+            <p class="pg-stage-empty">sprites<br>coming soon</p>
+          </div>
+          <div class="pg-controls">
+            <div class="pg-dpad" aria-label="Walk">
+              <button class="pg-key pg-up" type="button" data-dx="0" data-dy="-1" aria-label="Walk up">▲</button>
+              <button class="pg-key pg-left" type="button" data-dx="-1" data-dy="0" aria-label="Walk left">◀</button>
+              <button class="pg-key pg-down" type="button" data-dx="0" data-dy="1" aria-label="Walk down">▼</button>
+              <button class="pg-key pg-right" type="button" data-dx="1" data-dy="0" aria-label="Walk right">▶</button>
+            </div>
+            <span class="pg-controls-hint">click anywhere on the stage,<br>or hold the <kbd>arrow keys</kbd></span>
+          </div>
+        </div>
+
+        <!-- 右：角色資料卡 -->
+        <div class="pg-profile da-reveal">
+          <p class="da-eyebrow">★ Meet the Heroine ★</p>
+          <h2 class="pg-name">Isolde</h2>
+          <dl class="pg-stats">
+            <div><dt>Age</dt><dd>22</dd></div>
+            <div><dt>Role</dt><dd>Book Envoy</dd></div>
+            <div><dt>Personality</dt><dd>Calm, quiet, works alone</dd></div>
+            <div><dt>Mission</dt><dd>Repair books that have gone wrong, and the trouble they cause in reality</dd></div>
+          </dl>
+
+          <!-- 六張會動的小卡片：點了打開動畫檢視器（放大、暫停、一格一格看、調速度） -->
+          <p class="da-mini-label">Sprite animations</p>
+          <div class="pg-anims">
+            <button class="pg-anim-card" type="button" data-anim="idle" data-view="front">
+              <canvas width="48" height="48"></canvas>
+              <span>Idle · Front</span>
+            </button>
+            <button class="pg-anim-card" type="button" data-anim="idle" data-view="side">
+              <canvas width="48" height="48"></canvas>
+              <span>Idle · Side</span>
+            </button>
+            <button class="pg-anim-card" type="button" data-anim="idle" data-view="back">
+              <canvas width="48" height="48"></canvas>
+              <span>Idle · Back</span>
+            </button>
+            <button class="pg-anim-card" type="button" data-anim="walk" data-view="front">
+              <canvas width="48" height="48"></canvas>
+              <span>Walk · Front</span>
+            </button>
+            <button class="pg-anim-card" type="button" data-anim="walk" data-view="side">
+              <canvas width="48" height="48"></canvas>
+              <span>Walk · Side</span>
+            </button>
+            <button class="pg-anim-card" type="button" data-anim="walk" data-view="back">
+              <canvas width="48" height="48"></canvas>
+              <span>Walk · Back</span>
+            </button>
+          </div>
+          <p class="pg-anims-hint">click a card to take a closer look ✦</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 4. 主線故事：一本可以翻頁的書
+         上面的書籤可以直接跳章節；左右箭頭翻頁；最後兩章有封蠟，點了才打開 -->
+    <section class="pg-story" id="story" data-dot="Story">
+      <header class="da-head da-reveal">
+        <p class="da-eyebrow">★ Once Upon a Page ★</p>
+        <h2 class="da-heading">The Story</h2>
+      </header>
+
+      <div class="pg-book-wrap da-reveal">
+        <nav class="pg-bookmarks" aria-label="Chapters">
+          <button class="pg-bookmark is-active" type="button" data-chapter="world">World</button>
+          <button class="pg-bookmark" type="button" data-chapter="ch1">I</button>
+          <button class="pg-bookmark" type="button" data-chapter="ch2">II</button>
+          <button class="pg-bookmark" type="button" data-chapter="ch3">III</button>
+          <button class="pg-bookmark is-spoiler" type="button" data-chapter="final">Final</button>
+          <button class="pg-bookmark is-spoiler" type="button" data-chapter="endings">Endings</button>
+        </nav>
+
+        <div class="pg-book">
+          <!-- Prologue：故事背景 -->
+          <article class="pg-spread is-open" data-chapter="world">
+            <div class="pg-page pg-page-left">
+              <p class="pg-chapter-no">Prologue</p>
+              <h3 class="pg-chapter-title">The World of Books</h3>
+              <p class="pg-chapter-zh">Where it all begins</p>
+              <span class="pg-chapter-icon" aria-hidden="true">❦</span>
+              <p class="pg-folio">— 1 —</p>
+            </div>
+            <div class="pg-page pg-page-right">
+              <div class="pg-text">
+              <p>In this world, books are more than containers for stories. Every book holds a world of its own — and its characters, events, and endings all follow their own rules.</p>
+              <p>But when a story drifts from its path, the world inside begins to crumble, and the damage can spill into reality.</p>
+              <p>Those who repair these broken books, keeping story and reality in balance, are called <strong>Book Envoys</strong>. Isolde is one of them.</p>
+              <p>Calm and quiet, she prefers to work alone. Through conversations with other characters, players slowly uncover her hidden past — and the thoughts she keeps to herself.</p>
+              </div>
+              <p class="pg-folio">— 2 —</p>
+            </div>
+          </article>
+
+          <!-- Chapter 01：第一章 · 白雪公主 -->
+          <article class="pg-spread" data-chapter="ch1" hidden>
+            <div class="pg-page pg-page-left">
+              <p class="pg-chapter-no">Chapter 01</p>
+              <h3 class="pg-chapter-title">Snow White</h3>
+              <p class="pg-chapter-zh">A fairy tale gone wrong</p>
+              <span class="pg-chapter-icon" aria-hidden="true">❦</span>
+              <p class="pg-folio">— 3 —</p>
+            </div>
+            <div class="pg-page pg-page-right">
+              <div class="pg-text">
+              <p>Isolde’s first mission: a copy of <em>Snow White</em> that has gone wrong. The story has lost its order, and players must explore the book, talk with its characters, and find the <strong>key object</strong> that sets it right — here, the poisoned apple.</p>
+              <p>There are two ways to repair a story:</p>
+              <p><span class="pg-route pg-mercy">Mercy</span> Talk, build bonds, and gently guide the characters back to their roles.</p>
+              <p><span class="pg-route pg-cruel">Cruelty</span> Ignore their feelings and force events to happen, pushing the story back on track.</p>
+              <p>Either way the book is mended — but every choice leads toward a different ending.</p>
+              </div>
+              <p class="pg-folio">— 4 —</p>
+            </div>
+          </article>
+
+          <!-- Chapter 02：第二章 · 新的徒弟 -->
+          <article class="pg-spread" data-chapter="ch2" hidden>
+            <div class="pg-page pg-page-left">
+              <p class="pg-chapter-no">Chapter 02</p>
+              <h3 class="pg-chapter-title">The Apprentice</h3>
+              <p class="pg-chapter-zh">A new companion</p>
+              <span class="pg-chapter-icon" aria-hidden="true">❦</span>
+              <p class="pg-folio">— 5 —</p>
+            </div>
+            <div class="pg-page pg-page-right">
+              <div class="pg-text">
+              <p>Back in the real world, Isolde meets her new apprentice: a 16-year-old girl who is her complete opposite — lively, curious, always talking, and often puzzled by Isolde’s cool way of handling things.</p>
+              <p>Together they take on new missions. From clashes and awkward first steps to understanding and trust, Isolde’s closed-off heart slowly begins to change.</p>
+              <p>Through their time together, players piece together fragments of Isolde’s past.</p>
+              </div>
+              <p class="pg-folio">— 6 —</p>
+            </div>
+          </article>
+
+          <!-- Chapter 03：第三章 · 未知的故事 -->
+          <article class="pg-spread" data-chapter="ch3" hidden>
+            <div class="pg-page pg-page-left">
+              <p class="pg-chapter-no">Chapter 03</p>
+              <h3 class="pg-chapter-title">The Unknown Story</h3>
+              <p class="pg-chapter-zh">A book no one has read</p>
+              <span class="pg-chapter-icon" aria-hidden="true">❦</span>
+              <p class="pg-folio">— 7 —</p>
+            </div>
+            <div class="pg-page pg-page-right">
+              <div class="pg-text">
+              <p>One day, Isolde receives an unusual mission — not a familiar fairy tale, but an original story she has never seen before. With no clear clues, players must explore, talk, and follow the plot to find the true key object.</p>
+              <p>As the story unfolds, Isolde grows close to the book’s hero, and starts to look forward to every visit.</p>
+              <p>But between the book and reality, she keeps meeting mysterious menders in suits. They seem to know who she is — and keep trying to interfere. Slowly, Isolde senses she may be more than a mender of stories.</p>
+              </div>
+              <p class="pg-folio">— 8 —</p>
+            </div>
+          </article>
+
+          <!-- Final Chapter：最終章 · 故事背後的真相 -->
+          <article class="pg-spread is-sealed" data-chapter="final" hidden>
+            <div class="pg-page pg-page-left">
+              <p class="pg-chapter-no">Final Chapter</p>
+              <h3 class="pg-chapter-title">The Truth Behind the Story</h3>
+              <p class="pg-chapter-zh">The page she was written on</p>
+              <span class="pg-chapter-icon" aria-hidden="true">❦</span>
+              <p class="pg-folio">— 9 —</p>
+            </div>
+            <div class="pg-page pg-page-right">
+              <div class="pg-text">
+              <p>As the truth comes to light, Isolde finally realizes: she is not a Book Envoy in the real world. <strong>She is a character in a book.</strong></p>
+              <p>The reality she has lived in, and every mission she has taken, are part of a story. The original book she could never understand is her apprentice’s autobiography — everything between them was already written.</p>
+              <p>And the menders in suits? They noticed something wrong with the story, and came to repair <em>her</em>.</p>
+              <p>Realizing her existence is bound by the story, Isolde begins to fight against her fate.</p>
+              </div>
+              <p class="pg-folio">— 10 —</p>
+            </div>
+            <!-- 封蠟：劇透，點了才打開 -->
+            <button class="pg-seal" type="button">
+              <span class="pg-seal-wax">✦</span>
+              <span class="pg-seal-text">Spoiler ahead</span>
+              <span class="pg-seal-hint">click to break the seal</span>
+            </button>
+          </article>
+
+          <!-- The Final Choice：結局分歧 -->
+          <article class="pg-spread is-sealed" data-chapter="endings" hidden>
+            <div class="pg-page pg-page-left">
+              <p class="pg-chapter-no">The Final Choice</p>
+              <h3 class="pg-chapter-title">Two Endings</h3>
+              <p class="pg-chapter-zh">Mercy or Cruelty</p>
+              <span class="pg-chapter-icon" aria-hidden="true">❦</span>
+              <p class="pg-folio">— 11 —</p>
+            </div>
+            <div class="pg-page pg-page-right">
+              <div class="pg-text">
+              <p><span class="pg-route pg-mercy">Mercy</span> If players often chose mercy, Isolde comes to understand the bond between characters, stories, and fate. Instead of only trying to escape her story, she learns to accept who she is — and searches for another possibility.</p>
+              <p><span class="pg-route pg-cruel">Cruelty</span> If players always chose cruelty, Isolde is consumed by selfishness and fear. Obsessed with stopping the autobiography’s ending, she discovers its key object is her apprentice — and takes her life to destroy the story’s core. Yet everything she does was already part of the story.</p>
+              </div>
+              <p class="pg-folio">— 12 —</p>
+            </div>
+            <!-- 封蠟：劇透，點了才打開 -->
+            <button class="pg-seal" type="button">
+              <span class="pg-seal-wax">✦</span>
+              <span class="pg-seal-text">Spoiler ahead</span>
+              <span class="pg-seal-hint">click to break the seal</span>
+            </button>
+          </article>
+        </div>
+
+        <div class="pg-book-nav">
+          <button class="pg-turn" type="button" data-turn="-1" aria-label="Previous chapter">← Prev</button>
+          <span class="pg-book-count">1 / 6</span>
+          <button class="pg-turn" type="button" data-turn="1" aria-label="Next chapter">Next →</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 5. 開發進度：打勾清單（做完一樣就把 class 改成 is-done） -->
+    <section class="da-process pg-progress" id="progress" data-dot="Progress">
+      <header class="da-head da-reveal">
+        <p class="da-eyebrow">★ Behind the Curtain ★</p>
+        <h2 class="da-heading">Development Log</h2>
+      </header>
+
+      <div class="pg-log da-reveal">
+        <p class="pg-log-title">The Reader — progress</p>
+        <ul class="pg-checklist">
+          <li class="is-done"><strong>Game concept</strong> Books that can rewrite reality</li>
+          <li class="is-done"><strong>World &amp; main story</strong> Prologue to the two endings</li>
+          <li class="is-done"><strong>Isolde sprites</strong> Idle &amp; walk animations</li>
+          <li><strong>Chapter 1 map</strong> The broken world of Snow White</li>
+          <li><strong>Dialogue &amp; choices</strong> Mercy / Cruelty system</li>
+          <li><strong>Combat prototype</strong> Battles inside the books</li>
+          <li><strong>The apprentice</strong> Character design &amp; sprites</li>
+          <li><strong>Playable demo</strong> Built in Godot</li>
+        </ul>
+        <div class="pg-meter" aria-label="3 of 8 done"><span style="--done: 37.5%;"></span></div>
+        <p class="pg-log-foot">3 / 8 done · more coming soon</p>
+      </div>
+    </section>
+
+
+    <!-- 6. 其他場次（點了會從中間撕開，再跳過去） -->
+    <section class="da-more" data-dot="More Shows">
+      <header class="da-head da-reveal">
+        <p class="da-eyebrow">★ More Shows This Way ★</p>
+        <h2 class="da-heading">Explore Other Collections</h2>
+      </header>
+
+      <div class="da-tickets">
+        <a class="da-ticket da-ticket-red da-reveal" href="./digital-art.html">
+          <span class="da-ticket-no">No. 01</span>
+          <strong>Digital Art</strong>
+          <span class="da-ticket-go">see the show →</span>
+        </a>
+        <a class="da-ticket da-ticket-blue da-reveal" href="./visual-design.html">
+          <span class="da-ticket-no">No. 02</span>
+          <strong>Visual Design</strong>
+          <span class="da-ticket-go">see the show →</span>
+        </a>
+        <a class="da-ticket da-ticket-kiwi da-reveal" href="./3d-art.html">
+          <span class="da-ticket-no">No. 04</span>
+          <strong>3D Art</strong>
+          <span class="da-ticket-go">see the show →</span>
+        </a>
+      </div>
+
+      <a class="da-back" href="#top">↑ Back to the top</a>
+    </section>
+  </main>
+
+  <!-- 動畫檢視器（點 Isolde 資料卡上的小卡片打開） -->
+  <div class="pg-viewer" hidden>
+    <div class="pg-viewer-panel" role="dialog" aria-modal="true" aria-label="Sprite animation viewer">
+      <button class="pg-viewer-close" type="button" aria-label="Close">✕</button>
+      <div class="pg-viewer-stage">
+        <canvas class="pg-viewer-canvas" width="48" height="48"></canvas>
+      </div>
+      <div class="pg-viewer-side">
+        <p class="da-eyebrow">★ Sprite viewer ★</p>
+        <h3 class="pg-viewer-title">Walk · Side</h3>
+        <p class="pg-viewer-meta"></p>
+
+        <div class="pg-viewer-controls">
+          <button type="button" data-act="prev" aria-label="Previous frame">⏮</button>
+          <button type="button" data-act="play" class="pg-play" aria-label="Play / pause">❚❚</button>
+          <button type="button" data-act="next" aria-label="Next frame">⏭</button>
+          <span class="pg-viewer-count">1 / 10</span>
+        </div>
+
+        <label class="pg-viewer-speed">
+          <span>Speed</span>
+          <input type="range" min="1" max="20" step="1" value="10">
+          <output>10 fps</output>
+        </label>
+
+        <p class="da-mini-label">Frames</p>
+        <div class="pg-viewer-strip"></div>
+        <p class="pg-viewer-keys"><kbd>←</kbd> <kbd>→</kbd> step · <kbd>Space</kbd> play / pause · <kbd>Esc</kbd> close</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 放大看作品的視窗 -->
+  <div class="da-lightbox" hidden>
+    <button class="da-lb-close" type="button" aria-label="Close">✕</button>
+    <button class="da-lb-prev" type="button" aria-label="Previous">‹</button>
+    <figure class="da-lb-figure">
+      <img class="da-lb-img" src="" alt="">
+      <figcaption>
+        <strong class="da-lb-title"></strong>
+        <span class="da-lb-desc"></span>
+      </figcaption>
+    </figure>
+    <button class="da-lb-next" type="button" aria-label="Next">›</button>
+  </div>
+
+  <footer>
+    <p>✦ Lian</p>
+    <p>A little nook between worlds.</p>
+    <p class="copyright">© 2026 Lian · Made with imagination.</p>
+  </footer>
+
+  <script src="./lang-zh.js"></script>
+  <script src="./i18n.js"></script>
+  <script src="./script.js"></script>
+  <script src="./curtain.js"></script>
+  <script src="./sound.js"></script>
+  <script src="./digital-art.js"></script>
+</body>
+</html>

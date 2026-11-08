@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<!-- 作品分類頁 04：3D Art
+     版型跟 Digital Art 頁一樣（復古馬戲團 × 50 年代廣告），每一頁剛好一個畫面，捲動會卡頁
+     海報背景色 = 首頁那張門票的顏色（body 的 theme-kiwi）
+       1. 海報（標題）
+       2. 藝術家的話
+       3. 四個 3D 作品（每個一整頁，大螢幕＋底片小圖）
+       5. 幕後：創作過程
+       6. 其他場次（其他作品分類，點了會撕票）
+     ★ 文字是先放的，之後換成你自己的內容
+     ★ 圖片放進 images/3d-art/，檔名跟 <img> 的 src 一樣就會自動出現 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F8EFD5">
+  <title>3D Art | Lian</title>
+
+  <!-- 字體：本機字體＋Google Fonts（Alfa Slab One 標題、Yellowtail 手寫） -->
+  <link rel="stylesheet" href="./css/fonts.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Yellowtail&display=swap">
+
+  <!-- 共用樣式＋作品分類頁的樣式（四個分類頁共用 digital-art.css） -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/digital-art.css">
+  <link rel="stylesheet" href="./css/curtain.css">
+  <link rel="stylesheet" href="./css/i18n.css">
+  <!-- 1. 從作品頁拉著布幕過來時，先用紅色蓋住，等布幕拉起來
+       2. 中文版：先藏起畫面等翻譯好，並提早開始載入中文字型 -->
+  <script>
+    (function () {
+      var r = document.documentElement, l;
+      try { if (sessionStorage.getItem("lian-curtain-arrive") === "1") r.classList.add("curtain-arrive"); } catch (e) {}
+      try { l = localStorage.getItem("lian-lang"); } catch (e) {}
+      if (l !== "zh" && l !== "en") l = /^zh/i.test(navigator.language || "") ? "zh" : "en";
+      if (l !== "zh") return;
+      r.lang = "zh-Hant";
+      r.classList.add("lang-zh", "i18n-pending");
+      ["Dela+Gothic+One", "Noto+Sans+TC:wght@900", "Huninn", "Chiron+Hei+HK:wght@400;700"].forEach(function (f) {
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://fonts.googleapis.com/css2?family=" + f + "&display=swap";
+        document.head.appendChild(link);
+      });
+      setTimeout(function () { r.classList.remove("i18n-pending"); }, 3000);
+    })();
+  </script>
+</head>
+
+<body class="da-page theme-kiwi">
+
+  <!-- 導覽列：跟首頁一樣的資料夾分頁，現在在 Arts -->
+  <header class="navbar">
+    <a class="nav-logo" href="./index.html#home">LIAN's Portfolio</a>
+    <nav class="nav-tabs" aria-label="Main navigation">
+      <a class="nav-tab tab-red"    href="./index.html#home">Home</a>
+      <a class="nav-tab tab-blue"   href="./index.html#about">About Me</a>
+      <a class="nav-tab tab-yellow is-active" href="./index.html#works">Arts</a>
+      <a class="nav-tab tab-copper" href="./index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- 1. 海報 -->
+    <section class="da-hero" id="top" data-dot="Poster">
+      <div class="da-rays" aria-hidden="true"></div>
+
+      <div class="da-poster da-reveal">
+        <p class="da-presents">★ Lian's Circus of Color presents ★</p>
+        <p class="da-ribbon"><span>Collection No. 04</span></p>
+        <h1 class="da-title">
+          <span>3D</span>
+          <span>Art</span>
+        </h1>
+        <p class="da-tagline">giving imagination another dimension</p>
+        <p class="da-divider" aria-hidden="true">✦ ─────── ✦ ─────── ✦</p>
+        <ul class="da-badges">
+          <li>Modeling</li>
+          <li>Characters</li>
+          <li>Scenes</li>
+        </ul>
+        <a class="da-admit" href="#project-1">
+          <span class="da-admit-small">admit one</span>
+          <span class="da-admit-big">Step right in ↓</span>
+        </a>
+      </div>
+
+      <span class="da-spark da-spark-1" aria-hidden="true">✦</span>
+      <span class="da-spark da-spark-2" aria-hidden="true">✦</span>
+      <span class="da-spark da-spark-3" aria-hidden="true">✧</span>
+      <span class="da-spark da-spark-4" aria-hidden="true">✦</span>
+    </section>
+
+
+    <!-- 2. 藝術家的話 -->
+    <section class="da-note-wrap" data-dot="Note">
+      <article class="da-note da-reveal">
+        <p class="da-note-tab">A note from the artist</p>
+        <h2 class="da-note-title">Building worlds you can <em>walk around</em></h2>
+        <p>
+          After entering university, I began exploring 3D modeling through various
+          courses. Starting with simple models, I have gradually developed the skills
+          to create complete small-scale scenes. This learning journey has required
+          considerable time, effort, and dedication.
+        </p>
+        <p>
+          Beyond classroom instruction, I actively seek out online tutorials and
+          learning resources to explore different modeling techniques and continuously
+          improve my skills. The following works showcase the 3D models I created
+          during my freshman year, reflecting my progress from learning the basics to
+          building more complete scenes.
+        </p>
+        <p>
+          Now in my sophomore year, I have begun exploring character rigging, taking
+          another step toward combining 3D modeling with character animation and
+          expanding my skills in the 3D field.
+        </p>
+        <p class="da-sign">— Lian</p>
+      </article>
+    </section>
+
+
+    <!-- =========================================
+         五個 3D 作品：按照製作時間排（Act I 最早 → Act V 最新），每個一整頁
+         左：大螢幕（點下面的小圖換張、左右箭頭也可以；點大圖可以放大）
+         右：作品名稱＋說明牌
+         ★ 圖片：images/3d-art/{作品}-01.jpg …（小圖是 -thumb.jpg）
+         ★ 背景：每個作品有自己的顏色和花紋（td-cafe / td-diner / td-arcade / td-forge / td-me）
+         ========================================= -->
+    <!-- Act I：The Sweet Corner（Intro to 3D · Class Project） -->
+    <section class="td-project td-cafe" id="project-1" data-dot="Café">
+      <div class="td-body">
+        <!-- 左：大螢幕＋底片小圖 -->
+        <div class="td-gallery da-reveal">
+          <figure class="da-frame da-frame-gold td-screen"
+                  data-title="The Sweet Corner"
+                  data-desc="Intro to 3D · Class Project">
+            <img src="./images/3d-art/cafe-01.jpg" alt="The Sweet Corner — 3D render">
+            <button class="td-arrow td-prev" type="button" aria-label="Previous view">‹</button>
+            <button class="td-arrow td-next" type="button" aria-label="Next view">›</button>
+            <span class="td-count">1 / 6</span>
+          </figure>
+          <div class="td-strip">
+              <button class="td-thumb is-active" type="button" data-src="./images/3d-art/cafe-01.jpg" aria-label="View 1">
+                <img src="./images/3d-art/cafe-01-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cafe-02.jpg" aria-label="View 2">
+                <img src="./images/3d-art/cafe-02-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cafe-03.jpg" aria-label="View 3">
+                <img src="./images/3d-art/cafe-03-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cafe-04.jpg" aria-label="View 4">
+                <img src="./images/3d-art/cafe-04-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cafe-05.jpg" aria-label="View 5">
+                <img src="./images/3d-art/cafe-05-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cafe-06.jpg" aria-label="View 6">
+                <img src="./images/3d-art/cafe-06-thumb.jpg" alt="" loading="lazy">
+              </button>
+          </div>
+        </div>
+
+        <!-- 右：說明 -->
+        <div class="td-info">
+          <p class="td-journey da-reveal" aria-label="Project 1 of 5, in the order I made them">
+            <span class="td-journey-label">Timeline</span>
+            <span class="td-journey-dots" aria-hidden="true"><i class="is-now"></i><i></i><i></i><i></i><i></i></span>
+            <span class="td-journey-num">01 / 05</span>
+          </p>
+          <p class="da-eyebrow da-reveal">★ Act I · Class Project ★</p>
+          <h2 class="td-title da-reveal">The Sweet Corner</h2>
+          <div class="da-placard da-reveal">
+            <p>
+              A little café corner full of desserts — cupcakes, cakes, gingham tablecloths, and shelves of tiny treats.
+            </p>
+            <p>
+              Made for my Intro to 3D Graphics class, this was where I practiced modeling small objects, arranging a whole room, and lighting it warmly.
+            </p>
+            <ul class="td-tags">
+              <li>Interior scene</li>
+              <li>Food props</li>
+              <li>Composition</li>
+              <li class="td-tag-tool">Made in Maya</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Act II：Perfect Burger Meal（Retro Diner Scene） -->
+    <section class="td-project td-diner" id="project-2" data-dot="Burger Diner">
+      <div class="td-body">
+        <!-- 左：大螢幕＋底片小圖 -->
+        <div class="td-gallery da-reveal">
+          <figure class="da-frame da-frame-gold td-screen"
+                  data-title="Perfect Burger Meal"
+                  data-desc="Retro Diner Scene">
+            <img src="./images/3d-art/burger-01.jpg" alt="Perfect Burger Meal — 3D render">
+            <button class="td-arrow td-prev" type="button" aria-label="Previous view">‹</button>
+            <button class="td-arrow td-next" type="button" aria-label="Next view">›</button>
+            <span class="td-count">1 / 8</span>
+          </figure>
+          <div class="td-strip">
+              <button class="td-thumb is-active" type="button" data-src="./images/3d-art/burger-01.jpg" aria-label="View 1">
+                <img src="./images/3d-art/burger-01-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/burger-02.jpg" aria-label="View 2">
+                <img src="./images/3d-art/burger-02-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/burger-03.jpg" aria-label="View 3">
+                <img src="./images/3d-art/burger-03-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/burger-04.jpg" aria-label="View 4">
+                <img src="./images/3d-art/burger-04-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/burger-05.jpg" aria-label="View 5">
+                <img src="./images/3d-art/burger-05-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/burger-06.jpg" aria-label="View 6">
+                <img src="./images/3d-art/burger-06-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/burger-07.jpg" aria-label="View 7">
+                <img src="./images/3d-art/burger-07-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/burger-08.jpg" aria-label="View 8">
+                <img src="./images/3d-art/burger-08-thumb.jpg" alt="" loading="lazy">
+              </button>
+          </div>
+        </div>
+
+        <!-- 右：說明 -->
+        <div class="td-info">
+          <p class="td-journey da-reveal" aria-label="Project 2 of 5, in the order I made them">
+            <span class="td-journey-label">Timeline</span>
+            <span class="td-journey-dots" aria-hidden="true"><i class="is-past"></i><i class="is-now"></i><i></i><i></i><i></i></span>
+            <span class="td-journey-num">02 / 05</span>
+          </p>
+          <p class="da-eyebrow da-reveal">★ Act II · Diner Scene ★</p>
+          <h2 class="td-title da-reveal">Perfect Burger Meal</h2>
+          <div class="da-placard da-reveal">
+            <p>
+              A retro American diner glowing with neon — checkered walls, red booths, chrome stools, and a perfect burger waiting on the counter.
+            </p>
+            <p>
+              I focused on colored lighting, reflective materials, and filling the room with small props that tell the story of a late-night meal.
+            </p>
+            <ul class="td-tags">
+              <li>Interior scene</li>
+              <li>Neon lighting</li>
+              <li>Props</li>
+              <li class="td-tag-tool">Made in Maya</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Act III：Christmas Thief（Story Scene） -->
+    <section class="td-project td-arcade" id="project-3" data-dot="Xmas Thief">
+      <div class="td-body">
+        <!-- 左：大螢幕＋底片小圖 -->
+        <div class="td-gallery da-reveal">
+          <figure class="da-frame da-frame-gold td-screen"
+                  data-title="Christmas Thief"
+                  data-desc="Story Scene">
+            <img src="./images/3d-art/xmas-01.jpg" alt="Christmas Thief — 3D render">
+            <button class="td-arrow td-prev" type="button" aria-label="Previous view">‹</button>
+            <button class="td-arrow td-next" type="button" aria-label="Next view">›</button>
+            <span class="td-count">1 / 12</span>
+          </figure>
+          <div class="td-strip">
+              <button class="td-thumb is-active" type="button" data-src="./images/3d-art/xmas-01.jpg" aria-label="View 1">
+                <img src="./images/3d-art/xmas-01-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/xmas-02.jpg" aria-label="View 2">
+                <img src="./images/3d-art/xmas-02-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/xmas-03.jpg" aria-label="View 3">
+                <img src="./images/3d-art/xmas-03-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/xmas-04.jpg" aria-label="View 4">
+                <img src="./images/3d-art/xmas-04-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/xmas-05.jpg" aria-label="View 5">
+                <img src="./images/3d-art/xmas-05-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/xmas-06.jpg" aria-label="View 6">
+                <img src="./images/3d-art/xmas-06-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/xmas-07.jpg" aria-label="View 7">
+                <img src="./images/3d-art/xmas-07-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/xmas-08.jpg" aria-label="View 8">
+                <img src="./images/3d-art/xmas-08-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/xmas-09.jpg" aria-label="View 9">
+                <img src="./images/3d-art/xmas-09-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/xmas-10.jpg" aria-label="View 10">
+                <img src="./images/3d-art/xmas-10-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/xmas-11.jpg" aria-label="View 11">
+                <img src="./images/3d-art/xmas-11-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/xmas-12.jpg" aria-label="View 12">
+                <img src="./images/3d-art/xmas-12-thumb.jpg" alt="" loading="lazy">
+              </button>
+          </div>
+        </div>
+
+        <!-- 右：說明 -->
+        <div class="td-info">
+          <p class="td-journey da-reveal" aria-label="Project 3 of 5, in the order I made them">
+            <span class="td-journey-label">Timeline</span>
+            <span class="td-journey-dots" aria-hidden="true"><i class="is-past"></i><i class="is-past"></i><i class="is-now"></i><i></i><i></i></span>
+            <span class="td-journey-num">03 / 05</span>
+          </p>
+          <p class="da-eyebrow da-reveal">★ Act III · Story Scene ★</p>
+          <h2 class="td-title da-reveal">Christmas Thief</h2>
+          <div class="da-placard da-reveal">
+            <p>
+              Three little gnomes follow a scribbled treasure map into a late-night arcade, where burger coins spill across the checkered floor.
+            </p>
+            <p>
+              Told shot by shot, the story follows them as they sneak, play, and finally hide their loot under the Christmas tree — my first 3D piece built around a story.
+            </p>
+            <ul class="td-tags">
+              <li>Storytelling</li>
+              <li>Character Modeling</li>
+              <li>Environment Design</li>
+              <li class="td-tag-tool">Made in Maya</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Act IV：Cyran’s Forge（Stylized Diorama） -->
+    <section class="td-project td-forge td-has-sketches" id="project-4" data-dot="Cyran">
+      <div class="td-body">
+        <!-- 左：大螢幕＋底片小圖 -->
+        <div class="td-gallery da-reveal">
+          <figure class="da-frame da-frame-gold td-screen"
+                  data-title="Cyran the Hedgefolk"
+                  data-desc="Stylized Diorama">
+            <img src="./images/3d-art/cyran-01.jpg" alt="Cyran the Hedgefolk — 3D render">
+            <button class="td-arrow td-prev" type="button" aria-label="Previous view">‹</button>
+            <button class="td-arrow td-next" type="button" aria-label="Next view">›</button>
+            <span class="td-count">1 / 9</span>
+          </figure>
+          <div class="td-strip">
+              <button class="td-thumb is-active" type="button" data-src="./images/3d-art/cyran-01.jpg" aria-label="View 1">
+                <img src="./images/3d-art/cyran-01-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cyran-02.jpg" aria-label="View 2">
+                <img src="./images/3d-art/cyran-02-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cyran-03.jpg" aria-label="View 3">
+                <img src="./images/3d-art/cyran-03-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cyran-04.jpg" aria-label="View 4">
+                <img src="./images/3d-art/cyran-04-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cyran-05.jpg" aria-label="View 5">
+                <img src="./images/3d-art/cyran-05-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cyran-06.jpg" aria-label="View 6">
+                <img src="./images/3d-art/cyran-06-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cyran-07.jpg" aria-label="View 7">
+                <img src="./images/3d-art/cyran-07-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cyran-08.jpg" aria-label="View 8">
+                <img src="./images/3d-art/cyran-08-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/cyran-09.jpg" aria-label="View 9">
+                <img src="./images/3d-art/cyran-09-thumb.jpg" alt="" loading="lazy">
+              </button>
+          </div>
+        </div>
+
+        <!-- 右：說明 -->
+        <div class="td-info">
+          <p class="td-journey da-reveal" aria-label="Project 4 of 5, in the order I made them">
+            <span class="td-journey-label">Timeline</span>
+            <span class="td-journey-dots" aria-hidden="true"><i class="is-past"></i><i class="is-past"></i><i class="is-past"></i><i class="is-now"></i><i></i></span>
+            <span class="td-journey-num">04 / 05</span>
+          </p>
+          <p class="da-eyebrow da-reveal">★ Act IV · Stylized Diorama ★</p>
+          <h2 class="td-title da-reveal">Cyran the Hedgefolk</h2>
+          <div class="da-placard da-reveal">
+            <p>
+              Cyran, a little hedgefolk in a clock-badge hat, lives on a floating island with his cottage, workshop, and a barrel full of shiny gems.
+            </p>
+            <p>
+              I designed him in 2D first — front, side, and back views — then brought him and his world into 3D with soft, stylized materials and warm light.
+            </p>
+            <ul class="td-tags">
+              <li>Character Design</li>
+              <li>Modeling</li>
+              <li>Environment Design</li>
+              <li class="td-tag-tool">Made in Maya</li>
+            </ul>
+          </div>
+
+          <!-- 角色設計圖：兩張用紙膠帶貼在旁邊（點了可以放大） -->
+          <div class="td-sketches">
+            <figure class="td-sketch da-reveal" style="--tilt: -4deg;"
+                    data-title="Cyran the Hedgefolk — Design sketches"
+                    data-desc="Early sketches: his hat, bow tie, bag of gems, and gem-recording book.">
+              <img src="./images/3d-art/cyran-sketch-1.jpg" alt="Cyran character design sketches">
+            </figure>
+            <figure class="td-sketch da-reveal" style="--tilt: 3deg;"
+                    data-title="Cyran the Hedgefolk — Turnaround"
+                    data-desc="Front, side, and back views with his color palette.">
+              <img src="./images/3d-art/cyran-sketch-2.jpg" alt="Cyran turnaround: front, side and back views">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Act V：ME!（3D Self-Portrait） -->
+    <section class="td-project td-me td-has-sketches" id="project-5" data-dot="ME!">
+      <div class="td-body">
+        <!-- 左：大螢幕＋底片小圖 -->
+        <div class="td-gallery da-reveal">
+          <figure class="da-frame da-frame-gold td-screen"
+                  data-title="ME!"
+                  data-desc="3D Self-Portrait">
+            <img src="./images/3d-art/me-01.jpg" alt="ME! — 3D render">
+            <button class="td-arrow td-prev" type="button" aria-label="Previous view">‹</button>
+            <button class="td-arrow td-next" type="button" aria-label="Next view">›</button>
+            <span class="td-count">1 / 9</span>
+          </figure>
+          <div class="td-strip">
+              <button class="td-thumb is-active" type="button" data-src="./images/3d-art/me-01.jpg" aria-label="View 1">
+                <img src="./images/3d-art/me-01-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/me-02.jpg" aria-label="View 2">
+                <img src="./images/3d-art/me-02-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/me-03.jpg" aria-label="View 3">
+                <img src="./images/3d-art/me-03-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/me-04.jpg" aria-label="View 4">
+                <img src="./images/3d-art/me-04-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/me-05.jpg" aria-label="View 5">
+                <img src="./images/3d-art/me-05-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/me-06.jpg" aria-label="View 6">
+                <img src="./images/3d-art/me-06-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/me-07.jpg" aria-label="View 7">
+                <img src="./images/3d-art/me-07-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/me-08.jpg" aria-label="View 8">
+                <img src="./images/3d-art/me-08-thumb.jpg" alt="" loading="lazy">
+              </button>
+              <button class="td-thumb" type="button" data-src="./images/3d-art/me-09.jpg" aria-label="View 9">
+                <img src="./images/3d-art/me-09-thumb.jpg" alt="" loading="lazy">
+              </button>
+          </div>
+        </div>
+
+        <!-- 右：說明 -->
+        <div class="td-info">
+          <p class="td-journey da-reveal" aria-label="Project 5 of 5, in the order I made them">
+            <span class="td-journey-label">Timeline</span>
+            <span class="td-journey-dots" aria-hidden="true"><i class="is-past"></i><i class="is-past"></i><i class="is-past"></i><i class="is-past"></i><i class="is-now"></i></span>
+            <span class="td-journey-num">05 / 05</span>
+          </p>
+          <p class="da-eyebrow da-reveal">★ Act V · 3D Self-Portrait ★</p>
+          <h2 class="td-title da-reveal">ME!</h2>
+          <div class="da-placard da-reveal">
+            <p>
+              A 3D version of myself, standing on a little floating island of grass, berries, and sparkles.
+            </p>
+            <p>
+              I designed her in 2D first — a full-body drawing plus front, side, and back views — then modeled her from head to toe and built a dreamy stage around her.
+            </p>
+            <ul class="td-tags">
+              <li>Character Design</li>
+              <li>Character Modeling</li>
+              <li>Costume Design</li>
+              <li class="td-tag-tool">Made in Maya</li>
+            </ul>
+          </div>
+
+          <!-- 角色設計圖：兩張用紙膠帶貼在旁邊（點了可以放大） -->
+          <div class="td-sketches">
+            <figure class="td-sketch td-sketch-wide da-reveal" style="--tilt: -4deg;"
+                    data-title="ME! — Turnaround"
+                    data-desc="Front, side, and back views of my character design.">
+              <img src="./images/3d-art/me-sketch-1.jpg" alt="ME! character turnaround: front, side and back">
+            </figure>
+            <figure class="td-sketch td-sketch-tall da-reveal" style="--tilt: 3deg;"
+                    data-title="ME! — Character design"
+                    data-desc="The full-body drawing I made before modeling her in 3D.">
+              <img src="./images/3d-art/me-sketch-2.jpg" alt="ME! full-body character design">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 5. 幕後：創作過程 -->
+    <section class="da-process" data-dot="Process">
+      <header class="da-head da-reveal">
+        <p class="da-eyebrow">★ Behind the Curtain ★</p>
+        <h2 class="da-heading">How a Piece Comes to Life</h2>
+      </header>
+
+      <ol class="da-process-list">
+        <li class="da-step da-reveal" style="--tilt: -2deg;">
+          <span class="da-step-no">01</span>
+          <h3>Concept</h3>
+          <p>Sketch the idea and collect references.</p>
+        </li>
+        <li class="da-step da-reveal" style="--tilt: 1.5deg;">
+          <span class="da-step-no">02</span>
+          <h3>Modeling</h3>
+          <p>Block out shapes, then refine the forms.</p>
+        </li>
+        <li class="da-step da-reveal" style="--tilt: -1deg;">
+          <span class="da-step-no">03</span>
+          <h3>Texturing</h3>
+          <p>Add materials, colors, and surface details.</p>
+        </li>
+        <li class="da-step da-reveal" style="--tilt: 2deg;">
+          <span class="da-step-no">04</span>
+          <h3>Lighting</h3>
+          <p>Set up lights and cameras, then render.</p>
+        </li>
+      </ol>
+    </section>
+
+
+    <!-- 6. 其他場次（點了會從中間撕開，再跳過去） -->
+    <section class="da-more" data-dot="More Shows">
+      <header class="da-head da-reveal">
+        <p class="da-eyebrow">★ More Shows This Way ★</p>
+        <h2 class="da-heading">Explore Other Collections</h2>
+      </header>
+
+      <div class="da-tickets">
+        <a class="da-ticket da-ticket-red da-reveal" href="./digital-art.html">
+          <span class="da-ticket-no">No. 01</span>
+          <strong>Digital Art</strong>
+          <span class="da-ticket-go">see the show →</span>
+        </a>
+        <a class="da-ticket da-ticket-blue da-reveal" href="./visual-design.html">
+          <span class="da-ticket-no">No. 02</span>
+          <strong>Visual Design</strong>
+          <span class="da-ticket-go">see the show →</span>
+        </a>
+        <a class="da-ticket da-ticket-copper da-reveal" href="./pixel-games.html">
+          <span class="da-ticket-no">No. 03</span>
+          <strong>Pixel Games</strong>
+          <span class="da-ticket-go">see the show →</span>
+        </a>
+      </div>
+
+      <a class="da-back" href="#top">↑ Back to the top</a>
+    </section>
+  </main>
+
+  <!-- 放大看作品的視窗 -->
+  <div class="da-lightbox" hidden>
+    <button class="da-lb-close" type="button" aria-label="Close">✕</button>
+    <button class="da-lb-prev" type="button" aria-label="Previous">‹</button>
+    <figure class="da-lb-figure">
+      <img class="da-lb-img" src="" alt="">
+      <figcaption>
+        <strong class="da-lb-title"></strong>
+        <span class="da-lb-desc"></span>
+      </figcaption>
+    </figure>
+    <button class="da-lb-next" type="button" aria-label="Next">›</button>
+  </div>
+
+  <footer>
+    <p>✦ Lian</p>
+    <p>A little nook between worlds.</p>
+    <p class="copyright">© 2026 Lian · Made with imagination.</p>
+  </footer>
+
+  <script src="./lang-zh.js"></script>
+  <script src="./i18n.js"></script>
+  <script src="./script.js"></script>
+  <script src="./curtain.js"></script>
+  <script src="./sound.js"></script>
+  <script src="./digital-art.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+/* =========================================================
+   雙語切換（i18n.js 會用到）
+   ========================================================= */
+
+/* 中文版：翻譯完成前先藏起來，才不會先閃一下英文 */
+html.i18n-pending body {
+  opacity: 0;
+}
+
+/* ---------- 導覽列上的「EN / 中」切換鈕 ---------- */
+.lang-toggle {
+  display: inline-flex;
+  align-items: stretch;
+  margin-right: auto;            /* 緊貼在左邊 Logo 旁邊，分頁維持在右邊 */
+  align-self: center;            /* 跟左邊的 Logo 對齊在導覽列正中間 */
+  position: relative;
+  top: -5px;
+  margin-left: 18px;
+  padding: 3px;
+  border: 2px solid #4A2216;
+  border-radius: 999px;
+  background: #F8EFD5;
+  box-shadow: 0 3px 0 rgba(74, 34, 22, 0.35);
+  cursor: pointer;
+  transition: translate 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lang-toggle:hover {
+  translate: 0 -2px;
+  box-shadow: 0 5px 0 rgba(74, 34, 22, 0.35);
+}
+
+.lang-toggle:active {
+  translate: 0 1px;
+  box-shadow: 0 1px 0 rgba(74, 34, 22, 0.35);
+}
+
+.lang-toggle:focus-visible {
+  outline: 3px solid #F0BE57;
+  outline-offset: 2px;
+}
+
+.lang-opt {
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  padding: 3px 9px 2px;
+  border-radius: 999px;
+  font-family: "black", "Noto Sans TC", sans-serif;
+  font-size: 13px;
+  line-height: 1.2;
+  letter-spacing: 1px;
+  color: #4A2216;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.lang-opt.is-on {
+  background: #C03A22;
+  color: #F8EFD5;
+}
+
+@media (max-width: 600px) {
+  .lang-toggle { margin-left: 10px; }
+  .lang-opt { min-width: 28px; padding: 2px 6px 1px; font-size: 12px; }
+}
+
+/* ---------- 中文版的小調整 ---------- */
+/* 中文字本身比較密，大寫字母用的超寬字距稍微收一點 */
+html.lang-zh .da-eyebrow,
+html.lang-zh .da-mini-label,
+html.lang-zh .td-journey {
+  letter-spacing: 2px;
+}
+
+/* 手機：導覽列比較擠，只留「要切過去的那個語言」 */
+@media (max-width: 600px) {
+  .lang-opt.is-on { display: none; }
+}
+
+/* 票根上直排的「入場券！」：英文版是轉 180 度由下往上讀；中文要正著由上往下讀 */
+html.lang-zh .ticket-admit {
+  rotate: 0deg;
+  letter-spacing: 2px;
+}
+
+/* 作品頁最下面「更多演出」門票上的作品名稱：中文粗體字距拉開一點 */
+html.lang-zh .da-ticket strong {
+  letter-spacing: 4px;
+}
+
+/* Pixel Games 的「製作中」印章：中文不換行，字放大一點 */
+html.lang-zh .pg-stamp br {
+  display: none;
+}
+
+html.lang-zh .pg-stamp {
+  font-size: 19px;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+/* 「創作者的話 / 企劃簡介」卡片裡的標題：中文字比較密，放大一點 */
+html.lang-zh .da-note-title {
+  font-size: clamp(22px, 3vw, 30px);
+  letter-spacing: 1px;
+}
+
+/* 小小的紅色標籤（例如「主題」）：粗標題字型在這麼小的時候會糊掉，改用特粗黑體 */
+html.lang-zh .pg-themes span {
+  font-family: "Noto Sans TC", "black", sans-serif !important;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 3px;
+  padding: 3px 10px 4px 13px;
+}
+
+/* 視覺設計頁的活動名稱（黑洞奇藝點、賭賭賭她很壞…）：
+   大標題字型缺「黑」「她」，整個名稱改用特粗黑體，才不會一個字粗細不一樣 */
+html.lang-zh .vd-placard-title {
+  font-family: "Noto Sans TC", "Alfa Slab One", sans-serif !important;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+/* 聯絡區的小貼紙：中文字比較寬，縮小一點並排成一行 */
+html.lang-zh .cx-burst-text br {
+  display: none;
+}
+
+html.lang-zh .cx-burst-text {
+  flex-direction: row;
+  font-size: 22px;
+  white-space: nowrap;
+}
+
+html.lang-zh .cx-hello-text {
+  flex-direction: row;
+  font-size: 27px;
+  white-space: nowrap;
+}
+
+/* 導覽列分頁（首頁、關於我、作品、聯絡）：中文字距拉開，四個分頁的字樣式統一 */
+html.lang-zh .nav-tab {
+  font-family: "Noto Sans TC", "black", sans-serif !important;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-indent: 4px;                                   /* 補回最後一個字後面多出的字距，字才置中 */
+  text-shadow: 0 2px 0 rgba(60, 20, 10, 0.25);
+}
+
+html.lang-zh .nav-tab.tab-yellow {
+  text-shadow: 0 2px 0 rgba(60, 20, 10, 0.2);         /* 黃色分頁的紅字也用一樣的深色陰影 */
+}
